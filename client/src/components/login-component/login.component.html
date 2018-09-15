@@ -1,1 +1,24 @@
-<p>login works yeh!</p>
+<div layout="row" layout-align="end center" id="login-container">
+    <div md-whiteframe="24" id="login" layout-padding>
+        <div class="login-input-container">
+            <i class="fas fa-envelope mar-lr"></i>
+            <md-input-container>
+                <label>Employee Id</label>
+                <input type="text">
+            </md-input-container>
+        </div>
+
+        <div class="login-input-container">
+            <i class="fas fa-unlock-alt mar-lr"></i>
+            <md-input-container>
+                <label>Password</label>
+                <input type="{{$ctrl.passwordInputType}}">
+            </md-input-container>
+            <md-button class="md-icon-button mar-lr" ng-click="$ctrl.togglePasswordInputType()" aria-label="Google.com">
+                <i class="{{$ctrl.passwordToggleIcon}}"></i>
+            </md-button>
+        </div>
+
+        <md-button class="md-raised md-primary">login</md-button>
+    </div>
+</div>

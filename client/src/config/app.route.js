@@ -3,7 +3,7 @@ app.config([
   function($stateProvider) {
     $stateProvider.state({
       name: 'login',
-      url: '*path',
+      url: '',
       component: 'loginComponent'
     });
   }
