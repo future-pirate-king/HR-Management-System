@@ -1,10 +1,14 @@
-<div layout="row" layout-align="end center" id="login-container">
+<div layout="column" id="login-container">
+    <div layout="row" layout-padding>
+        <h2>e<span md-colors="{color:'pink-900'}">FOCUS</span></h2>
+    </div>
+    <img src="../../../assets/login-left-bg.svg" alt="backgroung" style="position:fixed;left:0;bottom: 0;">
     <div md-whiteframe="24" id="login" layout-padding>
         <div class="login-input-container">
             <i class="fas fa-envelope mar-lr"></i>
             <md-input-container>
                 <label>Employee Id</label>
-                <input type="text">
+                <input type="text" autofocus style="font-weight:600;">
             </md-input-container>
         </div>
 
@@ -12,13 +16,17 @@
             <i class="fas fa-unlock-alt mar-lr"></i>
             <md-input-container>
                 <label>Password</label>
-                <input type="{{$ctrl.passwordInputType}}">
+                <input type="{{$ctrl.passwordInputType}}" style="font-weight:600;">
             </md-input-container>
-            <md-button class="md-icon-button mar-lr" ng-click="$ctrl.togglePasswordInputType()" aria-label="Google.com">
+            <md-button class="
+                    md-icon-button mar-lr" ng-click="$ctrl.togglePasswordInputType()"
+                aria-label="login">
                 <i class="{{$ctrl.passwordToggleIcon}}"></i>
             </md-button>
         </div>
-
-        <md-button class="md-raised md-primary">login</md-button>
+        <div layout="column" layout-align="center end">
+            <a style="font-weight:600;cursor: pointer;" md-colors="{color:'grey'}"><span>Forgot Password ?</span></a>
+        </div>
+        <md-button id="login-btn" class="md-raised md-primary">login</md-button>
     </div>
 </div>
