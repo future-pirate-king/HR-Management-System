@@ -82,7 +82,7 @@ h2 {
 
 .menu-item:hover i,
 .menu-item:hover span {
-  color: #000000 !important;
+  color: grey !important;
 }
 
 .menu-item-active {
@@ -91,7 +91,7 @@ h2 {
 }
 
 .menu-item-active i {
-  color: black !important;
+  color: grey !important;
 }
 
 .menu-item-active span {
