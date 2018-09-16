@@ -75,11 +75,13 @@ h2 {
   width: 100%;
   transition: 0.5s;
   cursor: pointer;
-  border-radius: 5px;
+  margin-top: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .menu-item:hover i,
-.menu-item:hover strong {
+.menu-item:hover span {
   color: #000000 !important;
 }
 
@@ -89,10 +91,10 @@ h2 {
 }
 
 .menu-item-active i {
-  color: #c2185b !important;
+  color: black !important;
 }
 
-.menu-item-active strong {
-  color: #000000 !important;
+.menu-item-active span {
+  color: grey !important;
 }
 /* End of Side Nav styles */
