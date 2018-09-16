@@ -6,6 +6,22 @@ a {
 body {
   min-width: 1124px;
 }
+
+h2 {
+  margin: unset;
+}
+
+.mar-lr {
+  margin: 0 10px;
+}
+
+.mar-l {
+  margin-left: 10px;
+}
+
+.mar-r {
+  margin-right: 10px;
+}
 /* End of Global styles */
 
 /* ###################Login styles will go here################ */
@@ -38,9 +54,5 @@ body {
 #login .login-input-container {
   display: flex;
   align-items: center;
-}
-
-#login .login-input-container .mar-lr {
-  margin: 0 10px;
 }
 /* End of login styles */
