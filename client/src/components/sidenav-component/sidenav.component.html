@@ -1,1 +1,7 @@
-<p>side nav works</p>
+<div layout="column" layout-align="space-around center" style="background-color: white;width:auto; height: calc(100%-80px); padding-top: 20px">
+    <a class="menu-item" layout="column" layout-padding layout-align="space-around center" ng-repeat="item in $ctrl.menuItems"
+        ui-sref-active="menu-item-active" ui-sref="{{item.link}}">
+        <i md-colors="{color:'grey-400'}" class="{{item.icon}}"></i>
+        <strong md-colors="{color:'grey-400'}">{{item.title}}</strong>
+    </a>
+</div>

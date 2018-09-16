@@ -23,6 +23,18 @@ h2 {
 .mar-r {
   margin-right: 10px;
 }
+
+.mar-t {
+  margin-top: 10px;
+}
+
+.mar-b {
+  margin-bottom: 10px;
+}
+
+.mar {
+  margin: 10px;
+}
 /* End of Global styles */
 
 /* ###################Login styles will go here################ */
@@ -57,3 +69,30 @@ h2 {
   align-items: center;
 }
 /* End of login styles */
+
+/* #############Side Nav Styles go here################# */
+.menu-item {
+  width: 100%;
+  transition: 0.5s;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.menu-item:hover i,
+.menu-item:hover strong {
+  color: #000000 !important;
+}
+
+.menu-item-active {
+  color: #c2185b;
+  border-right: solid 5px #c2185b;
+}
+
+.menu-item-active i {
+  color: #c2185b !important;
+}
+
+.menu-item-active strong {
+  color: #000000 !important;
+}
+/* End of Side Nav styles */
