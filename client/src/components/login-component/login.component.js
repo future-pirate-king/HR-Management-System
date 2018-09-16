@@ -4,11 +4,23 @@ app.component('loginComponent', {
   controller: loginController
 });
 
-function loginController() {
+function loginController($state) {
   var $ctrl = this;
 
   $ctrl.passwordInputType = 'password';
   $ctrl.passwordToggleIcon = 'fas fa-eye-slash';
+
+  $ctrl.empId = '';
+  $ctrl.password = '';
+
+  $ctrl.login = function() {
+    if ($ctrl.empId === '10653184' && $ctrl.password === 'sam') {
+      $state.go('home');
+
+      $ctrl.empId = '';
+      $ctrl.password = '';
+    }
+  };
 
   $ctrl.togglePasswordInputType = function() {
     $ctrl.passwordInputType =

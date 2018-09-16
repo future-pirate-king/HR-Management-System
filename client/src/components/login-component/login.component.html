@@ -8,7 +8,7 @@
             <i class="fas fa-envelope mar-lr"></i>
             <md-input-container>
                 <label>Employee Id</label>
-                <input type="text" autofocus style="font-weight:600;">
+                <input type="text" ng-model="$ctrl.empId" autofocus style="font-weight:600;">
             </md-input-container>
         </div>
 
@@ -16,7 +16,7 @@
             <i class="fas fa-unlock-alt mar-lr"></i>
             <md-input-container>
                 <label>Password</label>
-                <input type="{{$ctrl.passwordInputType}}" style="font-weight:600;">
+                <input type="{{$ctrl.passwordInputType}}" ng-model="$ctrl.password" style="font-weight:600;">
             </md-input-container>
             <md-button class="
                     md-icon-button mar-lr" ng-click="$ctrl.togglePasswordInputType()"
@@ -27,6 +27,6 @@
         <div layout="column" layout-align="center end">
             <a style="font-weight:600;cursor: pointer;" md-colors="{color:'grey'}"><span>Forgot Password ?</span></a>
         </div>
-        <md-button id="login-btn" class="md-raised md-primary">login</md-button>
+        <md-button id="login-btn" ng-click="$ctrl.login()" class="md-raised md-primary">login</md-button>
     </div>
 </div>
