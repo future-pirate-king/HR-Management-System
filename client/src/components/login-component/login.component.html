@@ -21,6 +21,7 @@
             <md-button class="
                     md-icon-button mar-lr" ng-click="$ctrl.togglePasswordInputType()"
                 aria-label="login">
+                <md-tooltip md-direction="top">{{$ctrl.tooltipMessage}}</md-tooltip>
                 <i class="{{$ctrl.passwordToggleIcon}}"></i>
             </md-button>
         </div>

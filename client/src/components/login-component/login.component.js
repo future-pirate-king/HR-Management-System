@@ -9,6 +9,7 @@ function loginController($state) {
 
   $ctrl.passwordInputType = 'password';
   $ctrl.passwordToggleIcon = 'fas fa-eye-slash';
+  $ctrl.tooltipMessage = 'show password';
 
   $ctrl.empId = '';
   $ctrl.password = '';
@@ -27,5 +28,7 @@ function loginController($state) {
       $ctrl.passwordInputType === 'text' ? 'password' : 'text';
     $ctrl.passwordToggleIcon =
       $ctrl.passwordInputType === 'text' ? 'fas fa-eye' : 'fas fa-eye-slash';
+    $ctrl.tooltipMessage =
+      $ctrl.passwordInputType === 'text' ? 'hide password' : 'show password';
   };
 }
