@@ -75,23 +75,25 @@ h2 {
   width: 100%;
   transition: 0.5s;
   cursor: pointer;
-  margin-top: 20px;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  margin-bottom: 5px;
+  padding-top: 12px;
+  padding-bottom: 12px;
 }
 
-.menu-item:hover i,
 .menu-item:hover span {
   color: grey !important;
 }
 
 .menu-item-active {
   color: #c2185b;
-  border-right: solid 5px #c2185b;
+  border-right: solid 3px #c2185b;
 }
 
 .menu-item-active i {
-  color: grey !important;
+  padding: 8px;
+  border-radius: 50%;
+  background-color: #c2185b;
+  color: #fff !important;
 }
 
 .menu-item-active span {

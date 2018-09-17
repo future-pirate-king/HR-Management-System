@@ -9,27 +9,27 @@ function sidenavController() {
 
   $ctrl.menuItems = [
     {
-      icon: 'fas fa-home fa-lg',
+      icon: 'fas fa-home',
       title: 'Home',
       link: 'home'
     },
     {
-      icon: 'fas fa-calendar-alt fa-lg',
+      icon: 'fas fa-calendar-alt',
       title: 'Time Sheet',
       link: 'timeSheet'
     },
     {
-      icon: 'fas fa-money-bill-alt fa-lg',
+      icon: 'fas fa-money-bill-alt',
       title: 'Payroll',
       link: 'payroll'
     },
     {
-      icon: 'fas fa-comment-dots fa-lg',
+      icon: 'fas fa-comment-dots',
       title: 'Complaints',
       link: 'complaints'
     },
     {
-      icon: 'fab fa-foursquare fa-lg',
+      icon: 'fab fa-foursquare',
       title: 'Feedback',
       link: 'feedback'
     }
