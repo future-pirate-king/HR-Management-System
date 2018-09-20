@@ -41,6 +41,7 @@
 		<beans:property name="annotatedClasses">
 			<!-- Map all the annotated class with @Entity -->
 			<beans:list>
+				<beans:value>com.project.hrmanagement.model.LoginCredential</beans:value>
 				<beans:value>com.project.hrmanagement.model.Employee</beans:value>
 			</beans:list>
 		</beans:property>
