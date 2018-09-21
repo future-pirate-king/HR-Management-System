@@ -4,7 +4,7 @@ app.component('loginComponent', {
   controller: loginController
 });
 
-function loginController($state) {
+function loginController($state, loginService) {
   var $ctrl = this;
 
   $ctrl.passwordInputType = 'password';
@@ -15,12 +15,9 @@ function loginController($state) {
   $ctrl.password = '';
 
   $ctrl.login = function() {
-    if ($ctrl.empId === '10653184' && $ctrl.password === 'sam') {
-      $state.go('home');
-
-      $ctrl.empId = '';
-      $ctrl.password = '';
-    }
+    loginService
+      .login($ctrl.empId, $ctrl.password)
+      .then(response => console.log(response));
   };
 
   $ctrl.togglePasswordInputType = function() {

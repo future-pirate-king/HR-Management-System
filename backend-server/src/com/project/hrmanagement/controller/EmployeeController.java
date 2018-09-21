@@ -4,7 +4,9 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.hrmanagement.model.Employee;
@@ -17,12 +19,11 @@ public class EmployeeController {
 	@Autowired
 	private IEmployeeService empService;
 
-	@RequestMapping("/authenticate")
-	public Employee authenticate() {
-		int testId = 1;
-		LoginCredential credential = new LoginCredential(testId, "Newuser");
+	@RequestMapping(value="/authenticate", method=RequestMethod.POST)
+	public Employee authenticate(@RequestBody LoginCredential credential) {
+		
 		if(this.empService.authenticate(credential)) {
-			return this.empService.getEmployee(testId);
+			return this.empService.getEmployee(credential.getEmpId());
 		}
 		return null;
 	}
