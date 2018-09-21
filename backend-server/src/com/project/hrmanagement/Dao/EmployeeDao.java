@@ -15,25 +15,25 @@ import com.project.hrmanagement.model.LoginCredential;
 
 @Repository
 public class EmployeeDao implements IEmployeeDao {
-	
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public SessionFactory getFactory() {
 		return sessionFactory;
 	}
-	
+
 	@Autowired
 	public void setFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
 
-
+	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional
-	public Employee authenticate(LoginCredential loginCredential) {
-		
-		//System.out.println(loginCredential.getEmpId() + ' ' + loginCredential.getPassword());
+	public boolean authenticate(LoginCredential loginCredential) {
+
+		// System.out.println(loginCredential.getEmpId() + ' ' +
+		// loginCredential.getPassword());
 
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("Select empId,password from LoginCredential where empId=:e and password=:p");
@@ -42,14 +42,12 @@ public class EmployeeDao implements IEmployeeDao {
 		query.setParameter("p", loginCredential.getPassword());
 
 		List<String> empIdList = query.list();
-		
-		Employee emp = (Employee) session.load(Employee.class, loginCredential.getEmpId());
 
 		if (empIdList.isEmpty()) {
-			return null;
+			return false;
 		}
-		return emp;
-	
+
+		return true;
 
 	}
 
@@ -57,7 +55,12 @@ public class EmployeeDao implements IEmployeeDao {
 	@Transactional
 	public Employee addEmployee(Employee employee) {
 		Session session = sessionFactory.getCurrentSession();
-		session.save(employee);
+
+		LoginCredential loginCredential = new LoginCredential("Newuser");
+		loginCredential.setEmployee(employee);
+
+		session.save(loginCredential);
+
 		return employee;
 	}
 
@@ -65,7 +68,7 @@ public class EmployeeDao implements IEmployeeDao {
 	@Transactional
 	public Employee getEmployee(Integer empId) {
 		Session session = sessionFactory.getCurrentSession();
-		Employee emp = (Employee) session.load(Employee.class, empId);
+		Employee emp = (Employee) session.get(Employee.class, empId);
 		return emp;
 	}
 
@@ -73,6 +76,7 @@ public class EmployeeDao implements IEmployeeDao {
 	@Transactional
 	public List<Employee> getAllEmployee() {
 		Session session = sessionFactory.getCurrentSession();
+		@SuppressWarnings("unchecked")
 		List<Employee> empList = session.createQuery("from Employee").list();
 		return empList;
 	}
@@ -80,15 +84,15 @@ public class EmployeeDao implements IEmployeeDao {
 	@Override
 	@Transactional
 	public Employee updateEmployee(Integer empId, Employee employee) {
+
 		Session session = sessionFactory.getCurrentSession();
 		Employee emp = (Employee) session.load(Employee.class, empId);
-		
-		if(emp != null)
-		{
+
+		if (emp != null) {
 			session.update(employee);
 			return emp;
 		}
-		
+
 		return null;
 	}
 
@@ -97,10 +101,11 @@ public class EmployeeDao implements IEmployeeDao {
 	public Employee removeEmployee(Integer empId) {
 		Session session = sessionFactory.getCurrentSession();
 		Employee emp = (Employee) session.load(Employee.class, empId);
-		if(emp !=null) {
+		if (emp != null) {
 			session.delete(emp);
 			return emp;
-		} 
-		
+		}
+
 		return null;
-	}}
+	}
+}

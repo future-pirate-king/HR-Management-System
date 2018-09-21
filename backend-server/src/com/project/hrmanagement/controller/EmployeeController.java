@@ -1,5 +1,8 @@
 package com.project.hrmanagement.controller;
 
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,10 +19,25 @@ public class EmployeeController {
 
 	@RequestMapping("/authenticate")
 	public Employee authenticate() {
-		//problem with id
-		LoginCredential credential = new LoginCredential(new Integer(10653184), "sam");
+		int testId = 1;
+		LoginCredential credential = new LoginCredential(testId, "Newuser");
+		if(this.empService.authenticate(credential)) {
+			return this.empService.getEmployee(testId);
+		}
+		return null;
+	}
+	
+	@RequestMapping("/addEmployee")
+	public Employee addEmployee(){
+		@SuppressWarnings("deprecation")
+		Employee emp = new Employee("Viraj", "vinayak", "bhat", "O +ve", "9930801188", "viraj@gmail", "get1",
+				new Date("16-AUG-2017"), "java", new Date("16-AUG-2017"), "male", "single", "kapil");
+		return this.empService.addEmployee(emp);
+	}
+	
+	@RequestMapping("/getAllEmployees")
+	public List<Employee> getAllEmployees() {
 		
-
-		return empService.authenticate(credential);
+		return this.empService.getAllEmployee();
 	}
 }

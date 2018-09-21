@@ -2,23 +2,33 @@ package com.project.hrmanagement.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "HR_EMPLOYEE")
 public class Employee {
 
+	/**
+	 * 
+	 */
+
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GEN")
-	@SequenceGenerator(name = "GEN", sequenceName = "EMP_SEQ")
 	@Column(name = "emp_id")
+	@GeneratedValue
 	private Integer empId;
+	
+	@JsonIgnore
+	@OneToOne(mappedBy="employee",cascade=CascadeType.ALL)
+	private LoginCredential loginCredential;
 	
 	@Column(name = "first_name")
 	private String firstName;
@@ -47,7 +57,7 @@ public class Employee {
 	@Column(name = "dept_name")
 	private String deptName;
 	
-	@Column(name = "b_date")
+	@Column(name = "birth_date")
 	private Date bdate;
 	
 	@Column(name = "gender")
@@ -55,12 +65,19 @@ public class Employee {
 	
 	@Column(name = "marital_status")
 	private String maritalStatus;
+	
+	@Column(name = "reporting_to")
+	private String reportingTo;
 
-	public Employee(Integer empId, String firstName, String middleName, String lastName, String bloodGroup,
-			String mobileNo, String email, String cadre, Date dateOfJoining, String deptName, Date bdate, String gender,
-			String maritalStatus) {
+	public Employee() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Employee( String firstName, String middleName,
+			String lastName, String bloodGroup, String mobileNo, String email, String cadre, Date dateOfJoining,
+			String deptName, Date bdate, String gender, String maritalStatus, String reportingTo) {
 		super();
-		this.empId = empId;
+	
 		this.firstName = firstName;
 		this.middleName = middleName;
 		this.lastName = lastName;
@@ -73,10 +90,7 @@ public class Employee {
 		this.bdate = bdate;
 		this.gender = gender;
 		this.maritalStatus = maritalStatus;
-	}
-
-	public Employee() {
-		// TODO Auto-generated constructor stub
+		this.reportingTo = reportingTo;
 	}
 
 	public Integer getEmpId() {
@@ -85,6 +99,14 @@ public class Employee {
 
 	public void setEmpId(Integer empId) {
 		this.empId = empId;
+	}
+
+	public LoginCredential getLoginCredential() {
+		return loginCredential;
+	}
+
+	public void setLoginCredential(LoginCredential loginCredential) {
+		this.loginCredential = loginCredential;
 	}
 
 	public String getFirstName() {
@@ -183,12 +205,25 @@ public class Employee {
 		this.maritalStatus = maritalStatus;
 	}
 
-	@Override
-	public String toString() {
-		return "Employee [empId=" + empId + ", firstName=" + firstName + ", middleName=" + middleName + ", lastName="
-				+ lastName + ", bloodGroup=" + bloodGroup + ", mobileNo=" + mobileNo + ", email=" + email + ", cadre="
-				+ cadre + ", dateOfJoining=" + dateOfJoining + ", deptName=" + deptName + ", bdate=" + bdate
-				+ ", gender=" + gender + ", maritalStatus=" + maritalStatus + "]";
+	public String getReportingTo() {
+		return reportingTo;
 	}
 
+	public void setReportingTo(String reportingTo) {
+		this.reportingTo = reportingTo;
+	}
+
+	@Override
+	public String toString() {
+		return "Employee [empId=" + empId + ", loginCredential=" + loginCredential + ", firstName=" + firstName
+				+ ", middleName=" + middleName + ", lastName=" + lastName + ", bloodGroup=" + bloodGroup + ", mobileNo="
+				+ mobileNo + ", email=" + email + ", cadre=" + cadre + ", dateOfJoining=" + dateOfJoining
+				+ ", deptName=" + deptName + ", bdate=" + bdate + ", gender=" + gender + ", maritalStatus="
+				+ maritalStatus + ", reportingTo=" + reportingTo + "]";
+	}
+	
+	
+	
+	
+	
 }

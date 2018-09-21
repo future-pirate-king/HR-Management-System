@@ -32,7 +32,7 @@
 		<beans:property name="url"
 			value="jdbc:oracle:thin:@localhost:1521:xe" />
 		<beans:property name="username" value="system" />
-		<beans:property name="password" value="Newuser123" />
+		<beans:property name="password" value="7208169887" />
 	</beans:bean>
 	
 	<beans:bean id="sessionFactory"

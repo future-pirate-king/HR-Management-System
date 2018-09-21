@@ -25,7 +25,7 @@ public class EmployeeService implements IEmployeeService {
 	}
 
 	@Override
-	public Employee authenticate(LoginCredential logincredential) {
+	public boolean authenticate(LoginCredential logincredential) {
 		
 		return this.empDao.authenticate(logincredential);
 	}
