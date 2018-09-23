@@ -122,7 +122,6 @@ h2 {
 /* #######################Styles for calender starts here###################### */
 
 #cal {
-  margin: 50px auto;
   display: table;
 }
 
@@ -147,18 +146,20 @@ h2 {
   cursor: pointer;
 }
 #cal .header .left.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   left: 0;
-  border-top-left-radius: 3px;
-  border-bottom-left-radius: 3px;
   box-shadow: 5px 0 15px 0px #eee;
   height: 50px;
 }
 #cal .header .right.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   right: 0;
   top: 0;
   box-shadow: -5px 0 15px 0px #eee;
-  border-bottom-right-radius: 3px;
-  border-top-right-radius: 3px;
   height: 50px;
 }
 
@@ -220,3 +221,20 @@ h2 {
 }
 
 /* End of Calender styles */
+#timesheet-details table {
+  border-collapse: collapse;
+}
+
+#timesheet-details th {
+  padding: 15px 10px;
+  text-align: center;
+}
+
+#timesheet-details td {
+  padding: 15px 10px;
+  text-align: center;
+}
+
+#timesheet-details tbody tr:hover {
+  background-color: #ededed;
+}

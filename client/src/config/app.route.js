@@ -4,7 +4,7 @@ app.config([
     $stateProvider
       .state({
         name: 'login',
-        url: '',
+        url: '/l',
         component: 'loginComponent'
       })
       .state({
@@ -14,7 +14,7 @@ app.config([
       })
       .state({
         name: 'timesheet',
-        url: '/timesheet',
+        url: '',
         component: 'timesheetComponent'
       });
   }

@@ -1,0 +1,13 @@
+<form ng-init="form={}" layout="column" layout-padding name="timesheetForm">
+    <md-input-container>
+        <label>Task Name</label>
+        <input name="taskName" ng-model="form.taskName" type="text" style="font-weight:600;" required md-no-asterisk>
+        <div ng-messages="timesheetForm.taskName.$error">
+            <div ng-message="required">Task name is required!</div>
+        </div>
+    </md-input-container>
+
+    <md-button type="submit" class="md-raised md-primary mar-t" ng-click="answer($event,form)">
+        Add Task
+    </md-button>
+</form>
