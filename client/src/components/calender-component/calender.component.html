@@ -9,7 +9,7 @@
     <div layout="row" layout-align="space-between" layout-padding>
         <div id="cal" style="width:27%; max-width: 364px; min-width: 320px;">
             <div class="header">
-                <span class="left button" id="prev"> <i class="fas fa-chevron-right"></i> </span>
+                <span class="left button" id="prev"> <i class="fas fa-chevron-left"></i> </span>
                 <span class="month-year" id="label"> June 20&0 </span>
                 <span class="right button" id="next"> <i class="fas fa-chevron-right"></i> </span>
             </div>
@@ -79,11 +79,11 @@
                     <th>Total Hours</th>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1.</td>
-                        <td>Project</td>
-                        <td>10:15 AM</td>
-                        <td>08:00 PM</td>
+                    <tr ng-repeat="task in $ctrl.taskList">
+                        <td>{{$index + 1}}</td>
+                        <td>{{task.taskName}}</td>
+                        <td>{{task.swipeIn}}</td>
+                        <td>{{task.swipeOut}}</td>
                         <td>09:45</td>
                     </tr>
                 </tbody>

@@ -23,6 +23,11 @@ function calenderController($mdDialog) {
     'December'
   ];
 
+  $ctrl.taskList = [
+    { taskName: 'Hibernate', swipeIn: '08:12 AM', swipeOut: '07: 11 PM' },
+    { taskName: 'Spring', swipeIn: '08:22 AM', swipeOut: '08: 11 PM' }
+  ];
+
   $ctrl.series = ['Hours Worked'];
 
   $ctrl.data = [10];
@@ -51,7 +56,7 @@ function calenderController($mdDialog) {
       })
       .then(
         function(formData) {
-          $ctrl.formData = formData;
+          $ctrl.taskList.push(formData);
         },
         function() {} //fires when dialog closed
       );

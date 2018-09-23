@@ -1,13 +1,33 @@
-<form ng-init="form={}" layout="column" layout-padding name="timesheetForm">
-    <md-input-container>
-        <label>Task Name</label>
-        <input name="taskName" ng-model="form.taskName" type="text" style="font-weight:600;" required md-no-asterisk>
-        <div ng-messages="timesheetForm.taskName.$error">
-            <div ng-message="required">Task name is required!</div>
-        </div>
-    </md-input-container>
+<div style="min-width:300px; max-height: 450px; overflow-y: auto">
+    <form ng-init="form={}" layout="column" layout-padding name="timesheetForm" ng-submit="answer($event,form)">
+        <md-input-container>
+            <label>Task Name</label>
+            <input name="taskName" ng-model="form.taskName" type="text" style="font-weight:600;" required
+                md-no-asterisk>
+            <div ng-messages="timesheetForm.taskName.$error">
+                <div ng-message="required">Task name is required!</div>
+            </div>
+        </md-input-container>
 
-    <md-button type="submit" class="md-raised md-primary mar-t" ng-click="answer($event,form)">
-        Add Task
-    </md-button>
-</form>
+        <md-input-container>
+            <label>Swipe in time</label>
+            <input name="swipeIn" ng-model="form.swipeIn" type="text" style="font-weight:600;" required md-no-asterisk>
+            <div ng-messages="timesheetForm.swipeIn.$error">
+                <div ng-message="required">Swipe in time is required!</div>
+            </div>
+        </md-input-container>
+
+        <md-input-container>
+            <label>Swipe out time</label>
+            <input name="swipeOut" ng-model="form.swipeOut" type="text" style="font-weight:600;" required
+                md-no-asterisk>
+            <div ng-messages="timesheetForm.swipeOut.$error">
+                <div ng-message="required">Swipe out time is required!</div>
+            </div>
+        </md-input-container>
+
+        <md-button type="submit" class="md-raised md-primary mar-t">
+            Add Task
+        </md-button>
+    </form>
+</div>
