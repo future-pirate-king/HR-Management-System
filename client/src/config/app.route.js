@@ -11,6 +11,11 @@ app.config([
         name: 'home',
         url: '/home',
         component: 'homeComponent'
+      })
+      .state({
+        name: 'timesheet',
+        url: '/timesheet',
+        component: 'timesheetComponent'
       });
   }
 ]);

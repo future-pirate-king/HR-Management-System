@@ -16,7 +16,7 @@ function sidenavController() {
     {
       icon: 'fas fa-calendar-alt',
       title: 'Time Sheet',
-      link: 'timeSheet'
+      link: 'timesheet'
     },
     {
       icon: 'fas fa-money-bill-alt',
