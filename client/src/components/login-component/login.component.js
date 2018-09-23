@@ -4,7 +4,7 @@ app.component('loginComponent', {
   controller: loginController
 });
 
-function loginController($state, loginService) {
+function loginController($state, loginService, $mdToast) {
   var $ctrl = this;
 
   $ctrl.passwordInputType = 'password';
@@ -15,9 +15,26 @@ function loginController($state, loginService) {
   $ctrl.password = '';
 
   $ctrl.login = function() {
+    $ctrl.isloading = true;
+
     loginService
       .login($ctrl.empId, $ctrl.password)
-      .then(response => console.log(response));
+      .then(response => {
+        if (response.data) {
+          $state.go('home');
+        } else {
+          $mdToast.show(
+            $mdToast
+              .simple()
+              .textContent('Enter valid a email and password.')
+              .position('top right')
+              .hideDelay(3000)
+          );
+        }
+
+        $ctrl.isloading = false;
+      })
+      .catch(err => console.log(err));
   };
 
   $ctrl.togglePasswordInputType = function() {
