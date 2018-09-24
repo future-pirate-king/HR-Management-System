@@ -103,14 +103,14 @@ h2 {
 }
 
 .menu-item-active {
-  color: #c2185b;
-  border-right: solid 3px #c2185b;
+  color: #1A237E;
+  border-right: solid 3px #1A237E;
 }
 
 .menu-item-active i {
   padding: 8px;
   border-radius: 50%;
-  background-color: #c2185b;
+  background-color: #1A237E;
   color: #fff !important;
 }
 

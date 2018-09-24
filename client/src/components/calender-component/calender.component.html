@@ -1,17 +1,26 @@
 <div layout="column" layout-align="space-around">
     <nav layout="row" layout-padding>
-        <a ui-sref="home" style="color: black; border-radius: 16px" md-whiteframe="8"><i class="fas fa-arrow-left"></i><span
-                class="mar-lr"><strong>Home</strong></span></a>
+        <a ui-sref="home" style="color: black; border-radius: 16px" md-whiteframe="8">
+            <i class="fas fa-arrow-left"></i>
+            <span class="mar-lr">
+                <strong>Home</strong>
+            </span>
+        </a>
     </nav>
     <div layout="row" layout-padding layout-align="end">
-        <strong style="color:#9E9E9E">Total hours worked:</strong><span style="background: #1A237E; border-radius: 5px;font-weight: 700;color: white;">54.00</span>
+        <strong style="color:#9E9E9E">Total hours worked:</strong>
+        <span style="background: #1A237E; border-radius: 5px;font-weight: 700;color: white;">54.00</span>
     </div>
     <div layout="row" layout-align="space-between" layout-padding>
         <div id="cal" style="width:27%; max-width: 364px; min-width: 320px;">
             <div class="header">
-                <span class="left button" id="prev"> <i class="fas fa-chevron-left"></i> </span>
+                <span class="left button" id="prev">
+                    <i class="fas fa-chevron-left"></i>
+                </span>
                 <span class="month-year" id="label"> June 20&0 </span>
-                <span class="right button" id="next"> <i class="fas fa-chevron-right"></i> </span>
+                <span class="right button" id="next">
+                    <i class="fas fa-chevron-right"></i>
+                </span>
             </div>
             <table id="days">
                 <td ng-repeat="day in $ctrl.dayNames">{{day}}</td>
@@ -20,49 +29,29 @@
                 <table class="curr">
                     <tbody>
                         <tr>
-                            <td class="nil"></td>
-                            <td class="nil"></td>
-                            <td ng-click="$ctrl.addTask($event)">1</td>
-                            <td>2</td>
-                            <td>3</td>
-                            <td>4</td>
-                            <td>5</td>
+                            <td ng-click="$ctrl.addTask($event)" ng-repeat="day in ['a0', 'a1', 'a2', 'a3', 'a4', 'a5','a6']">
+                                {{day !== $ctrl.rows.first[$index] ? $ctrl.rows.first[$index] : ''}}
+                            </td>
                         </tr>
                         <tr>
-                            <td>6</td>
-                            <td>7</td>
-                            <td>8</td>
-                            <td>9</td>
-                            <td>10</td>
-                            <td class="today">11</td>
-                            <td>12</td>
+                            <td ng-click="$ctrl.addTask($event)" ng-repeat="day in $ctrl.rows.second">
+                                {{day}}
+                            </td>
                         </tr>
                         <tr>
-                            <td>13</td>
-                            <td>14</td>
-                            <td>15</td>
-                            <td>16</td>
-                            <td>17</td>
-                            <td>18</td>
-                            <td>19</td>
+                            <td ng-click="$ctrl.addTask($event)" ng-repeat="day in $ctrl.rows.third">
+                                {{day}}
+                            </td>
                         </tr>
                         <tr>
-                            <td>20</td>
-                            <td>21</td>
-                            <td>22</td>
-                            <td>23</td>
-                            <td>24</td>
-                            <td>25</td>
-                            <td>26</td>
+                            <td ng-click="$ctrl.addTask($event)" ng-repeat="day in $ctrl.rows.fourth">
+                                {{day}}
+                            </td>
                         </tr>
                         <tr>
-                            <td>27</td>
-                            <td>28</td>
-                            <td>29</td>
-                            <td>30</td>
-                            <td class="nil"></td>
-                            <td class="nil"></td>
-                            <td class="nil"></td>
+                            <td ng-click="$ctrl.addTask($event)" ng-repeat="day in $ctrl.rows.fifth">
+                                {{day}}
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -72,7 +61,8 @@
         <div id="timesheet-details" style="width:67%; border-radius: 5px;" md-whiteframe="5">
             <table style="width:100%">
                 <thead>
-                    <th>Sr. No.</th>
+                    <th>Day</th>
+                    <th>Date</th>
                     <th>Task Name</th>
                     <th>Swipe In</th>
                     <th>Swipe Out</th>
@@ -80,7 +70,11 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="task in $ctrl.taskList">
-                        <td>{{$index + 1}}</td>
+                        <td>
+                            <span style="padding: 8px; background: cyan; border-radius: 5px; color: white;">{{$ctrl.dayNames[$index
+                                + 1]}}</span>
+                        </td>
+                        <td>{{task.date | date: 'mediumDate'}}</td>
                         <td>{{task.taskName}}</td>
                         <td>{{task.swipeIn}}</td>
                         <td>{{task.swipeOut}}</td>

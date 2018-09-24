@@ -1,5 +1,7 @@
 <div style="background-color:white;height: 60px;box-sizing: border-box;" layout="row" layout-align="space-between center">
-    <h4 class="mar-l"><span md-colors="{color:'black'}">LOGO</span></h4>
+    <h4 class="mar-l">
+        <span md-colors="{color:'black'}">LOGO</span>
+    </h4>
     <div layout="row" layout-padding layout-align="space-between center">
         <md-button class="md-icon-button mar-lr" aria-label="notification">
             <md-tooltip md-direction="bottom">Notification</md-tooltip>
@@ -8,7 +10,9 @@
 
         <div class="mar-lr" md-whiteframe="12" layout="row" layout-align="space-around center" style="min-width:60px; border-radius:30px; box-sizing: border-box; padding: 5px; cursor: pointer;">
             <i style="padding:5px; border-radius: 50%; background-color: #eeeeee" class="fas fa-user fa-xs"></i>
-            <span class="mar-lr"><strong style="font-size:12px">Sam David</strong></span>
+            <span class="mar-lr">
+                <strong style="font-size:12px">{{$ctrl.firstName + ' ' + $ctrl.lastName}}</strong>
+            </span>
             <i class="fas fa-angle-down mar-lr"></i>
         </div>
     </div>

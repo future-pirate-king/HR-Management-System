@@ -14,14 +14,14 @@ function loginController($state, loginService, $mdToast) {
   $ctrl.empId = '';
   $ctrl.password = '';
 
-  $ctrl.login = function() {
+  $ctrl.login = function () {
     $ctrl.isloading = true;
 
     loginService
       .login($ctrl.empId, $ctrl.password)
       .then(response => {
         if (response.data) {
-          $state.go('home');
+          $state.go('home', { empId: response.data.empId }, { notify: false, location: 'replace' });
         } else {
           $mdToast.show(
             $mdToast
@@ -37,7 +37,7 @@ function loginController($state, loginService, $mdToast) {
       .catch(err => console.log(err));
   };
 
-  $ctrl.togglePasswordInputType = function() {
+  $ctrl.togglePasswordInputType = function () {
     $ctrl.passwordInputType =
       $ctrl.passwordInputType === 'text' ? 'password' : 'text';
     $ctrl.passwordToggleIcon =

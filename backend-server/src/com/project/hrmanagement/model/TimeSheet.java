@@ -1,26 +1,92 @@
 package com.project.hrmanagement.model;
 
-import java.sql.Time;
+import java.io.Serializable;
+import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "TIME_SHEET")
-public class TimeSheet {
-	private Integer hours;
-	private Integer minutes;
-	private Time inTime;
-	private Time outTime;
+@Table(name = "HR_TIMESHEET")
+public class TimeSheet implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3163691523333594426L;
+
+	@Id
+	@GeneratedValue
+	@Column(name = "time_sheet_id")
+	private Integer timeSheetId;
+
+	@Column(name = "emp_id")
+	private Integer empId;
+
+	@Column(name = "today_date")
+	private Date todayDate;
+
+	@Column(name = "task_name")
 	private String taskName;
 
-	public enum weekDays {
-		monday, tuesday, wednesday, thrusday, friday, saturday, sunday;
+	@Column(name = "swipe_in")
+	private String swipeIn;
 
+	@Column(name = "swipe_out")
+	private String swipeOut;
+	
+	@Column(name = "total_time")
+	private Float totalTime /*= Float.valueOf(swipeIn) - Float.valueOf(swipeOut)*/;
+	
+	@Column(name = "is_filled")
+	private Boolean isfilled;
+	
+	@Column(name = "is_approved")
+	private Boolean isApproved;
+	
+	
+	
+
+	public TimeSheet() {
+		// TODO Auto-generated constructor stub
 	}
+
 	
-	
-	
+
+	public TimeSheet(Integer empId, Date todayDate, String taskName, String swipeIn, String swipeOut, Float totalTime) {
+		super();
+		this.empId = empId;
+		this.todayDate = todayDate;
+		this.taskName = taskName;
+		this.swipeIn = swipeIn;
+		this.swipeOut = swipeOut;
+		this.totalTime = totalTime;
+	}
+
+
+
+	public Date getTodayDate() {
+		return todayDate;
+	}
+
+	public void setTodayDate(Date todayDate) {
+		this.todayDate = todayDate;
+	}
+
+	public Integer getTimeSheetId() {
+		return timeSheetId;
+	}
+
+	public Integer getEmpId() {
+		return empId;
+	}
+
+	public void setEmpId(Integer empId) {
+		this.empId = empId;
+	}
 
 	public String getTaskName() {
 		return taskName;
@@ -30,36 +96,33 @@ public class TimeSheet {
 		this.taskName = taskName;
 	}
 
-	public Time getInTime() {
-		return inTime;
+	public String getSwipeIn() {
+		return swipeIn;
 	}
 
-	public void setInTime(Time inTime) {
-		this.inTime = inTime;
+	public void setSwipeIn(String swipeIn) {
+		this.swipeIn = swipeIn;
 	}
 
-	public Time getOutTime() {
-		return outTime;
+	public String getSwipeOut() {
+		return swipeOut;
 	}
 
-	public void setOutTime(Time outTime) {
-		this.outTime = outTime;
+	public void setSwipeOut(String swipeOut) {
+		this.swipeOut = swipeOut;
 	}
 
-	public Integer getHours() {
-		return hours;
+
+
+	public Float getTotalTime() {
+		return totalTime;
 	}
 
-	public void setHours(Integer hours) {
-		this.hours = hours;
+
+
+	public void setTotalTime(Float totalTime) {
+		this.totalTime = totalTime;
 	}
 
-	public Integer getMinutes() {
-		return minutes;
-	}
-
-	public void setMinutes(Integer minutes) {
-		this.minutes = minutes;
-	}
 
 }

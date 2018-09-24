@@ -2,27 +2,34 @@
     <form ng-init="form={}" layout="column" layout-padding name="timesheetForm" ng-submit="answer($event,form)">
         <md-input-container>
             <label>Task Name</label>
-            <input name="taskName" ng-model="form.taskName" type="text" style="font-weight:600;" required
-                md-no-asterisk>
+            <input name="taskName" ng-model="form.taskName" type="text" style="font-weight:600;" required md-no-asterisk>
             <div ng-messages="timesheetForm.taskName.$error">
                 <div ng-message="required">Task name is required!</div>
             </div>
         </md-input-container>
 
         <md-input-container>
+            <label>Date</label>
+            <md-datepicker name="date" ng-model="form.date" md-placeholder="Enter date"></md-datepicker>
+        </md-input-container>
+
+        <md-input-container>
             <label>Swipe in time</label>
-            <input name="swipeIn" ng-model="form.swipeIn" type="text" style="font-weight:600;" required md-no-asterisk>
+            <input ng-pattern="/^(1[012]|[1-9]):[0-5][0-9]$/" name="swipeIn" ng-model="form.swipeIn" type="text" style="font-weight:600;"
+                required md-no-asterisk>
             <div ng-messages="timesheetForm.swipeIn.$error">
                 <div ng-message="required">Swipe in time is required!</div>
+                <div ng-message="pattern">Time should be of format HH:MM (eg: 8:30 PM)</div>
             </div>
         </md-input-container>
 
         <md-input-container>
             <label>Swipe out time</label>
-            <input name="swipeOut" ng-model="form.swipeOut" type="text" style="font-weight:600;" required
-                md-no-asterisk>
+            <input ng-pattern="/^(1[012]|[1-9]):[0-5][0-9]$/" name="swipeOut" ng-model="form.swipeOut" type="text" style="font-weight:600;"
+                required md-no-asterisk>
             <div ng-messages="timesheetForm.swipeOut.$error">
                 <div ng-message="required">Swipe out time is required!</div>
+                <div ng-message="pattern">Time should be of format HH:MM (eg: 10:30)</div>
             </div>
         </md-input-container>
 

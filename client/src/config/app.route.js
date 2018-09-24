@@ -1,20 +1,20 @@
 app.config([
   '$stateProvider',
-  function($stateProvider) {
+  function ($stateProvider) {
     $stateProvider
       .state({
         name: 'login',
-        url: '/l',
+        url: '',
         component: 'loginComponent'
       })
       .state({
         name: 'home',
-        url: '/home',
+        url: '/home/{empId}',
         component: 'homeComponent'
       })
       .state({
         name: 'timesheet',
-        url: '',
+        url: '/timesheet',
         component: 'timesheetComponent'
       });
   }

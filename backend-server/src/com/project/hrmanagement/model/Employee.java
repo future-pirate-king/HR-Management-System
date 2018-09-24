@@ -1,13 +1,16 @@
 package com.project.hrmanagement.model;
 
+import java.sql.Time;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -20,64 +23,88 @@ public class Employee {
 	 * 
 	 */
 
-
 	@Id
 	@Column(name = "emp_id")
-	@GeneratedValue
+	 @SequenceGenerator(name="id", initialValue=0000, allocationSize=100)
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="id")
 	private Integer empId;
-	
+
 	@JsonIgnore
-	@OneToOne(mappedBy="employee",cascade=CascadeType.ALL)
+	@OneToOne(mappedBy = "employee", cascade = CascadeType.ALL)
 	private LoginCredential loginCredential;
-	
+
+/*
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "emp_id")
+	@OrderColumn(name = "type")
+	private Set<Complaints> complaints;*/
+
 	@Column(name = "first_name")
 	private String firstName;
-	
+
 	@Column(name = "middle_name")
 	private String middleName;
-	
+
 	@Column(name = "last_name")
 	private String lastName;
-	
+
 	@Column(name = "blood_group")
 	private String bloodGroup;
-	
+
 	@Column(name = "mobile_no")
 	private String mobileNo;
-	
+
 	@Column(name = "email")
 	private String email;
-	
+
 	@Column(name = "cadre")
 	private String cadre;
-	
+
 	@Column(name = "date_of_joining")
 	private Date dateOfJoining;
-	
+
 	@Column(name = "dept_name")
 	private String deptName;
-	
+
 	@Column(name = "birth_date")
 	private Date bdate;
-	
+
 	@Column(name = "gender")
 	private String gender;
-	
+
 	@Column(name = "marital_status")
 	private String maritalStatus;
-	
+
 	@Column(name = "reporting_to")
 	private String reportingTo;
+	
+	@Column(name="last_login")
+	private Time lastLogin = new Time(2);
 
 	public Employee() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Employee( String firstName, String middleName,
-			String lastName, String bloodGroup, String mobileNo, String email, String cadre, Date dateOfJoining,
-			String deptName, Date bdate, String gender, String maritalStatus, String reportingTo) {
-		super();
 	
+/*
+	public Set<Complaints> getComplaints() {
+		return complaints;
+	}
+
+
+
+	public void setComplaints(Set<Complaints> complaints) {
+		this.complaints = complaints;
+	}*/
+	
+	
+
+
+	public Employee(String firstName, String middleName, String lastName, String bloodGroup, String mobileNo,
+			String email, String cadre, Date dateOfJoining, String deptName, Date bdate, String gender,
+			String maritalStatus, String reportingTo) {
+		super();
+
 		this.firstName = firstName;
 		this.middleName = middleName;
 		this.lastName = lastName;
@@ -92,6 +119,38 @@ public class Employee {
 		this.maritalStatus = maritalStatus;
 		this.reportingTo = reportingTo;
 	}
+
+	public Employee(LoginCredential loginCredential, String firstName, String middleName, String lastName,
+		String bloodGroup, String mobileNo, String email, String cadre, Date dateOfJoining, String deptName, Date bdate,
+		String gender, String maritalStatus, String reportingTo, Time lastLogin) {
+	super();
+	this.loginCredential = loginCredential;
+	this.firstName = firstName;
+	this.middleName = middleName;
+	this.lastName = lastName;
+	this.bloodGroup = bloodGroup;
+	this.mobileNo = mobileNo;
+	this.email = email;
+	this.cadre = cadre;
+	this.dateOfJoining = dateOfJoining;
+	this.deptName = deptName;
+	this.bdate = bdate;
+	this.gender = gender;
+	this.maritalStatus = maritalStatus;
+	this.reportingTo = reportingTo;
+	this.lastLogin = lastLogin;
+}
+
+
+	public Time getLastLogin() {
+		return lastLogin;
+	}
+
+
+	public void setLastLogin(Time lastLogin) {
+		this.lastLogin = lastLogin;
+	}
+
 
 	public Integer getEmpId() {
 		return empId;
@@ -221,9 +280,5 @@ public class Employee {
 				+ ", deptName=" + deptName + ", bdate=" + bdate + ", gender=" + gender + ", maritalStatus="
 				+ maritalStatus + ", reportingTo=" + reportingTo + "]";
 	}
-	
-	
-	
-	
-	
+
 }

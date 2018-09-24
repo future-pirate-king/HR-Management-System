@@ -6,7 +6,7 @@ app.component('calenderComponent', {
 
 function calenderController($mdDialog) {
   var $ctrl = this;
-  $ctrl.dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  $ctrl.dayNames = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
   $ctrl.monthNames = [
     'January',
@@ -24,8 +24,18 @@ function calenderController($mdDialog) {
   ];
 
   $ctrl.taskList = [
-    { taskName: 'Hibernate', swipeIn: '08:12 AM', swipeOut: '07: 11 PM' },
-    { taskName: 'Spring', swipeIn: '08:22 AM', swipeOut: '08: 11 PM' }
+    {
+      taskName: 'Hibernate',
+      date: new Date(),
+      swipeIn: '08:12 AM',
+      swipeOut: '07: 11 PM'
+    },
+    {
+      taskName: 'Spring',
+      date: new Date(),
+      swipeIn: '08:22 AM',
+      swipeOut: '08: 11 PM'
+    }
   ];
 
   $ctrl.series = ['Hours Worked'];
@@ -40,9 +50,41 @@ function calenderController($mdDialog) {
 
   var temp = new Date(firstDate).toDateString(); //Mon Sep 01 2014 ...
   var firstDay = temp.substring(0, 3);
-  $ctrl.dayNo = 7; //$ctrl.dayNames.indexOf(firstDay); // 1
+  $ctrl.dayNo = $ctrl.dayNames.indexOf(firstDay); // 1
 
   $ctrl.days = new Date($ctrl.year, $ctrl.month + 1, 0).getDate(); // total days
+
+  $ctrl.rows = {
+    first: [],
+    second: [],
+    third: [],
+    fourth: [],
+    fifth: []
+  };
+  var counter = 1;
+  for (var i = 0; i <= 6; i++) {
+    if (i + 1 > $ctrl.dayNo) {
+      $ctrl.rows.first.push(counter++);
+    } else {
+      $ctrl.rows.first.push('a' + i);
+    }
+  }
+
+  for (var j = 0; j <= 6; j++) {
+    $ctrl.rows.second.push(counter++);
+  }
+
+  for (var j = 0; j <= 6; j++) {
+    $ctrl.rows.third.push(counter++);
+  }
+
+  for (var k = 0; counter <= $ctrl.days; k++) {
+    if (k <= 6) {
+      $ctrl.rows.fourth.push(counter++);
+    } else {
+      $ctrl.rows.fifth.push(counter++);
+    }
+  }
 
   $ctrl.addTask = function(event) {
     $mdDialog

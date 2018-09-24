@@ -4,4 +4,12 @@ app.component('homeComponent', {
   controller: homeController
 });
 
-function homeController() {}
+function homeController() {
+
+
+
+  this.$onInit = function () {
+
+
+  }
+}
