@@ -55,6 +55,10 @@ h2 {
 }
 /* End of Global styles */
 
+#profile-btn {
+  border-radius: 20px;
+}
+
 /* ###################Login styles will go here################ */
 
 #login-container {
@@ -96,26 +100,22 @@ h2 {
   margin-bottom: 5px;
   padding-top: 12px;
   padding-bottom: 12px;
+  position: relative;
 }
 
-.menu-item:hover span {
-  color: grey !important;
+.menu-item:hover {
+  background-color: rgba(0, 0, 0, 0.085);
 }
 
-.menu-item-active {
-  color: #1A237E;
-  border-right: solid 3px #1A237E;
-}
-
-.menu-item-active i {
-  padding: 8px;
-  border-radius: 50%;
-  background-color: #1A237E;
-  color: #fff !important;
-}
-
-.menu-item-active span {
-  color: grey !important;
+.menu-item-active::before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  width: 5px;
+  border-radius: 5px;
+  background-color: #fafafa;
+  position: absolute;
+  left: 0;
 }
 /* End of Side Nav styles */
 
@@ -191,33 +191,51 @@ h2 {
   border-right: 1px solid #fff;
 }
 
-#cal #cal-frame td.today {
-  background: #1a237e;
-  color: #ffffff;
-  border-radius: 50%;
-}
-#cal #cal-frame td:not(.nil):hover {
-  color: #000000;
-  border-radius: 50%;
-  background: #ededed;
-}
-
-#cal #cal-frame td span {
-  font-size: 80%;
-  position: relative;
-}
-#cal #cal-frame td span:first-child {
-  bottom: 5px;
-}
-#cal #cal-frame td span:last-child {
-  top: 5px;
-}
-
-#cal #cal-frame table.curr {
+calendar > div.week {
   float: left;
+  width: 100%;
+  border-top: solid 1px #cccccc;
 }
-#cal #cal-frame table.temp {
-  position: absolute;
+
+#cal > div.week:first-child {
+  border-top: none;
+}
+
+#cal > div.week > span.day {
+  width: 14.28571429%;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  font-size: 0.8em;
+  text-align: center;
+  height: 30px;
+  line-height: 30px !important;
+  display: inline-block;
+  vertical-align: middle;
+  background: white;
+  cursor: pointer;
+  color: black;
+}
+
+#cal > div.week > span.day:first-child {
+  border-left: none;
+}
+
+#cal > div.week > span.day.today {
+  background: #e3f2ff;
+}
+
+#cal > div.week > span.day.different-month {
+  color: #c0c0c0;
+}
+
+#cal > div.week > span.day.selected {
+  background: #2875c7;
+  color: white;
+}
+
+#cal > div.week.names > span {
+  color: #2875c7;
+  font-weight: bold;
 }
 
 /* End of Calender styles */

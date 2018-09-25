@@ -4,15 +4,21 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.hrmanagement.model.Employee;
-import com.project.hrmanagement.model.LoginCredential;
 import com.project.hrmanagement.service.IEmployeeService;
+
+
+
+//--------------working--------------//
+// add employee  (needs changes as to accept data from json obj)
+// remove employee  (needs changes as to accept data from json obj)
+// get employee  (needs changes as to accept data from json obj)
+// get all employee  (needs changes as to accept data from json obj)
+
 
 @RestController
 @RequestMapping("/Employee")
@@ -20,15 +26,6 @@ public class EmployeeController {
 
 	@Autowired
 	private IEmployeeService empService;
-
-	@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
-	public Employee authenticate(@RequestBody LoginCredential lc) {
-
-		if (this.empService.authenticate(lc)) {
-			return this.empService.getEmployee(lc.getEmpId());
-		}
-		return null;
-	}
 
 	@RequestMapping("/addEmployee")
 	public Employee addEmployee() {

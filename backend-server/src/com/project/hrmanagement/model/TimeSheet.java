@@ -8,9 +8,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "HR_TIMESHEET")
+@Table(name = "HR_TIMESHEET", uniqueConstraints = @UniqueConstraint(columnNames = { "task_date" }))
 public class TimeSheet implements Serializable {
 
 	/**
@@ -26,8 +27,8 @@ public class TimeSheet implements Serializable {
 	@Column(name = "emp_id")
 	private Integer empId;
 
-	@Column(name = "today_date")
-	private Date todayDate;
+	@Column(name = "task_date")
+	private Date taskDate;
 
 	@Column(name = "task_name")
 	private String taskName;
@@ -37,43 +38,56 @@ public class TimeSheet implements Serializable {
 
 	@Column(name = "swipe_out")
 	private String swipeOut;
-	
-	@Column(name = "total_time")
-	private Float totalTime /*= Float.valueOf(swipeIn) - Float.valueOf(swipeOut)*/;
-	
+
+	/*
+	 * @Column(name = "total_time") private Float totalTime = Float.valueOf(swipeIn)
+	 * - Float.valueOf(swipeOut);
+	 */
+
 	@Column(name = "is_filled")
-	private Boolean isfilled;
-	
+	private Integer isFilled = 0;
+
 	@Column(name = "is_approved")
-	private Boolean isApproved;
-	
-	
-	
+	private Integer isApproved = null;
 
 	public TimeSheet() {
 		// TODO Auto-generated constructor stub
 	}
 
-	
-
-	public TimeSheet(Integer empId, Date todayDate, String taskName, String swipeIn, String swipeOut, Float totalTime) {
+	public TimeSheet(Integer empId, Date taskDate, String taskName, String swipeIn, String swipeOut) {
 		super();
 		this.empId = empId;
-		this.todayDate = todayDate;
+		this.taskDate = taskDate;
 		this.taskName = taskName;
 		this.swipeIn = swipeIn;
 		this.swipeOut = swipeOut;
-		this.totalTime = totalTime;
 	}
 
-
-
-	public Date getTodayDate() {
-		return todayDate;
+	public Date getTaskDate() {
+		return taskDate;
 	}
 
-	public void setTodayDate(Date todayDate) {
-		this.todayDate = todayDate;
+	public void setTaskDate(Date taskDate) {
+		this.taskDate = taskDate;
+	}
+
+	
+
+
+	public Integer getIsFilled() {
+		return isFilled;
+	}
+
+	public void setIsFilled(Integer isFilled) {
+		this.isFilled = isFilled;
+	}
+
+	public Integer getIsApproved() {
+		return isApproved;
+	}
+
+	public void setIsApproved(Integer isApproved) {
+		this.isApproved = isApproved;
 	}
 
 	public Integer getTimeSheetId() {
@@ -112,17 +126,12 @@ public class TimeSheet implements Serializable {
 		this.swipeOut = swipeOut;
 	}
 
-
-
-	public Float getTotalTime() {
-		return totalTime;
-	}
-
-
-
-	public void setTotalTime(Float totalTime) {
-		this.totalTime = totalTime;
-	}
-
+	/*
+	 * public Float getTotalTime() { return totalTime; }
+	 * 
+	 * 
+	 * 
+	 * public void setTotalTime(Float totalTime) { this.totalTime = totalTime; }
+	 */
 
 }

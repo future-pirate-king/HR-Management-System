@@ -1,0 +1,24 @@
+<div id="cal">
+    <div class="header">
+        <span class="left button" id="prev" ng-click="previous()">
+            <i class="fas fa-chevron-left"></i>
+        </span>
+        <span class="month-year" id="label">{{month.format("MMMM, YYYY")}}</span>
+        <span class="right button" id="next" ng-click="next()">
+            <i class="fas fa-chevron-right"></i>
+        </span>
+    </div>
+    <table id="days">
+        <td class="day">Sun</td>
+        <td class="day">Mon</td>
+        <td class="day">Tue</td>
+        <td class="day">Wed</td>
+        <td class="day">Thu</td>
+        <td class="day">Fri</td>
+        <td class="day">Sat</td>
+    </table>
+    <div class="week" ng-repeat="week in weeks">
+        <span class="day" ng-class="{ today: day.isToday, 'different-month': !day.isCurrentMonth, selected: day.date.isSame(selected) }"
+            ng-click="select(day)" ng-repeat="day in week.days">{{day.number}}</span>
+    </div>
+</div>

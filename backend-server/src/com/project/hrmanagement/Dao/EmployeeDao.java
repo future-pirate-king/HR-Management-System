@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.project.hrmanagement.model.Employee;
 import com.project.hrmanagement.model.LoginCredential;
-import com.project.hrmanagement.model.TimeSheet;
 
 @Repository
 public class EmployeeDao implements IEmployeeDao {
@@ -58,12 +57,9 @@ public class EmployeeDao implements IEmployeeDao {
 		Session session = sessionFactory.getCurrentSession();
 
 		LoginCredential loginCredential = new LoginCredential("Newuser");
-		TimeSheet ts = new TimeSheet();
 		loginCredential.setEmployee(employee);
 		session.save(employee);
 		session.save(loginCredential);
-		session.save(ts);
-		
 
 		return employee;
 	}

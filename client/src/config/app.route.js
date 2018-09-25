@@ -1,6 +1,6 @@
 app.config([
   '$stateProvider',
-  function ($stateProvider) {
+  function($stateProvider) {
     $stateProvider
       .state({
         name: 'login',
@@ -13,9 +13,19 @@ app.config([
         component: 'homeComponent'
       })
       .state({
-        name: 'timesheet',
+        name: 'home.dashboard',
+        url: '/dashboard',
+        component: 'mainAreaComponent'
+      })
+      .state({
+        name: 'home.timesheet',
         url: '/timesheet',
         component: 'timesheetComponent'
+      })
+      .state({
+        name: 'home.complaint',
+        url: '/complaint',
+        component: 'complaintComponent'
       });
   }
 ]);

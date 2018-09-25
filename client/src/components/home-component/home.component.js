@@ -4,12 +4,12 @@ app.component('homeComponent', {
   controller: homeController
 });
 
-function homeController() {
-
-
-
-  this.$onInit = function () {
-
-
-  }
+function homeController($state, $stateParams) {
+  this.$onInit = function() {
+    $state.go(
+      'home.dashboard',
+      { empId: $stateParams.empId },
+      { notify: false, location: 'replace' }
+    );
+  };
 }

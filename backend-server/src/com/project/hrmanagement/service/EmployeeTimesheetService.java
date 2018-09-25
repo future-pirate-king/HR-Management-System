@@ -27,28 +27,21 @@ public class EmployeeTimesheetService implements IEmployeeTimesheetService {
 	}
 
 	@Override
-	public TimeSheet editTimeSheet(TimeSheet timeSheet) {
+	public Integer editTimeSheet(TimeSheet timeSheet) {
 		// TODO Auto-generated method stub
 		return this.employeeTimeSheetDao.editTimeSheet(timeSheet);
 	}
 
+
 	@Override
-	public TimeSheet rejectTimeSheet(TimeSheet timeSheet) {
-		// TODO Auto-generated method stub
-		return null;
+	public Integer updateTimeSheetStatus(TimeSheet timeSheet) {
+		return this.employeeTimeSheetDao.updateTimeSheetStatus(timeSheet);
 	}
 
 	@Override
-	public TimeSheet approveTimeSheet(TimeSheet timeSheet) {
+	public Integer rejectTimeSheet(TimeSheet timeSheet) {
 		// TODO Auto-generated method stub
-		return null;
+		return this.employeeTimeSheetDao.rejectTimeSheet(timeSheet);
 	}
-
-	@Override
-	public TimeSheet requestApprovalTimeSheet(TimeSheet timeSheet) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 
 }

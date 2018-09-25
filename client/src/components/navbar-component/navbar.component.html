@@ -1,19 +1,31 @@
-<div style="background-color:white;height: 60px;box-sizing: border-box;" layout="row" layout-align="space-between center">
+<div md-whiteframe="2" style="background-color:#ffffff;height: 60px;box-sizing: border-box;" layout="row" layout-align="space-between center">
     <h4 class="mar-l">
-        <span md-colors="{color:'black'}">LOGO</span>
+        <span md-colors="{color:'purple'}">LOGO</span>
     </h4>
     <div layout="row" layout-padding layout-align="space-between center">
-        <md-button class="md-icon-button mar-lr" aria-label="notification">
+        <md-button md-colors="{color:'purple'}" class=" md-icon-button mar-lr" aria-label="notification">
             <md-tooltip md-direction="bottom">Notification</md-tooltip>
             <i class="far fa-bell fa-lg"></i>
         </md-button>
 
-        <div class="mar-lr" md-whiteframe="12" layout="row" layout-align="space-around center" style="min-width:60px; border-radius:30px; box-sizing: border-box; padding: 5px; cursor: pointer;">
-            <i style="padding:5px; border-radius: 50%; background-color: #eeeeee" class="fas fa-user fa-xs"></i>
-            <span class="mar-lr">
-                <strong style="font-size:12px">{{$ctrl.firstName + ' ' + $ctrl.lastName}}</strong>
-            </span>
-            <i class="fas fa-angle-down mar-lr"></i>
-        </div>
+        <md-menu>
+            <md-button id="profile-btn" md-whiteframe="5" aria-label="Open menu with custom trigger" ng-click="$mdMenu.open()">
+                <div class="mar-lr" layout="row" layout-align="space-around center">
+                    <i style="padding:5px; border-radius: 50%; background-color: #eeeeee" class="fas fa-user fa-xs"></i>
+                    <span class="mar-lr">
+                        <strong style="font-size:12px" md-colors="{color:'purple'}">{{$ctrl.firstName + ' ' +
+                            $ctrl.lastName}}</strong>
+                    </span>
+                    <i class="fas fa-angle-down mar-lr"></i>
+                </div>
+            </md-button>
+            <md-menu-content width="3" ng-mouseleave="$mdMenu.close()">
+                <md-menu-item ng-repeat="item in ['View Profile', 'Logout']">
+                    <md-button>
+                        {{item}}
+                    </md-button>
+                </md-menu-item>
+            </md-menu-content>
+        </md-menu>
     </div>
 </div>

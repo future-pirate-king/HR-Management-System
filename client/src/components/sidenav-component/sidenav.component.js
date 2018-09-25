@@ -4,19 +4,19 @@ app.component('sidenavComponent', {
   controller: sidenavController
 });
 
-function sidenavController() {
+function sidenavController($stateParams) {
   var $ctrl = this;
 
   $ctrl.menuItems = [
     {
       icon: 'fas fa-home',
       title: 'Home',
-      link: 'home'
+      link: 'home.dashboard({empId:' + $stateParams.empId + '})'
     },
     {
       icon: 'fas fa-calendar-alt',
       title: 'Time Sheet',
-      link: 'timesheet'
+      link: 'home.timesheet({empId:' + $stateParams.empId + '})'
     },
     {
       icon: 'fas fa-money-bill-alt',
