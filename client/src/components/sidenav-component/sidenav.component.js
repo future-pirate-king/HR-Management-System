@@ -21,17 +21,17 @@ function sidenavController($stateParams) {
     {
       icon: 'fas fa-money-bill-alt',
       title: 'Payroll',
-      link: 'payroll'
+      link: 'home.payroll({empId:' + $stateParams.empId + '})'
     },
     {
       icon: 'fas fa-comment-dots',
       title: 'Complaints',
-      link: 'complaints'
+      link: 'home.complaint({empId:' + $stateParams.empId + '})'
     },
     {
       icon: 'fab fa-foursquare',
       title: 'Feedback',
-      link: 'feedback'
+      link: 'home.feedback({empId:' + $stateParams.empId + '})'
     }
   ];
 }

@@ -8,6 +8,11 @@ app.config([
         component: 'loginComponent'
       })
       .state({
+        name: 'profile',
+        url: '/profile/{empId}',
+        component: 'profileComponent'
+      })
+      .state({
         name: 'home',
         url: '/home/{empId}',
         component: 'homeComponent'
@@ -26,6 +31,16 @@ app.config([
         name: 'home.complaint',
         url: '/complaint',
         component: 'complaintComponent'
+      })
+      .state({
+        name: 'home.feedback',
+        url: '/feedback',
+        component: 'feedbackComponent'
+      })
+      .state({
+        name: 'home.payroll',
+        url: '/payroll',
+        component: 'payrollComponent'
       });
   }
 ]);
