@@ -31,13 +31,13 @@ public class AnnouncementController {
 	@RequestMapping("/addAnnouncement")
 	public Announcement addAnnouncement() {
 		@SuppressWarnings("deprecation")
-		Announcement a1 =new Announcement((long)101,new Date("16-AUG-2017"),"important announcement","holiday","unread");
+		Announcement a1 =new Announcement(new Date("16-AUG-2017"),"important announcement","holiday","unread");
 		return this.announcementService.addAnnouncement(a1);
 		 		
 	}
 	
 	@RequestMapping("/listAllAnnouncement")
-	public List<Announcement> listAllAnnouncement() {	
+	public List<Announcement> listAllAnnouncements() {	
 	return this.announcementService.listAllAnnouncement();
 
 		}

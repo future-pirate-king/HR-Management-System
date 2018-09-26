@@ -41,7 +41,7 @@ public class FeedbackController {
 
 		}
 	
-	@RequestMapping("/searchFeedback")
+	@RequestMapping("searchFeedback")
 	public Feedback getFeedback(@RequestParam("feedbackId") Long feedbackId) {
 	if (feedbackId != null) {
 		Feedback feedback = feedbackService.searchFeedback(feedbackId);

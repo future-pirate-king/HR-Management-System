@@ -3,9 +3,15 @@
         <span md-colors="{color:'purple'}">LOGO</span>
     </h4>
     <div layout="row" layout-padding layout-align="space-between center">
-        <md-button md-colors="{color:'purple'}" class=" md-icon-button mar-lr" aria-label="notification">
+        <md-button md-colors="{color:'purple'}" class="md-icon-button mar-lr" aria-label="notification">
             <md-tooltip md-direction="bottom">Notification</md-tooltip>
             <i class="far fa-bell fa-lg"></i>
+        </md-button>
+
+        <md-button layout="row" layout-align="center center" target="_blank" ui-sref="{{$ctrl.hrLink}}" md-colors="{color:'purple'}"
+            class="md-icon-button mar-lr" aria-label="hr-mode">
+            <md-tooltip md-direction="bottom">Hr Mode</md-tooltip>
+            <i class="fas fa-external-link-alt"></i>
         </md-button>
 
         <md-menu>
@@ -13,16 +19,21 @@
                 <div class="mar-lr" layout="row" layout-align="space-around center">
                     <i style="padding:5px; border-radius: 50%; background-color: #eeeeee" class="fas fa-user fa-xs"></i>
                     <span class="mar-lr">
-                        <strong style="font-size:12px" md-colors="{color:'purple'}">{{$ctrl.firstName + ' ' +
-                            $ctrl.lastName}}</strong>
+                        <strong style="font-size:12px" md-colors="{color:'purple'}">{{$ctrl.firstName + ' ' + $ctrl.lastName}}
+                        </strong>
                     </span>
                     <i class="fas fa-angle-down mar-lr"></i>
                 </div>
             </md-button>
             <md-menu-content width="3" ng-mouseleave="$mdMenu.close()">
-                <md-menu-item ng-repeat="item in ['View Profile', 'Logout']">
+                <md-menu-item>
+                    <md-button ui-sref="{{$ctrl.profileLink}}">
+                        View Profile
+                    </md-button>
+                </md-menu-item>
+                <md-menu-item>
                     <md-button>
-                        {{item}}
+                        Logout
                     </md-button>
                 </md-menu-item>
             </md-menu-content>

@@ -1,6 +1,6 @@
 app.config([
   '$stateProvider',
-  function($stateProvider) {
+  function ($stateProvider) {
     $stateProvider
       .state({
         name: 'login',
@@ -11,6 +11,11 @@ app.config([
         name: 'profile',
         url: '/profile/{empId}',
         component: 'profileComponent'
+      })
+      .state({
+        name: 'hr_home',
+        url: '/hr/{empId}',
+        component: 'hrHomeComponent'
       })
       .state({
         name: 'home',

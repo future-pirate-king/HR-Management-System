@@ -6,7 +6,9 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -27,7 +29,8 @@ public class Announcement implements Serializable{
 	
 	@Id
 	@Column(name="announcement_id")
-	@GeneratedValue
+	@SequenceGenerator(name="id", initialValue=0000, allocationSize=100)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="id")
 	private Long announcementId;
 	//(strategy = GenerationType.SEQUENCE, generator= "HR_ANNOUNCEMENT_GEN")
 	//@SequenceGenerator(name="HR_ANNOUNCEMENT_GEN", sequenceName="HR_ANNOUNCEMENT_SEQ",allocationSize=1)
@@ -52,10 +55,10 @@ public class Announcement implements Serializable{
 		
 	}
 
-	public Announcement(Long announcementId, Date announcementDate, String announcementTitle, String announcementBody,
+	public Announcement(Date announcementDate, String announcementTitle, String announcementBody,
 			String announcementStatus) {
 		super();
-		this.announcementId = announcementId;
+		
 		this.announcementDate = announcementDate;
 		this.announcementTitle = announcementTitle;
 		this.announcementBody = announcementBody;

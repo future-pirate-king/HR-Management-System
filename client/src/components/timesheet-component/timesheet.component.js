@@ -4,32 +4,26 @@ app.component('timesheetComponent', {
   controller: timesheetController
 });
 
-function timesheetController($scope, $mdDialog, $stateParams, timesheetService) {
+function timesheetController(
+  $scope,
+  $mdDialog,
+  $stateParams,
+  timesheetService
+) {
   var $ctrl = this;
   $ctrl.dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-
   $scope.day = moment();
+  $ctrl.taskList = [];
 
-  $ctrl.taskList = [
-    {
-      taskName: 'Hibernate',
-      taskDate: new Date(),
-      swipeIn: '08:12 AM',
-      swipeOut: '07: 11 PM'
-    },
-    {
-      taskName: 'Spring',
-      taskDate: new Date(),
-      swipeIn: '08:22 AM',
-      swipeOut: '08: 11 PM'
-    }
-  ];
+  $ctrl.onInit = function() {
+    // getTimesheetDetails goes here..
+  };
 
   $ctrl.series = ['Hours Worked'];
 
   $ctrl.data = [10];
 
-  $ctrl.addTask = function (event) {
+  $ctrl.addTask = function(event) {
     $mdDialog
       .show({
         controller: DialogController,
@@ -39,31 +33,39 @@ function timesheetController($scope, $mdDialog, $stateParams, timesheetService) 
         locals: {
           date: $scope.day
         },
-        clickOutsideToClose: true,
+        clickOutsideToClose: false,
         fullscreen: false // Only for -xs, -sm breakpoints.
       })
       .then(
-      function (formData) {
-        timesheetService.addTask($stateParams.empId, formData.swipeIn, formData.swipeOut, $scope.day._d, formData.taskName).then(res => console.log(res));
-        formData = { ...formData, taskDate: $scope.day._d },
-          $ctrl.taskList.push(formData);
-      },
-      function () { } //fires when dialog closed
+        function(formData) {
+          timesheetService
+            .addTask(
+              $stateParams.empId,
+              formData.swipeIn,
+              formData.swipeOut,
+              $scope.day._d.getTime(),
+              formData.taskName
+            )
+            .then(res => console.log(res));
+          (formData = { ...formData, taskDate: $scope.day._d.getTime() }),
+            $ctrl.taskList.push(formData);
+        },
+        function() {} //fires when dialog closed
       );
   };
 }
 
 function DialogController($scope, $mdDialog, date) {
   $scope.date = date;
-  $scope.hide = function () {
+  $scope.hide = function() {
     $mdDialog.hide();
   };
 
-  $scope.cancel = function () {
+  $scope.cancel = function() {
     $mdDialog.cancel();
   };
 
-  $scope.answer = function (event, answer) {
+  $scope.answer = function(event, answer) {
     event.preventDefault();
     $mdDialog.hide(answer);
   };

@@ -4,4 +4,13 @@ app.component('profileComponent', {
   controller: profileController
 });
 
-function profileController() {}
+function profileController(employeeService, $stateParams) {
+  var $ctrl = this;
+  $ctrl.employee = {};
+
+  this.$onInit = function () {
+    employeeService.getEmployeeById($stateParams.empId).then((res) => {
+      $ctrl.employee = res.data;
+    });
+  }
+}

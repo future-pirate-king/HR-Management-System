@@ -34,7 +34,10 @@ function loginController($state, loginService, $mdToast) {
 
         $ctrl.isloading = false;
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        $ctrl.isloading = false;
+      });
   };
 
   $ctrl.togglePasswordInputType = function () {

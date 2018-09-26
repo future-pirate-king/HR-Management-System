@@ -4,4 +4,8 @@ app.component('complaintComponent', {
   controller: complaintController
 });
 
-function complaintController() {}
+function complaintController() {
+  var $ctrl = this;
+
+  $ctrl.hello = 'hello';
+}

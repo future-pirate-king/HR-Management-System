@@ -1,49 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans:beans xmlns="http://www.springframework.org/schema/mvc"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:beans="http://www.springframework.org/schema/beans"
-    xmlns:context="http://www.springframework.org/schema/context"
-    xmlns:tx="http://www.springframework.org/schema/tx"
-    xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
- 
-    <!-- Enables the Spring MVC @Controller programming model -->
-    <annotation-driven />
-    
-    <!-- To  convert JSON to Object and vice versa -->
-    <beans:bean id="jsonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-    </beans:bean>
- 
-   <!-- for processing requests with annotated controller methods and set Message Convertors from the list of convertors -->
-    <beans:bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
-        <beans:property name="messageConverters">
-            <beans:list>
-                <beans:ref bean="jsonMessageConverter"/>
-            </beans:list>
-        </beans:property>
-    </beans:bean> 
-    
-    <beans:bean id="dataSource"
+
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<annotation-driven />
+	<context:component-scan base-package="com.project.hrmanagement"></context:component-scan>
+	<!-- To convert JSON to Object and vice versa -->
+	<!-- <beans:bean id="jsonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"> -->
+	<!-- </beans:bean> -->
+
+	<!-- for processing requests with annotated controller methods and set Message 
+		Convertors from the list of convertors -->
+	<!-- <beans:bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"> -->
+	<!-- <beans:property name="messageConverters"> -->
+	<!-- <beans:list> -->
+	<!-- <beans:ref bean="jsonMessageConverter"/> -->
+	<!-- </beans:list> -->
+	<!-- </beans:property> -->
+	<!-- </beans:bean> -->
+
+	<beans:bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<beans:property name="driverClassName"
-			value="oracle.jdbc.driver.OracleDriver" />
+		<beans:property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
 		<beans:property name="url"
 			value="jdbc:oracle:thin:@localhost:1521:xe" />
-		<beans:property name="username" value="system" />
+		<beans:property name="username" value="SYSTEM" />
 		<beans:property name="password" value="7208169887" />
 	</beans:bean>
-	
+
 	<beans:bean id="sessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<beans:property name="dataSource" ref="dataSource" />
 		<beans:property name="annotatedClasses">
 			<!-- Map all the annotated class with @Entity -->
 			<beans:list>
-				<beans:value>com.project.hrmanagement.model.LoginCredential</beans:value>
+				<beans:value>com.project.hrmanagement.model.LoginCredential
+				</beans:value>
 				<beans:value>com.project.hrmanagement.model.Employee</beans:value>
-			</beans:list>
+				<beans:value>com.project.hrmanagement.model.TimeSheet</beans:value>
+				<beans:value>com.project.hrmanagement.model.Announcement</beans:value>
+				<beans:value>com.project.hrmanagement.model.Feedback</beans:value>
+				<beans:value>com.project.hrmanagement.model.Leave</beans:value>
+<!-- 				<beans:value>com.project.hrmanagement.model.Complaints</beans:value>
+ -->			</beans:list>
 		</beans:property>
 		<beans:property name="hibernateProperties">
 			<beans:props>
@@ -55,7 +59,7 @@
 			</beans:props>
 		</beans:property>
 	</beans:bean>
-	
+
 	<beans:bean id="transactionManager"
 		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<beans:property name="sessionFactory" ref="sessionFactory" />
@@ -64,7 +68,6 @@
 
 	<!-- This is required to handle transactions via Annotations like @Transactional -->
 	<tx:annotation-driven transaction-manager="transactionManager" />
- 
-    <context:component-scan base-package="com.project.hrmanagement" />
- 
+
+
 </beans:beans>

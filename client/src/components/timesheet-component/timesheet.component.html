@@ -1,6 +1,6 @@
 <div class="timesheet-container">
     <div layout="row" layout-align="space-between" layout-padding>
-        <calendar selected="$ctrl.day" add-task="$ctrl.addTask()"></calendar>
+        <calendar selected="day" add-task="$ctrl.addTask()"></calendar>
 
         <div id="timesheet-details" style="width:67%; border-radius: 5px;" md-whiteframe="5">
             <table style="width:100%">
@@ -27,8 +27,6 @@
             </table>
         </div>
     </div>
-
-    {{day.format('dddd, MMMM Do YYYY')}}
 
     <div style="margin: 15px; max-width:500px; max-height: 350px; border-radius: 5px;" md-whiteframe="5" layout-padding>
         <canvas id="bar" class="chart chart-bar" chart-data="$ctrl.data" chart-labels="$ctrl.dayNames" chart-series="$ctrl.series">

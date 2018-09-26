@@ -6,7 +6,9 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -17,7 +19,8 @@ public class Leave implements Serializable {
 
 	@Id
 	@Column(name="leave_id")
-	@GeneratedValue
+	 @SequenceGenerator(name="id", initialValue=0000, allocationSize=100)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="id")
 	private Integer leaveId;
 	
 	@Column(name="number_of_leaves_taken")
@@ -83,10 +86,10 @@ public class Leave implements Serializable {
 		this.leaveBalance = leaveBalance;
 	}
 
-	public Leave(Integer leaveId, Integer numberOfLeavesTaken, Date fromDate, Date toDate, String reason,
+	public Leave(Integer numberOfLeavesTaken, Date fromDate, Date toDate, String reason,
 			Integer leaveBalance) {
 		super();
-		this.leaveId = leaveId;
+		
 		this.numberOfLeavesTaken = numberOfLeavesTaken;
 		this.fromDate = fromDate;
 		this.toDate = toDate;

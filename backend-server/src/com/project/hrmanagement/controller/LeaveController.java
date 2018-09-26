@@ -27,9 +27,9 @@ public class LeaveController {
 	
 	@RequestMapping("/addLeave")
 	public Leave addLeave() {
-		Integer leaveId = new Integer(111);
+		
 		@SuppressWarnings("deprecation")
-		Leave l1 =new Leave(leaveId,(int)5,new Date(2017, 9, 15), new Date(2017, 9, 19),"Health",(int)1);
+		Leave l1 =new Leave((int)5,new Date(2017, 9, 15), new Date(2017, 9, 19),"Health",(int)1);
 		return this.leaveService.addLeave(l1); 		
 	}
 	
@@ -39,7 +39,7 @@ public class LeaveController {
 		}
 	
 	
-	@RequestMapping("/getLeave")
+	@RequestMapping("getLeave")
 	public Leave getLeave(@RequestParam("leaveId") Integer leaveId) {
 		if (leaveId != null) {
 			Leave l1 = leaveService.getLeave(leaveId);
