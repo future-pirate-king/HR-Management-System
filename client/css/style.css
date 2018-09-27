@@ -54,11 +54,33 @@ h2 {
   z-index: 1000;
 }
 
+ui-view {
+  width: 100% !important;
+}
+
+.hoverable {
+  -webkit-transition: -webkit-box-shadow 0.25s;
+  transition: -webkit-box-shadow 0.25s;
+  transition: box-shadow 0.25s;
+  transition: box-shadow 0.25s, -webkit-box-shadow 0.25s;
+}
+
+.hoverable:hover {
+  -webkit-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2),
+    0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.hoverable:hover i {
+  display: block !important;
+}
+
 .md-subheader .md-subheader-inner {
   background-color: #ffffff;
 }
 
-md-tab-content, md-tabs-content-wrapper {
+md-tab-content,
+md-tabs-content-wrapper {
   position: static;
 }
 /* End of Global styles */
@@ -213,7 +235,7 @@ calendar > div.week {
   width: 14.28571429%;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
-  font-size: 0.8em;
+  font-size: 0.9em;
   text-align: center;
   height: 30px;
   line-height: 30px !important;
@@ -224,12 +246,20 @@ calendar > div.week {
   color: black;
 }
 
+#cal > div.week > span.day:hover {
+  background: #eeeeee;
+  border-radius: 10px;
+}
+
 #cal > div.week > span.day:first-child {
   border-left: none;
 }
 
 #cal > div.week > span.day.today {
-  background: #e3f2ff;
+  background-color: #2196f3;
+  color: white;
+  font-weight: bold;
+  border-radius: 10px;
 }
 
 #cal > div.week > span.day.different-month {
@@ -237,8 +267,10 @@ calendar > div.week {
 }
 
 #cal > div.week > span.day.selected {
-  background: #2875c7;
+  background-color: purple;
   color: white;
+  font-weight: 600;
+  border-radius: 10px;
 }
 
 #cal > div.week.names > span {

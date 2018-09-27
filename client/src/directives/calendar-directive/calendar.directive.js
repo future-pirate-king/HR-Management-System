@@ -1,14 +1,14 @@
-
-
-app.directive("calendar", function () {
+app.directive('calendar', function() {
   return {
-    restrict: "E",
-    templateUrl: "./src/directives/calendar-directive/calendar.directive.html",
+    restrict: 'E',
+    templateUrl: './src/directives/calendar-directive/calendar.directive.html',
     scope: {
-      selected: "=",
-      addTask: "&"
+      selected: '=',
+      startDate: '=startDate',
+      endDate: '=endDate',
+      addTask: '&'
     },
-    link: function (scope) {
+    link: function(scope) {
       scope.selected = _removeTime(scope.selected || moment());
       scope.month = scope.selected.clone();
 
@@ -18,19 +18,24 @@ app.directive("calendar", function () {
 
       _buildMonth(scope, start, scope.month);
 
-      scope.select = function (day) {
+      scope.select = function(day) {
         scope.selected = day.date;
         scope.addTask();
       };
 
-      scope.next = function () {
+      scope.getWeek = function(weekDates) {
+        scope.startDate = weekDates[0].date;
+        scope.endDate = weekDates[weekDates.length - 1].date;
+      };
+
+      scope.next = function() {
         var next = scope.month.clone();
         _removeTime(next.month(next.month() + 1).date(1));
         scope.month.month(scope.month.month() + 1);
         _buildMonth(scope, next, scope.month);
       };
 
-      scope.previous = function () {
+      scope.previous = function() {
         var previous = scope.month.clone();
         _removeTime(previous.month(previous.month() - 1).date(1));
         scope.month.month(scope.month.month() - 1);
@@ -40,7 +45,12 @@ app.directive("calendar", function () {
   };
 
   function _removeTime(date) {
-    return date.day(0).hour(0).minute(0).second(0).millisecond(0);
+    return date
+      .day(0)
+      .hour(0)
+      .minute(0)
+      .second(0)
+      .millisecond(0);
   }
 
   function _buildMonth(scope, start, month) {
@@ -53,7 +63,7 @@ app.directive("calendar", function () {
       scope.weeks.push({
         days: _buildWeek(date.clone(), month)
       });
-      date.add(1, "w");
+      date.add(1, 'w');
       done = count++ > 2 && monthIndex !== date.month();
       monthIndex = date.month();
     }
@@ -63,14 +73,14 @@ app.directive("calendar", function () {
     var days = [];
     for (var i = 0; i < 7; i++) {
       days.push({
-        name: date.format("dd").substring(0, 1),
+        name: date.format('dd').substring(0, 1),
         number: date.date(),
         isCurrentMonth: date.month() === month.month(),
-        isToday: date.isSame(new Date(), "day"),
+        isToday: date.isSame(new Date(), 'day'),
         date: date
       });
       date = date.clone();
-      date.add(1, "d");
+      date.add(1, 'd');
     }
     return days;
   }
