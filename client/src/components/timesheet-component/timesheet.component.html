@@ -1,7 +1,14 @@
 <div class="timesheet-container">
     <div layout="row" layout-align="space-around center" layout-padding>
+        <div style="height:200px" layout="column" layout-align="space-around space-between">
+            <span><i class="fas fa-square mar-r"></i>Pending</span>
+            <span><i class="fas fa-square mar-r"></i>Rejected</span>
+            <span><i class="fas fa-square mar-r"></i>Approved</span>
+            <span><i class="fas fa-square mar-r"></i>Filled</span>
+        </div>
         <calendar selected="day" add-task="$ctrl.addTask()" end-date="endDate" start-date="startDate"></calendar>
-        <div style="margin: 15px; max-width:500px; max-height: 350px; border-radius: 5px;" md-whiteframe="5"
+
+        <div style="margin: 15px; max-width:700px; max-height: 350px; border-radius: 5px;" md-whiteframe="5"
             layout-padding>
             <canvas id="bar" class="chart chart-bar" chart-data="$ctrl.data" chart-labels="$ctrl.dayNames" chart-series="$ctrl.series">
             </canvas>
