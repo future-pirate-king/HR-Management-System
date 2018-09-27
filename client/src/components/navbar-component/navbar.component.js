@@ -1,5 +1,7 @@
 app.component('navbarComponent', {
-  bindings: {},
+  bindings: {
+    mode: '<'
+  },
   templateUrl: './src/components/navbar-component/navbar.component.html',
   controller: navbarController,
 });
@@ -12,6 +14,7 @@ function navbarController(employeeService, $state, $stateParams, $mdToast) {
   $ctrl.hrLink = '';
 
   this.$onInit = function () {
+    $ctrl.hrMode = $ctrl.mode === 'hr';
     $ctrl.profileLink = 'profile({empId:' + $stateParams.empId + '})';
     $ctrl.hrLink = 'hr_home({empId:' + $stateParams.empId + '})';
 

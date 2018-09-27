@@ -4,4 +4,9 @@ app.component('hrHomeComponent', {
     controller: hrHomeController,
 });
 
-function hrHomeController() { }
+function hrHomeController(employeeService) {
+    var $ctrl = this;
+
+    $ctrl.mode = 'hr';
+
+}

@@ -1,0 +1,119 @@
+<form name="employeeForm" ng-submit="$ctrl.addEmployee($event)" layout-padding>
+    <div layout="row">
+        <md-input-container>
+            <label>First Name</label>
+            <input ng-model="$ctrl.employee.firstName">
+        </md-input-container>
+        <md-input-container>
+            <label>Middle Name</label>
+            <input ng-model="$ctrl.employee.middleName">
+        </md-input-container>
+        <md-input-container>
+            <label>Last Name</label>
+            <input ng-model="$ctrl.employee.lastName">
+        </md-input-container>
+    </div>
+
+    <md-input-container>
+        <label>Blood Group</label>
+        <md-select ng-model="$ctrl.employee.bloodGroup">
+            <md-option ng-repeat="bloodGroup in ['A+', 'A-', 'AB+', 'AB-', 'O+', 'O-', 'B+', 'B-']" value="{{bloodGroup}}">
+                {{bloodGroup}}
+            </md-option>
+        </md-select>
+    </md-input-container>
+
+    <md-input-container>
+        <label>Gender</label>
+        <md-select ng-model="$ctrl.employee.gender">
+            <md-option value="Male">Male</md-option>
+            <md-option value="Female">Female</md-option>
+        </md-select>
+    </md-input-container>
+
+    <!-- <md-input-container class="md-block">
+        <label>Address</label>
+        <input ng-model="$ctrl.employee.address">
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+        <input ng-model="$ctrl.employee.address2" placeholder="Address 2">
+    </md-input-container>
+
+    <div layout-gt-sm="row">
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>City</label>
+            <input ng-model="$ctrl.employee.city">
+        </md-input-container>
+
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>State</label>
+            <input ng-model="$ctrl.employee.state">
+        </md-input-container>
+
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Postal Code</label>
+            <input name="postalCode" ng-model="$ctrl.employee.postalCode" placeholder="123456" required ng-pattern="/^[0-9]{5}[0-9]?$/"
+                md-maxlength="6">
+
+            <div ng-messages="employeeForm.postalCode.$error" role="alert" multiple>
+                <div ng-message="required">You must supply a postal code.</div>
+                <div ng-message="pattern">That doesn't look like a valid postal code.
+                </div>
+                <div ng-message="md-maxlength" class="my-message">
+                    You have exceeded max length.
+                </div>
+            </div>
+        </md-input-container>
+    </div> -->
+
+    <div layout="row">
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Email</label>
+            <input required type="email" name="email" ng-model="$ctrl.employee.email" minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/"
+            />
+
+            <div ng-messages="$ctrl.employee.email.$error" role="alert">
+                <div ng-message="required">Email is required.</div>
+                <div ng-message-exp="['minlength', 'maxlength']">Your email must be between 10 and 100 characters long.</div>
+                <div ng-message="pattern">
+                    Your email must be a valid e-mail address.
+                </div>
+            </div>
+        </md-input-container>
+
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Mobile No</label>
+            <input ng-model="$ctrl.employee.mobileNo">
+        </md-input-container>
+
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Cadre</label>
+            <input ng-model="$ctrl.employee.cadre">
+        </md-input-container>
+    </div>
+
+    <div layout="row">
+        <md-datepicker ng-model=" $ctrl.employee.dateOfJoining " md-placeholder="Date of joining">
+        </md-datepicker>
+
+        <md-datepicker ng-model="$ctrl.employee.bdate " md-placeholder="Enter Birth date"></md-datepicker>
+    </div>
+
+    <div layout="row">
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Department Name</label>
+            <input ng-model="$ctrl.employee.deptName">
+        </md-input-container>
+
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Reporting To</label>
+            <input ng-model="$ctrl.employee.reportingTo">
+        </md-input-container>
+
+    </div>
+
+    <md-button ng-disabled="$ctrl.isloading" type="submit" layout="row" layout-align="center center" class="md-raised md-primary mar-t">
+        <md-progress-circular class="mar-r" ng-if="$ctrl.isloading" class="md-accent" md-diameter="20"></md-progress-circular>Add Employee
+    </md-button>
+</form>

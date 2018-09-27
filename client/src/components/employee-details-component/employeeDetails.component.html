@@ -1,0 +1,101 @@
+<div ng-if="$ctrl.employee.empId">
+    <div layout="row" style="width: 100%; height: 100px; position:relative; background:#eee; margin-top:3px;">
+        <div md-whiteframe="2" style="width: 100px; height: 100px; position: absolute; top: 50px; left: 30px; border-radius: 50%; background: #fff;">
+
+        </div>
+        <div style="position: absolute;left: 30%;top: 27px;">
+            <h4 style="margin:unset">{{$ctrl.employee.firstName + ' ' + $ctrl.employee.lastName}}</h4>
+            <h5 style="margin: 10px 0">{{$ctrl.employee.email}}</h5>
+        </div>
+        <md-menu>
+            <md-button class="md-icon-button mar-lr" aria-label="action" style="position: absolute;right: 0;" ng-click="$mdMenu.open()">
+                <md-tooltip md-direction="left">Action</md-tooltip>
+                <i class="fas fa-ellipsis-v"></i>
+            </md-button>
+
+            <md-menu-content width="2">
+                <md-menu-item>
+                    <md-button ng-click="$ctrl.deleteEmployee()">
+                        Delete
+                    </md-button>
+                </md-menu-item>
+                <md-menu-item>
+                    <md-button ng-click="null">
+                        Update
+                    </md-button>
+                </md-menu-item>
+            </md-menu-content>
+        </md-menu>
+    </div>
+
+    <md-tabs md-center-tabs class="mar-t">
+        <md-tab label="Details">
+            <div layout="row" layout-align="space-around center">
+                <div layout="column" layout-align="space-around center">
+                    <md-subheader>Date of Joining</md-subheader>
+                    <span>{{$ctrl.employee.dateOfJoining | date: 'mediumDate'}}</span>
+                </div>
+                <div layout="column" layout-align="space-around center">
+                    <md-subheader>Cadre</md-subheader>
+                    <span>{{$ctrl.employee.cadre}}</span>
+                </div>
+                <div layout="column" layout-align="space-around center">
+                    <md-subheader>Department</md-subheader>
+                    <span>{{$ctrl.employee.deptName}}</span>
+                </div>
+            </div>
+            <div layout="row" layout-align="space-around center" class="mar-t">
+                <div layout="column" layout-align="space-around center">
+                    <md-subheader>Last login</md-subheader>
+                    <span>{{$ctrl.employee.lastLogin | date: 'shortTime'}}</span>
+                </div>
+                <div layout="column" layout-align="space-around center">
+                    <md-subheader>Manager</md-subheader>
+                    <span>{{$ctrl.employee.reportingTo}}</span>
+                </div>
+                <div layout="column" layout-align="space-around center">
+                    <md-subheader>Gender</md-subheader>
+                    <span>{{$ctrl.employee.gender}}</span>
+                </div>
+            </div>
+            <div layout="row" layout-align="space-around center" class="mar-t">
+                <div layout="column" layout-align="space-around center">
+                    <md-subheader>Blood Group</md-subheader>
+                    <span>{{$ctrl.employee.bloodGroup}}</span>
+                </div>
+                <div layout="column" layout-align="space-around center">
+                    <md-subheader>Mobile No</md-subheader>
+                    <span>{{$ctrl.employee.mobileNo}}</span>
+                </div>
+                <div layout="column" layout-align="space-around center">
+                    <md-subheader>Birth Date</md-subheader>
+                    <span>{{$ctrl.employee.bdate | date: 'mediumDate'}}</span>
+                </div>
+            </div>
+            <div layout="row" layout-align="space-around center" class="mar-t" layout-padding>
+                <div layout="column" layout-align="space-around center">
+                    <md-subheader>Marital Status</md-subheader>
+                    <span>{{$ctrl.employee.maritalStatus}}</span>
+                </div>
+                <div layout="column" layout-align="space-around center">
+                    <md-subheader>Role</md-subheader>
+                    <span>{{$ctrl.employee.role}}</span>
+                </div>
+            </div>
+        </md-tab>
+        <md-tab label="Timesheet">
+            <md-content class="md-padding">
+
+            </md-content>
+        </md-tab>
+        <md-tab label="Payroll">
+            <md-content class="md-padding">
+
+            </md-content>
+        </md-tab>
+    </md-tabs>
+</div>
+
+<div ng-if="!$ctrl.employee.empId" style="text-align: center;position: relative;top: 50%; transform: translateY(-50%);font-weight:600; color:gray;">
+    Please Click on Employee to get Details
+</div>

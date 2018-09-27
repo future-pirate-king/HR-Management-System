@@ -8,7 +8,7 @@
             <i class="far fa-bell fa-lg"></i>
         </md-button>
 
-        <md-button layout="row" layout-align="center center" target="_blank" ui-sref="{{$ctrl.hrLink}}" md-colors="{color:'purple'}"
+        <md-button ng-if="!$ctrl.hrMode" layout="row" layout-align="center center" target="_blank" ui-sref="{{$ctrl.hrLink}}" md-colors="{color:'purple'}"
             class="md-icon-button mar-lr" aria-label="hr-mode">
             <md-tooltip md-direction="bottom">Hr Mode</md-tooltip>
             <i class="fas fa-external-link-alt"></i>

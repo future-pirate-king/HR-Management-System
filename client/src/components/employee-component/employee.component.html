@@ -1,0 +1,25 @@
+<div layout="row" style="width: 100%;">
+
+    <div style="width: 40%; height:calc(100%-60px)" layout-padding>
+        <div layout="row" layout-align="space-between center">
+            <md-input-container>
+                <input ng-model="empId" placeholder="Search" class="md-block">
+            </md-input-container>
+            <md-button ng-click="$ctrl.toggleAddEmployee()" md-colors="{color: 'purple'}" class="md-raised">{{$ctrl.btnName}}</md-button>
+        </div>
+        <md-list flex>
+            <md-list-item class="md-3-line" ng-repeat="employee in $ctrl.employeeList | filter:{empId:empId}" ng-click="$ctrl.showDetails(employee)">
+                <div class="md-list-item-text" layout="column">
+                    <h3>{{employee.firstName + ' ' + employee.lastName}}</h3>
+                    <h4>{{employee.empId}}</h4>
+                    <p>{{employee.email}}</p>
+                </div>
+
+                <md-divider ng-if="!$last"></md-divider>
+            </md-list-item>
+        </md-list>
+    </div>
+
+    <employee-details-component ng-if="!$ctrl.showEmployeeForm" style="width: 60%;" employee="$ctrl.employee"></employee-details-component>
+    <add-employee-component ng-if="$ctrl.showEmployeeForm" style="width: 60%;"></add-employee-component>
+</div>

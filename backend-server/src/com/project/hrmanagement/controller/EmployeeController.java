@@ -1,10 +1,12 @@
 package com.project.hrmanagement.controller;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,25 +29,22 @@ public class EmployeeController {
 	@Autowired
 	private IEmployeeService empService;
 
-	@RequestMapping("/addEmployee")
-	public Employee addEmployee() {
-		@SuppressWarnings("deprecation")
-		Employee emp = new Employee("Viraj", "vinayak", "bhat", "O +ve", "9930801188", "viraj@gmail", "get1",
-				new Date("16-AUG-2017"), "java", new Date("16-AUG-2017"), "male", "single", "kapil");
-
-		return this.empService.addEmployee(emp);
+	@RequestMapping(value = "/addEmployee", method = RequestMethod.POST)
+	public Employee addEmployee(@RequestBody Employee employee) {
+		
+		return this.empService.addEmployee(employee);
 	}
 
-	@RequestMapping("removeEmployee")
-	public String remove(@RequestParam("empId") Integer empId) {
+	@RequestMapping(value = "/removeEmployee", method = RequestMethod.DELETE)
+	public boolean remove(@RequestParam Integer empId) {
+		System.out.println(empId);
 		if (empId != null) {
 			Employee emp = empService.removeEmployee(empId);
 			if (emp != null) {
-				String st = "sucess";
-				return st;
+				return true;
 			}
 		}
-		return "employee with requested ID does not exist";
+		return false;
 	}
 
 	@RequestMapping("/getEmployee")

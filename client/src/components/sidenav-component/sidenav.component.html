@@ -1,7 +1,15 @@
-<div layout="column" layout-align="space-around center" style="background-color: transparent;width:auto; padding-top: 20px">
-    <a class="menu-item" layout="column" layout-align="space-around center" ng-repeat="item in $ctrl.menuItems"
-        ui-sref-active="menu-item-active" ui-sref="{{item.link}}">
+<div ng-if="!$ctrl.hrNav" layout="column" layout-align="space-around center" style="background-color: transparent;width:auto; padding-top: 20px">
+    <a class="menu-item" layout="column" layout-align="space-around center" ng-repeat="item in $ctrl.menuItems" ui-sref-active="menu-item-active"
+        ui-sref="{{item.link}}">
         <i md-colors="{color:'grey-100'}" class="{{item.icon}}"></i>
         <span style="font-weight:600; font-size: 12px" md-colors="{color:'grey-100'}" class="mar-t mar-lr">{{item.title}}</span>
+    </a>
+</div>
+
+<div ng-if="$ctrl.hrNav" layout="column" layout-align="space-around center" style="background-color: transparent;width:85px; padding-top: 20px">
+    <a class="menu-item" layout="column" layout-align="space-around center" ng-repeat="item in $ctrl.hrMenuItems" ui-sref-active="menu-item-active"
+        ui-sref="{{item.link}}">
+        <i md-colors="{color:'grey-100'}" class="{{item.icon}}"></i>
+        <span style="font-weight:600; font-size: 12px; text-align:center;" md-colors="{color:'grey-100'}" class="mar-t mar-lr">{{item.title}}</span>
     </a>
 </div>

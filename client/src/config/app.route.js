@@ -18,6 +18,11 @@ app.config([
         component: 'hrHomeComponent'
       })
       .state({
+        name: 'hr_home.employee',
+        url: '/employee',
+        component: 'employeeComponent'
+      })
+      .state({
         name: 'home',
         url: '/home/{empId}',
         component: 'homeComponent'
