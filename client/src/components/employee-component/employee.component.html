@@ -5,10 +5,12 @@
             <md-input-container>
                 <input ng-model="empId" placeholder="Search" class="md-block">
             </md-input-container>
-            <md-button ng-click="$ctrl.toggleAddEmployee()" md-colors="{color: 'purple'}" class="md-raised">{{$ctrl.btnName}}</md-button>
+            <md-button style="background: white" ng-click="$ctrl.toggleAddEmployee()" md-colors="{color: 'purple'}"
+                class="md-raised">{{$ctrl.btnName}}</md-button>
         </div>
         <md-list flex>
-            <md-list-item class="md-3-line" ng-repeat="employee in $ctrl.employeeList | filter:{empId:empId}" ng-click="$ctrl.showDetails(employee)">
+            <md-list-item md-whiteframe="10" style="margin-bottom: 10px;background: white; border-radius:5px" class="md-3-line"
+                ng-repeat="employee in $ctrl.employeeList | filter:{empId:empId}" ng-click="$ctrl.showDetails(employee)">
                 <div class="md-list-item-text" layout="column">
                     <h3>{{employee.firstName + ' ' + employee.lastName}}</h3>
                     <h4>{{employee.empId}}</h4>

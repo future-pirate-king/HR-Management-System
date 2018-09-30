@@ -1,4 +1,8 @@
 <div style="background-color:#fafafa; width: auto; height: calc(100% - 60px); margin:15px">
+    <div style="display:flex; justify-content: flex-end; align-items: center">
+        <strong>Last login:</strong> <span md-whiteframe="5" style="background: #ffffff;padding: 10px; border-radius: 8px; color: grey; margin:0 15px; font-size: 13px">{{$ctrl.lastLogin
+            | date: 'MMM, dd | HH:mm a'}}</span>
+    </div>
     <div layout="row" layout-align="space-between">
         <md-card md-whiteframe="10" style=" border-radius: 5px;width: 45%; min-height: 300px; max-height: 300px; position: relative;">
             <md-card-title style="max-height: 30px;">
@@ -56,8 +60,7 @@
                 <p>
                     <md-card-actions layout="row" layout-align="end center">
                         <md-button>
-                            <a id="timesheet" md-colors="{color: 'purple'}" href="https://www.google.com/" role="button"
-                                aria-label="go to">Payslip</a>
+                            <a id="timesheet" md-colors="{color: 'purple'}" role="button" aria-label="go to">Payslip</a>
                         </md-button>
                     </md-card-actions>
                 </p>

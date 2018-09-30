@@ -20,7 +20,7 @@ function complaintController(complaintService, $stateParams, $mdToast) {
           $mdToast
             .simple()
             .textContent('Complaint Added successfully.')
-            .position('bottom left')
+            .position('top right')
             .hideDelay(3000)
         );
         $ctrl.complaint.complaintsType = 'Service';

@@ -6,6 +6,7 @@ app.component('mainAreaComponent', {
 
 function mainAreaController(
   announcementService,
+  employeeService,
   timesheetService,
   $stateParams
 ) {
@@ -19,6 +20,9 @@ function mainAreaController(
   $ctrl.complaintLink = 'home.complaint({empId:' + $stateParams.empId + '})';
 
   this.$onInit = function() {
+    employeeService
+      .getEmployeeById($stateParams.empId)
+      .then(res => ($ctrl.lastLogin = res.data.lastLogin));
     $ctrl.getTimesheetDetails();
     announcementService
       .getAllAnnouncements()

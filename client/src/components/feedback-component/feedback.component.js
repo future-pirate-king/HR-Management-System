@@ -34,7 +34,7 @@ function feedbackController($scope, feedbackService, $stateParams, $mdToast) {
             $mdToast
               .simple()
               .textContent('Feedback Added successfully.')
-              .position('bottom left')
+              .position('top right')
               .hideDelay(3000)
           );
         }
