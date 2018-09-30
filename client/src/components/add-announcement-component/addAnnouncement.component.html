@@ -1,0 +1,16 @@
+<div layout="row" style="width: 100%">
+    <form style="width:50%" layout="column" name="announcementForm" layout-padding ng-submit="$ctrl.addAnnouncement()">
+        <h3>Add Announcement Form</h3>
+        <md-input-container>
+            <label>Title</label>
+            <input ng-model="$ctrl.announcement.title" md-maxlength="16" required>
+        </md-input-container>
+        <md-input-container>
+            <label>body</label>
+            <input ng-model="$ctrl.announcement.body" md-maxlength="150" rows="5" required>
+        </md-input-container>
+        <md-button type="submit" class="md-primary">Add Announcement</md-button>
+    </form>
+    <announcement-list-component delete="true" layout="row" layout-align="center center" layout-padding announcement-list="$ctrl.announcementList"
+        style="width:40%"></announcement-list-component>
+</div>

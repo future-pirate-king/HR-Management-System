@@ -1,15 +1,19 @@
 package com.project.hrmanagement.Dao;
 
+import java.util.Date;
 import java.util.List;
 
-import javax.transaction.Transactional;
-
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.LogicalExpression;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.project.hrmanagement.model.Employee;
 import com.project.hrmanagement.model.TimeSheet;
 
 @Repository
@@ -27,7 +31,6 @@ public class EmployeeTimeSheetDao implements IEmployeeTimeSheetDao {
 	}
 
 	@Override
-	@Transactional
 	public TimeSheet addTimeSheet(TimeSheet timeSheet) {
 
 		Session session = sessionFactory.getCurrentSession();
@@ -42,6 +45,7 @@ public class EmployeeTimeSheetDao implements IEmployeeTimeSheetDao {
 
 			// filled state set to 1 and timesheet added
 			timeSheet.setIsFilled(1);
+			timeSheet.setIsApproved(0);
 			session.save(timeSheet);
 
 			// timesheet returned to UI
@@ -54,7 +58,6 @@ public class EmployeeTimeSheetDao implements IEmployeeTimeSheetDao {
 	}
 
 	@Override
-	@Transactional
 	public Integer editTimeSheet(TimeSheet timeSheet) {
 
 		Session session = sessionFactory.getCurrentSession();
@@ -107,7 +110,6 @@ public class EmployeeTimeSheetDao implements IEmployeeTimeSheetDao {
 	}
 
 	@Override
-	@Transactional
 	public Integer updateTimeSheetStatus(TimeSheet timeSheet) {
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery(
@@ -120,27 +122,24 @@ public class EmployeeTimeSheetDao implements IEmployeeTimeSheetDao {
 		System.out.println(approvalCheck);
 		for (Object[] tse : approvalCheck) {
 			// check for approved flag
-		
+
 			Integer isApproved = (Integer) tse[2];
 
 			// check for already filled flag
 			Integer isFilled = (Integer) tse[3];
-			if(isApproved == null)
-			{
-				//time sheet is in rejected status and now sent to approval procedure
+			if (isApproved == null) {
+				// time sheet is in rejected status and now sent to approval procedure
 				break;
-			}else
-			{
+			} else {
 
-			if (isApproved == 1) {
-				// time sheet already approved
-				return 1;
+				if (isApproved == 1) {
+					// time sheet already approved
+					return 1;
+				}
+				if (isFilled == 0)
+					// timesheet not filled so cannot approve
+					return 0;
 			}
-			if (isFilled == 0)
-
-				// timesheet not filled so cannot approve
-				return 0;
-		}
 		}
 
 		{
@@ -166,24 +165,89 @@ public class EmployeeTimeSheetDao implements IEmployeeTimeSheetDao {
 	}
 
 	@Override
-	@Transactional
 	public Integer rejectTimeSheet(TimeSheet timeSheet) {
 		Session session = sessionFactory.getCurrentSession();
-		
-		
-		Query hql = session.createQuery(
-				"Update TimeSheet set isApproved = :ia where empId = :ep and taskDate = :td");
+
+		Query hql = session.createQuery("Update TimeSheet set isApproved = :ia where empId = :ep and taskDate = :td");
 		hql.setParameter("ep", timeSheet.getEmpId());
 		hql.setParameter("td", timeSheet.getTaskDate());
-		
-		//setting isApproved flag to null
+
+		// setting isApproved flag to null
 		hql.setParameter("ia", null);
 
 		int empIdList1 = hql.executeUpdate();
 		System.out.println(empIdList1);
 
-		//timeSheet added to rejected status
+		// timeSheet added to rejected status
 		return 1;
+	}
+
+	@Override
+	public List<TimeSheet> findTimeSheet(Integer empId, Date startDate, Date endDate) {
+		Session session = sessionFactory.getCurrentSession();
+
+		Criteria cr = session.createCriteria(TimeSheet.class);
+
+		Criterion timeCt = Restrictions.between("taskDate", startDate, endDate);
+		Criterion empIdCt = Restrictions.eq("empId", empId);
+
+		LogicalExpression andExp = Restrictions.and(timeCt, empIdCt);
+		cr.add(andExp);
+/*//		List results = cr.list();
+//		System.out.println(results);
+		List<TimeSheet> timeSheetList = new ArrayList<TimeSheet>();
+		timeSheetList = (List<TimeSheet>) cr.list();*/
+		List<TimeSheet> findTimeSheet =cr.list();
+		System.out.println(findTimeSheet);
+/*//		System.out.println(approvalCheck);
+		for (int i = 0; i<timeSheetList.size(); i++ ) {
+			// check for approved flag
+			
+			 Integer timeSheetId = (Integer) i[0];
+		
+		 Integer empIdTimeSheet = (Integer) fts[1];
+		 
+			
+			 Date taskDate = (Date) fts[2];
+
+			
+			 String taskName = (String) fts[3];
+
+			String swipeIn = (String) fts[4];
+
+			String swipeOut = (String) fts[5];
+		 Integer isFilled = (Integer) fts[5];
+
+			 Integer isApproved = (Integer) fts[5];*/
+
+
+/*System.out.println(timeSheetId);
+System.out.println(empIdTimeSheet);
+System.out.println( taskDate);
+System.out.println(taskName);
+System.out.println(swipeOut);
+
+System.out.println(isFilled);
+System.out.println(isApproved);*/
+
+		/*
+		 * Query query = session.
+		 * createQuery("FROM TimeSheet WHERE taskDate BETWEEN :stDate AND :edDate");
+		 * hql.setParameter("stDate",startDate ); hql.setParameter("td",
+		 * timeSheet.getTaskDate());
+		 */
+
+	return findTimeSheet;
+	}
+
+	@Override
+	public List<TimeSheet> getEmployeeTimeSheets(Integer empId) {
+		Session session = sessionFactory.getCurrentSession();
+			@SuppressWarnings("unchecked")
+			Query hql = session.createQuery("from TimeSheet where empId=:e");
+			hql.setParameter("e",empId);
+			List<TimeSheet> timeSheetList = hql.list();
+			return timeSheetList;
 	}
 
 }

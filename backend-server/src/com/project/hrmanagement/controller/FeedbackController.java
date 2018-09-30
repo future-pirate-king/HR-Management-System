@@ -4,7 +4,9 @@ package com.project.hrmanagement.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,15 +26,15 @@ import com.project.hrmanagement.service.IFeedbackService;
 @RestController
 public class FeedbackController {
 	
-	@Autowired
+	
 	private IFeedbackService feedbackService;
 
-	@RequestMapping("/addFeedback")
+	@RequestMapping(value="/addFeedback", method=RequestMethod.POST, consumes = "application/json")
+	public Feedback addFeedback(@RequestBody Feedback feedback) {	
+		
+		/*Feedback fs = new Feedback("as","SAda", "asda");*/
 	
-	public Feedback addFeedback() {	
-		//Integer emp_Id = 35;
-		Feedback f1 = new Feedback((long)151,"nikita",(int)1);
-	return this.feedbackService.addFeedback(f1);
+	return this.feedbackService.addFeedback(feedback);
 		}
 	
 	@RequestMapping("/listAllFeedback")
@@ -41,8 +43,8 @@ public class FeedbackController {
 
 		}
 	
-	@RequestMapping("searchFeedback")
-	public Feedback getFeedback(@RequestParam("feedbackId") Long feedbackId) {
+	@RequestMapping("/searchFeedback")
+	public Feedback getFeedback(@RequestParam("feedbackId") Integer feedbackId) {
 	if (feedbackId != null) {
 		Feedback feedback = feedbackService.searchFeedback(feedbackId);
 	if (feedback != null) {	
@@ -54,7 +56,7 @@ public class FeedbackController {
 	}
 	
 	@RequestMapping("removeFeedback")
-	public String remove(@RequestParam("feedbackId") Long feedbackId) {
+	public String remove(@RequestParam("feedbackId") Integer feedbackId) {
 	if (feedbackId != null) {		
 	Feedback feedback = feedbackService.removeFeedback(feedbackId);			
 	if (feedback != null) {				
@@ -64,6 +66,15 @@ public class FeedbackController {
 	}	
 	return "feedback with requested ID does not exist";
 		}
+
+	public IFeedbackService getFeedbackService() {
+		return feedbackService;
+	}
+	
+	@Autowired
+	public void setFeedbackService(IFeedbackService feedbackService) {
+		this.feedbackService = feedbackService;
+	}
 
 	
 

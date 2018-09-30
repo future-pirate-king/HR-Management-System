@@ -17,7 +17,7 @@ function timesheetController(
   $scope.startDate = null;
   $scope.endDate = null;
 
-  $ctrl.onInit = function() {
+  $ctrl.onInit = function () {
     // getTimesheetDetails goes here..
   };
 
@@ -25,7 +25,14 @@ function timesheetController(
 
   $ctrl.data = [10];
 
-  $ctrl.addTask = function(event) {
+  $ctrl.getTimesheetDetails = function () {
+    timesheetService.getTimeSheetDetails($scope.startDate, $scope.endDate, $stateParams.empId)
+      .then(res => {
+        $ctrl.taskList = res.data;
+      });
+  }
+
+  $ctrl.addTask = function (event) {
     $mdDialog
       .show({
         controller: DialogController,
@@ -38,37 +45,49 @@ function timesheetController(
         clickOutsideToClose: true,
         fullscreen: false // Only for -xs, -sm breakpoints.
       })
-      .then(
-        function(formData) {
-          timesheetService
-            .addTask(
-              $stateParams.empId,
-              formData.swipeIn,
-              formData.swipeOut,
-              $scope.day._d.getTime(),
-              formData.taskName
-            )
-            .then(res => console.log(res));
-          (formData = { ...formData, taskDate: $scope.day._d.getTime() }),
-            $ctrl.taskList.push(formData);
-        },
-        function() {} //fires when dialog closed
-      );
+      .then(data => $ctrl.taskList.push(data));
   };
 }
 
-function DialogController($scope, $mdDialog, date) {
+function DialogController($scope, $mdDialog, date, timesheetService, $stateParams, $mdToast) {
   $scope.date = date;
-  $scope.hide = function() {
+  $scope.hours = [];
+  $scope.minutes = [];
+  $scope.hide = function () {
     $mdDialog.hide();
   };
 
-  $scope.cancel = function() {
+  $scope.cancel = function () {
     $mdDialog.cancel();
   };
 
-  $scope.answer = function(event, answer) {
+  for (var hour = 1; hour <= 12; hour++) {
+    $scope.hours.push(hour);
+  }
+
+  for (var minute = 0; minute <= 60; minute++) {
+    $scope.minutes.push(minute);
+  }
+
+  $scope.answer = function (event, formData) {
     event.preventDefault();
-    $mdDialog.hide(answer);
+    timesheetService
+      .addTask(
+      $stateParams.empId,
+      formData.swipeIn,
+      formData.swipeOut,
+      $scope.date._d.getTime(),
+      formData.taskName
+      )
+      .then(res => {
+        $mdToast.show(
+          $mdToast
+            .simple()
+            .textContent('Task Added Successfully.')
+            .position('top right')
+            .hideDelay(3000)
+        );
+        $mdDialog.hide(res.data);
+      });
   };
 }

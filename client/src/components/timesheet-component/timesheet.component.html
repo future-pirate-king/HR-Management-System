@@ -1,23 +1,23 @@
 <div class="timesheet-container">
     <div layout="row" layout-align="space-around center" layout-padding>
         <div style="height:200px" layout="column" layout-align="space-around space-between">
-            <span><i class="fas fa-square mar-r"></i>Pending</span>
-            <span><i class="fas fa-square mar-r"></i>Rejected</span>
-            <span><i class="fas fa-square mar-r"></i>Approved</span>
-            <span><i class="fas fa-square mar-r"></i>Filled</span>
+            <span style="color:#FFAB00">
+                <i class="fas fa-square mar-r"></i>Pending</span>
+            <span style="color:#4CAF50">
+                <i class="fas fa-square mar-r"></i>Approved</span>
+            <span style="color:#D50000">
+                <i class="fas fa-square mar-r"></i>Rejected</span>
+            <span style="color:#FF80AB">
+                <i class="fas fa-square mar-r"></i>Not Filled</span>
         </div>
-        <calendar selected="day" add-task="$ctrl.addTask()" end-date="endDate" start-date="startDate"></calendar>
+        <calendar selected="day" add-task="$ctrl.addTask()" end-date="endDate" start-date="startDate" get-timesheet-details="$ctrl.getTimesheetDetails()"></calendar>
 
-        <div style="margin: 15px; max-width:700px; max-height: 350px; border-radius: 5px;" md-whiteframe="5"
-            layout-padding>
+        <div style="margin: 15px; width:400px; max-height: 350px; border-radius: 5px;" md-whiteframe="5" layout-padding>
             <canvas id="bar" class="chart chart-bar" chart-data="$ctrl.data" chart-labels="$ctrl.dayNames" chart-series="$ctrl.series">
             </canvas>
         </div>
 
     </div>
-
-    start: {{startDate}}
-    end: {{endDate}}
 
     <div id="timesheet-details" style="width:60%; min-height: 300px; border-radius: 5px;" md-whiteframe="5">
         <table style="width:100%">
@@ -32,8 +32,7 @@
             <tbody>
                 <tr ng-repeat="task in $ctrl.taskList">
                     <td>
-                        <span style="padding: 8px; background: cyan; border-radius: 5px; color: white;">{{$ctrl.dayNames[$index
-                            + 1]}}</span>
+                        <span style="padding: 8px; background: cyan; border-radius: 5px; color: white;">{{$ctrl.dayNames[$index + 1]}}</span>
                     </td>
                     <td>{{task.taskDate | date: 'mediumDate'}}</td>
                     <td>{{task.taskName}}</td>

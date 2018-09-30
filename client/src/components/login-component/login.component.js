@@ -4,7 +4,7 @@ app.component('loginComponent', {
   controller: loginController
 });
 
-function loginController($state, loginService, $mdToast) {
+function loginController($state, loginService, $mdToast, $mdDialog) {
   var $ctrl = this;
 
   $ctrl.passwordInputType = 'password';
@@ -13,6 +13,22 @@ function loginController($state, loginService, $mdToast) {
 
   $ctrl.empId = '';
   $ctrl.password = '';
+
+  $ctrl.forgotPassword = function (event) {
+    $mdDialog.show({
+      controller: PasswordResetController,
+      templateUrl: './src/dialogs/password.reset.html',
+      parent: angular.element(document.body),
+      targetEvent: event,
+      clickOutsideToClose: false,
+      fullscreen: false
+    })
+      .then(function (result) {
+
+      }, function () {
+
+      });
+  }
 
   $ctrl.login = function () {
     $ctrl.isloading = true;
@@ -48,4 +64,48 @@ function loginController($state, loginService, $mdToast) {
     $ctrl.tooltipMessage =
       $ctrl.passwordInputType === 'text' ? 'hide password' : 'show password';
   };
+}
+
+function PasswordResetController($scope, $mdDialog, loginService, $mdToast) {
+
+  $scope.empId = '';
+  $scope.loading = false;
+  $scope.message = '';
+  $scope.OTP = '';
+  $scope.password = '';
+
+  $scope.genOTP = true;
+  $scope.resetPassword = false;
+
+  $scope.hide = function () {
+    $mdDialog.hide();
+  };
+
+  $scope.cancel = function () {
+    $mdDialog.cancel();
+  };
+
+  $scope.sendOTP = function (empId) {
+    $scope.loading = true;
+    loginService.otpGen(empId)
+      .then(res => {
+        if (res.data) {
+          $scope.message = 'OTP sent to your registered Email Id.'
+          $scope.empId = empId;
+          $scope.genOTP = false;
+          $scope.resetPassword = true;
+        }
+        $scope.loading = false;
+      })
+      .catch(err => {
+        $scope.message = 'OTP not generated, Please Contact your HR.'
+        $scope.loading = false;
+      });
+  };
+
+  $scope.changePassword = function (OTP, password) {
+    console.log($scope.empId, OTP, password)
+    loginService.resetPassword($scope.empId, OTP, password)
+      .then(res => console.log(res));
+  }
 }

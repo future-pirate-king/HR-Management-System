@@ -6,7 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
+
 
 import com.project.hrmanagement.model.Leave;
 
@@ -25,7 +25,6 @@ public class LeaveDao implements ILeaveDao{
 	}
 
 	@Override
-	@Transactional
 	public Leave addLeave(Leave leave) {
 		
 		Session session = sessionFactory.getCurrentSession();
@@ -36,7 +35,6 @@ public class LeaveDao implements ILeaveDao{
 	}
 
 	@Override
-	@Transactional
 	public Leave getLeave(Integer leaveId) {
 		Session session = sessionFactory.getCurrentSession();
 		Leave l1 = (Leave) session.get(Leave.class, leaveId);
@@ -45,7 +43,6 @@ public class LeaveDao implements ILeaveDao{
 	}
 
 	@Override
-	@Transactional
 	public List<Leave> getAllLeaves() {
 		Session session=sessionFactory.getCurrentSession();
 		 @SuppressWarnings("unchecked")

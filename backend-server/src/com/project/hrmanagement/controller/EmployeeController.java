@@ -1,19 +1,20 @@
 package com.project.hrmanagement.controller;
 
+import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.hrmanagement.model.Employee;
+import com.project.hrmanagement.model.EmployeeAddress;
 import com.project.hrmanagement.service.IEmployeeService;
-
-
 
 //--------------working--------------//
 // add employee  (needs changes as to accept data from json obj)
@@ -21,36 +22,53 @@ import com.project.hrmanagement.service.IEmployeeService;
 // get employee  (needs changes as to accept data from json obj)
 // get all employee  (needs changes as to accept data from json obj)
 
-
 @RestController
 @RequestMapping("/Employee")
 public class EmployeeController {
 
-	@Autowired
-	private IEmployeeService empService;
+	private IEmployeeService employeeService;
 
-	@RequestMapping(value = "/addEmployee", method = RequestMethod.POST)
+	// add new employee
+	@RequestMapping("/addEmployee")
 	public Employee addEmployee(@RequestBody Employee employee) {
 		
-		return this.empService.addEmployee(employee);
+		EmployeeAddress empadd = new EmployeeAddress();
+		
+		empadd.setCity(employee.getEmployeeAddress().getCity());
+		empadd.setState(employee.getEmployeeAddress().getState());
+		empadd.setCountry(employee.getEmployeeAddress().getCountry());
+		empadd.setStreet(employee.getEmployeeAddress().getStreet());
+		empadd.setZipcode(employee.getEmployeeAddress().getZipcode());
+
+		employee.setEmployeeAddress(empadd);
+		Set<Employee> employeeSet = new HashSet<>();
+		// create Set
+
+		employeeSet.add(employee);
+
+		empadd.setEmployee(employee);
+
+		return this.employeeService.addEmployee(employee);
 	}
 
-	@RequestMapping(value = "/removeEmployee", method = RequestMethod.DELETE)
-	public boolean remove(@RequestParam Integer empId) {
-		System.out.println(empId);
+	//remove employee by passing employee Id
+	@RequestMapping("removeEmployee")
+	public String remove(@RequestParam("empId") Integer empId) {
 		if (empId != null) {
-			Employee emp = empService.removeEmployee(empId);
+			Employee emp = employeeService.removeEmployee(empId);
 			if (emp != null) {
-				return true;
+				String st = "sucess";
+				return st;
 			}
 		}
-		return false;
+		return "employee with requested ID does not exist";
 	}
 
+	//find employee using employee Id
 	@RequestMapping("/getEmployee")
 	public Employee getEmployee(@RequestParam("empId") Integer empId) {
 		if (empId != null) {
-			Employee emp = empService.getEmployee(empId);
+			Employee emp = employeeService.getEmployee(empId);
 			if (emp != null) {
 				return emp;
 			}
@@ -58,10 +76,28 @@ public class EmployeeController {
 		return null;
 	}
 
+	//list all employees in database
 	@RequestMapping("/getAllEmployees")
 	public List<Employee> getAllEmployees() {
 
-		return this.empService.getAllEmployee();
+		return this.employeeService.getAllEmployee();
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+
+	public IEmployeeService getEmpService() {
+		return employeeService;
+	}
+
+	@Autowired
+	public void setEmpService(IEmployeeService empService) {
+		this.employeeService = empService;
 	}
 
 }

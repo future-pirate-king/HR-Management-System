@@ -4,9 +4,15 @@ app.component('hrHomeComponent', {
     controller: hrHomeController,
 });
 
-function hrHomeController(employeeService) {
+function hrHomeController(employeeService, $stateParams, $state) {
     var $ctrl = this;
 
     $ctrl.mode = 'hr';
-
+    this.$onInit = function () {
+        $state.go(
+            'hr_home.employee',
+            { empId: $stateParams.empId },
+            { notify: false, location: 'replace' }
+        );
+    };
 }

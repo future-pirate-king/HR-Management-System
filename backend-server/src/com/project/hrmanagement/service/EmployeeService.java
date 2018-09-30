@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.project.hrmanagement.Dao.IEmployeeDao;
 import com.project.hrmanagement.model.Employee;
@@ -13,51 +14,51 @@ import com.project.hrmanagement.model.LoginCredential;
 public class EmployeeService implements IEmployeeService {
 	
 	
-	private IEmployeeDao empDao;
+	private IEmployeeDao employeeDao;
 
 	public IEmployeeDao getEmpDao() {
-		return empDao;
+		return employeeDao;
 	}
 
 	@Autowired
-	public void setEmpDao(IEmployeeDao empDao) {
-		this.empDao = empDao;
+	public void setEmpDao(IEmployeeDao employeeDao) {
+		this.employeeDao = employeeDao;
 	}
 
-	@Override
-	public boolean authenticate(LoginCredential logincredential) {
-		
-		return this.empDao.authenticate(logincredential);
-	}
 
 	@Override
+	@Transactional
 	public Employee addEmployee(Employee employee) {
 		
-		return this.empDao.addEmployee(employee);
+		return this.employeeDao.addEmployee(employee);
 	}
 
 	@Override
+	@Transactional
 	public Employee getEmployee(Integer empId) {
 		
-		return this.empDao.getEmployee(empId);
+		return this.employeeDao.getEmployee(empId);
 	}
 
 	@Override
+	@Transactional
 	public List<Employee> getAllEmployee() {
 		
-		return this.empDao.getAllEmployee();
+		return this.employeeDao.getAllEmployee();
 	}
 
 	@Override
-	public Employee updateEmployee(Integer empId, Employee employee) {
+	@Transactional
+	public Employee updateEmployee(Employee employee) {
 		
-		return this.empDao.updateEmployee(empId, employee);
+		return this.employeeDao.updateEmployee(employee);
 	}
 
 	@Override
+	@Transactional
 	public Employee removeEmployee(Integer empId) {
 		
-		return this.empDao.removeEmployee(empId);
+		return this.employeeDao.removeEmployee(empId);
 	}
 
 }

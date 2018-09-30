@@ -1,6 +1,8 @@
 <div layout="column" id="login-container">
     <div layout="row" layout-padding>
-        <h3><span>LOGO</span></h3>
+        <h3>
+            <span>LOGO</span>
+        </h3>
     </div>
     <img src="../../../assets/login-left-bg.svg" alt="backgroung" style="position:fixed;left:0;bottom: 0;">
     <div md-whiteframe="24" id="login" layout-padding>
@@ -9,8 +11,7 @@
                 <i class="fas fa-id-badge fa-lg mar-lr"></i>
                 <md-input-container>
                     <label>Employee Id</label>
-                    <input type="text" name="empId" ng-model="$ctrl.empId" autofocus style="font-weight:600;"
-                        md-no-asterisk required pattern="^[0-9]+$">
+                    <input type="text" name="empId" ng-model="$ctrl.empId" autofocus style="font-weight:600;" md-no-asterisk required pattern="^[0-9]+$">
                     <div ng-messages="loginForm.empId.$error">
                         <div ng-message="required">Employee id is required!</div>
                         <div ng-message="pattern">Employee id can only have numbers.</div>
@@ -22,26 +23,26 @@
                 <i class="fas fa-unlock-alt fa-lg mar-lr"></i>
                 <md-input-container>
                     <label>Password</label>
-                    <input name="password" type="{{$ctrl.passwordInputType}}" ng-model="$ctrl.password" style="font-weight:600;"
-                        required md-no-asterisk>
+                    <input name="password" type="{{$ctrl.passwordInputType}}" ng-model="$ctrl.password" style="font-weight:600;" required md-no-asterisk>
                     <div ng-messages="loginForm.password.$error">
                         <div ng-message="required">Password is required!</div>
                     </div>
                 </md-input-container>
                 <md-button class="
-                        md-icon-button mar-lr" ng-click="$ctrl.togglePasswordInputType()"
-                    aria-label="login">
+                        md-icon-button mar-lr" ng-click="$ctrl.togglePasswordInputType()" aria-label="login">
                     <md-tooltip md-direction="top">{{$ctrl.tooltipMessage}}</md-tooltip>
                     <i class="{{$ctrl.passwordToggleIcon}}"></i>
                 </md-button>
             </div>
             <div layout="column" layout-align="center end">
-                <a style="font-weight:600;cursor: pointer; margin-bottom: 10px;" md-colors="{color:'grey'}"><span>Forgot
-                        Password ?</span></a>
+                <a ng-click="$ctrl.forgotPassword($event)" style="font-weight:600;cursor: pointer; margin-bottom: 10px;" md-colors="{color:'grey'}">
+                    <span>Forgot Password ?</span>
+                </a>
             </div>
-            <md-button style="padding:10px;" ng-disabled="$ctrl.isloading" type="submit" layout="row" layout-align="center center"
-                id="login-btn" class="md-raised md-primary mar-t">
-                <md-progress-circular class="mar-r" ng-if="$ctrl.isloading" class="md-accent" md-diameter="20"></md-progress-circular><strong>login</strong>
+            <md-button style="padding:10px;" ng-disabled="$ctrl.isloading" type="submit" layout="row" layout-align="center center" id="login-btn"
+                class="md-raised md-primary mar-t">
+                <md-progress-circular class="mar-r" ng-if="$ctrl.isloading" class="md-accent" md-diameter="20"></md-progress-circular>
+                <strong>login</strong>
             </md-button>
         </form>
     </div>

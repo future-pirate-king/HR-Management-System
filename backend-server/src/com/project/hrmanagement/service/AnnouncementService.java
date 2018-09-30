@@ -2,8 +2,11 @@ package com.project.hrmanagement.service;
 
 import java.util.List;
 
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.project.hrmanagement.Dao.IAnnouncementDao;
 
@@ -26,6 +29,7 @@ public class AnnouncementService implements IAnnouncementService {
 	}
 
 	@Override
+	@Transactional
 	public Announcement addAnnouncement(Announcement announcement) {
 	 
 	return this.announcementDao.addAnnouncement(announcement);
@@ -34,6 +38,7 @@ public class AnnouncementService implements IAnnouncementService {
 	
 
 	@Override
+	@Transactional
 	public List<Announcement> listAllAnnouncement() {
 		
 		return this.announcementDao.listAllAnnouncement();
@@ -42,6 +47,7 @@ public class AnnouncementService implements IAnnouncementService {
 	
 
 	@Override
+	@Transactional
 	public Announcement removeAnnouncement(Long announcementId) {
 		announcementDao.removeAnnouncement(announcementId);
 		return null;

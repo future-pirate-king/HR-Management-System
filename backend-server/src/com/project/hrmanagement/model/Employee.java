@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -25,19 +27,21 @@ public class Employee {
 
 	@Id
 	@Column(name = "emp_id")
-	 @SequenceGenerator(name="id", initialValue=0000, allocationSize=100)
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="id")
+	@SequenceGenerator(name = "id", initialValue = 0000, allocationSize = 1000)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id")
 	private Integer empId;
 
 	@JsonIgnore
 	@OneToOne(mappedBy = "employee", cascade = CascadeType.ALL)
 	private LoginCredential loginCredential;
 
-/*
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "emp_id")
-	@OrderColumn(name = "type")
-	private Set<Complaints> complaints;*/
+	/*
+	 * @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	 * 
+	 * @JoinColumn(name = "emp_id")
+	 * 
+	 * @OrderColumn(name = "type") private Set<Complaints> complaints;
+	 */
 
 	@Column(name = "first_name")
 	private String firstName;
@@ -77,28 +81,35 @@ public class Employee {
 
 	@Column(name = "reporting_to")
 	private String reportingTo;
-	
-	@Column(name="last_login")
-	private Time lastLogin = new Time(2);
+
+	@Column(name = "type")
+	private String type;
+	@Column(name = "last_login")
+	private Date lastLogin;
+
+	@OneToOne(mappedBy = "employee", cascade = CascadeType.ALL)
+	private EmployeeAddress employeeAddress;
+
+	public EmployeeAddress getEmployeeAddress() {
+		return employeeAddress;
+	}
+
+	public void setEmployeeAddress(EmployeeAddress employeeAddress) {
+		this.employeeAddress = employeeAddress;
+	}
 
 	public Employee() {
 		// TODO Auto-generated constructor stub
 	}
 
-	
-/*
-	public Set<Complaints> getComplaints() {
-		return complaints;
-	}
-
-
-
-	public void setComplaints(Set<Complaints> complaints) {
-		this.complaints = complaints;
-	}*/
-	
-	
-
+	/*
+	 * public Set<Complaints> getComplaints() { return complaints; }
+	 * 
+	 * 
+	 * 
+	 * public void setComplaints(Set<Complaints> complaints) { this.complaints =
+	 * complaints; }
+	 */
 
 	public Employee(String firstName, String middleName, String lastName, String bloodGroup, String mobileNo,
 			String email, String cadre, Date dateOfJoining, String deptName, Date bdate, String gender,
@@ -120,37 +131,67 @@ public class Employee {
 		this.reportingTo = reportingTo;
 	}
 
+	public Employee(String firstName, String middleName, String lastName, String bloodGroup, String mobileNo,
+			String email, String cadre, Date dateOfJoining, String deptName, Date bdate, String gender,
+			String maritalStatus, String reportingTo, EmployeeAddress employeeAddress) {
+		super();
+		this.firstName = firstName;
+		this.middleName = middleName;
+		this.lastName = lastName;
+		this.bloodGroup = bloodGroup;
+		this.mobileNo = mobileNo;
+		this.email = email;
+		this.cadre = cadre;
+		this.dateOfJoining = dateOfJoining;
+		this.deptName = deptName;
+		this.bdate = bdate;
+		this.gender = gender;
+		this.maritalStatus = maritalStatus;
+		this.reportingTo = reportingTo;
+		this.employeeAddress = employeeAddress;
+	}
+
+	
 	public Employee(LoginCredential loginCredential, String firstName, String middleName, String lastName,
-		String bloodGroup, String mobileNo, String email, String cadre, Date dateOfJoining, String deptName, Date bdate,
-		String gender, String maritalStatus, String reportingTo, Time lastLogin) {
-	super();
-	this.loginCredential = loginCredential;
-	this.firstName = firstName;
-	this.middleName = middleName;
-	this.lastName = lastName;
-	this.bloodGroup = bloodGroup;
-	this.mobileNo = mobileNo;
-	this.email = email;
-	this.cadre = cadre;
-	this.dateOfJoining = dateOfJoining;
-	this.deptName = deptName;
-	this.bdate = bdate;
-	this.gender = gender;
-	this.maritalStatus = maritalStatus;
-	this.reportingTo = reportingTo;
-	this.lastLogin = lastLogin;
-}
+			String bloodGroup, String mobileNo, String email, String cadre, Date dateOfJoining, String deptName,
+			Date bdate, String gender, String maritalStatus, String reportingTo, String type, Date lastLogin,
+			EmployeeAddress employeeAddress) {
+		super();
+		this.loginCredential = loginCredential;
+		this.firstName = firstName;
+		this.middleName = middleName;
+		this.lastName = lastName;
+		this.bloodGroup = bloodGroup;
+		this.mobileNo = mobileNo;
+		this.email = email;
+		this.cadre = cadre;
+		this.dateOfJoining = dateOfJoining;
+		this.deptName = deptName;
+		this.bdate = bdate;
+		this.gender = gender;
+		this.maritalStatus = maritalStatus;
+		this.reportingTo = reportingTo;
+		this.type = type;
+		this.lastLogin = lastLogin;
+		this.employeeAddress = employeeAddress;
+	}
 
+	
+	public String getType() {
+		return type;
+	}
 
-	public Time getLastLogin() {
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public Date getLastLogin() {
 		return lastLogin;
 	}
 
-
-	public void setLastLogin(Time lastLogin) {
+	public void setLastLogin(Date lastLogin) {
 		this.lastLogin = lastLogin;
 	}
-
 
 	public Integer getEmpId() {
 		return empId;

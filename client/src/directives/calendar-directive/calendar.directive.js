@@ -1,4 +1,4 @@
-app.directive('calendar', function() {
+app.directive('calendar', function () {
   return {
     restrict: 'E',
     templateUrl: './src/directives/calendar-directive/calendar.directive.html',
@@ -6,9 +6,10 @@ app.directive('calendar', function() {
       selected: '=',
       startDate: '=startDate',
       endDate: '=endDate',
-      addTask: '&'
+      addTask: '&',
+      getTimesheetDetails: '&'
     },
-    link: function(scope) {
+    link: function (scope, timesheetService, $stateParams) {
       scope.selected = _removeTime(scope.selected || moment());
       scope.month = scope.selected.clone();
 
@@ -18,24 +19,23 @@ app.directive('calendar', function() {
 
       _buildMonth(scope, start, scope.month);
 
-      scope.select = function(day) {
+      scope.select = function (day) {
         scope.selected = day.date;
-        scope.addTask();
       };
 
-      scope.getWeek = function(weekDates) {
-        scope.startDate = weekDates[0].date;
-        scope.endDate = weekDates[weekDates.length - 1].date;
+      scope.getWeek = function (weekDates) {
+        scope.startDate = weekDates[0].date._d.getTime();
+        scope.endDate = weekDates[weekDates.length - 1].date._d.getTime();
       };
 
-      scope.next = function() {
+      scope.next = function () {
         var next = scope.month.clone();
         _removeTime(next.month(next.month() + 1).date(1));
         scope.month.month(scope.month.month() + 1);
         _buildMonth(scope, next, scope.month);
       };
 
-      scope.previous = function() {
+      scope.previous = function () {
         var previous = scope.month.clone();
         _removeTime(previous.month(previous.month() - 1).date(1));
         scope.month.month(scope.month.month() - 1);

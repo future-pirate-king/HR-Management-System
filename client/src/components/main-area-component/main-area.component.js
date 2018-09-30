@@ -4,4 +4,14 @@ app.component('mainAreaComponent', {
   controller: mainAreaController
 });
 
-function mainAreaController() {}
+function mainAreaController(announcementService) {
+
+  var $ctrl = this;
+
+  $ctrl.announcementList = [];
+
+  this.$onInit = function () {
+    announcementService.getAllAnnouncements()
+      .then(res => $ctrl.announcementList = res.data);
+  }
+}

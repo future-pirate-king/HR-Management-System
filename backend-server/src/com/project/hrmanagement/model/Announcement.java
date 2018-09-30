@@ -29,11 +29,10 @@ public class Announcement implements Serializable{
 	
 	@Id
 	@Column(name="announcement_id")
-	@SequenceGenerator(name="id", initialValue=0000, allocationSize=100)
+	 @SequenceGenerator(name="id", initialValue=0000, allocationSize=100)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="id")
 	private Long announcementId;
-	//(strategy = GenerationType.SEQUENCE, generator= "HR_ANNOUNCEMENT_GEN")
-	//@SequenceGenerator(name="HR_ANNOUNCEMENT_GEN", sequenceName="HR_ANNOUNCEMENT_SEQ",allocationSize=1)
+	
 	
 	@Column(name="announcement_date")
 	private Date announcementDate;
@@ -58,7 +57,6 @@ public class Announcement implements Serializable{
 	public Announcement(Date announcementDate, String announcementTitle, String announcementBody,
 			String announcementStatus) {
 		super();
-		
 		this.announcementDate = announcementDate;
 		this.announcementTitle = announcementTitle;
 		this.announcementBody = announcementBody;

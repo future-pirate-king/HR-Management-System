@@ -48,24 +48,19 @@ function sidenavController($stateParams) {
       link: 'hr_home.employee()'
     },
     {
-      icon: 'fas fa-calendar-alt',
-      title: 'Manage Time Sheet',
-      link: 'home.timesheet({empId:' + $stateParams.empId + '})'
+      icon: 'fas fa-bullhorn',
+      title: 'Add Announcement',
+      link: 'hr_home.announcement()'
     },
     {
-      icon: 'fas fa-money-bill-alt',
-      title: 'Manage Payroll',
-      link: 'home.payroll({empId:' + $stateParams.empId + '})'
-    },
-    {
-      icon: 'fas fa-comment-dots',
+      icon: 'fas fa-bullhorn',
       title: 'Manage Complaints',
-      link: 'home.complaint({empId:' + $stateParams.empId + '})'
+      link: 'hr_home.complaint()'
     },
     {
       icon: 'fab fa-foursquare',
       title: 'Manage Feedback',
-      link: 'home.feedback({empId:' + $stateParams.empId + '})'
+      link: 'hr_home.feedback()'
     }
   ];
 }

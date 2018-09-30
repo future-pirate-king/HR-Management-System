@@ -22,7 +22,7 @@ public class LeaveController {
 	
 	
 	
-	@Autowired
+	
 	private ILeaveService leaveService;
 	
 	@RequestMapping("/addLeave")
@@ -39,7 +39,7 @@ public class LeaveController {
 		}
 	
 	
-	@RequestMapping("getLeave")
+	@RequestMapping("/getLeave")
 	public Leave getLeave(@RequestParam("leaveId") Integer leaveId) {
 		if (leaveId != null) {
 			Leave l1 = leaveService.getLeave(leaveId);
@@ -48,6 +48,16 @@ public class LeaveController {
 			}
 		}
 		return null;
+	}
+
+	public ILeaveService getLeaveService() {
+		return leaveService;
+	}
+	
+	
+	@Autowired
+	public void setLeaveService(ILeaveService leaveService) {
+		this.leaveService = leaveService;
 	}
 
 	

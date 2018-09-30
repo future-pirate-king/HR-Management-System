@@ -31,29 +31,32 @@
         </md-select>
     </md-input-container>
 
-    <!-- <md-input-container class="md-block">
-        <label>Address</label>
-        <input ng-model="$ctrl.employee.address">
-    </md-input-container>
+    <div layout-gt-sm="row">
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Street</label>
+            <input ng-model="$ctrl.employee.employeeAddress.street">
+        </md-input-container>
 
-    <md-input-container md-no-float class="md-block">
-        <input ng-model="$ctrl.employee.address2" placeholder="Address 2">
-    </md-input-container>
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Country</label>
+            <input ng-model="$ctrl.employee.employeeAddress.country">
+        </md-input-container>
+    </div>
 
     <div layout-gt-sm="row">
         <md-input-container class="md-block" flex-gt-sm>
             <label>City</label>
-            <input ng-model="$ctrl.employee.city">
+            <input ng-model="$ctrl.employee.employeeAddress.city">
         </md-input-container>
 
         <md-input-container class="md-block" flex-gt-sm>
             <label>State</label>
-            <input ng-model="$ctrl.employee.state">
+            <input ng-model="$ctrl.employee.employeeAddress.state">
         </md-input-container>
 
         <md-input-container class="md-block" flex-gt-sm>
             <label>Postal Code</label>
-            <input name="postalCode" ng-model="$ctrl.employee.postalCode" placeholder="123456" required ng-pattern="/^[0-9]{5}[0-9]?$/"
+            <input name="postalCode" ng-model="$ctrl.employee.employeeAddress.zipcode" placeholder="123456" required ng-pattern="/^[0-9]{5}[0-9]?$/"
                 md-maxlength="6">
 
             <div ng-messages="employeeForm.postalCode.$error" role="alert" multiple>
@@ -65,7 +68,7 @@
                 </div>
             </div>
         </md-input-container>
-    </div> -->
+    </div>
 
     <div layout="row">
         <md-input-container class="md-block" flex-gt-sm>

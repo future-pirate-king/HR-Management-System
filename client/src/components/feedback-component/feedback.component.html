@@ -1,1 +1,45 @@
-<p>Feedback under construction!</p>
+<md-content layout-padding>
+    <md-content style="text-align: center;">
+        <p>We would like your feedback to improve our website!</p>
+        <p>Rate Us!!</p>
+    </md-content>
+
+    <div layout="column" layout-align="space-between center">
+        <div ng-repeat="rating in ratings">
+            <h2 style="text-align: center">{{rating.current}} / {{rating.max}}
+            </h2>
+            <div star-rating rating-value="rating.current" max="rating.max" on-rating-selected="getSelectedRating(rating)"></div>
+        </div>
+    </div>
+
+    <md-divider></md-divider>
+
+    <div class="col-md-12">
+        <md-content>
+            <p>Please select your feedback category below.</p>
+        </md-content>
+
+        <md-content style="overflow: hidden;" id="feedback-radio" layout="row" layout-align="space-around center">
+            <input type="radio" ng-model="feedback.feedbackCategory" id="radio1" name="radios" value="Suggestions" checked>
+            <label for="radio1">Suggestions</label>
+            <input type="radio" ng-model="feedback.feedbackCategory" id="radio2" name="radios" value="Something is not quite right!">
+            <label for="radio2">Something is not quite right!</label>
+            <input type="radio" ng-model="feedback.feedbackCategory" id="radio3" name="radios" value="Compliment">
+            <label for="radio3">Compliment</label>
+        </md-content>
+
+        <md-content>
+            <p>Please leave your feedback below.</p>
+        </md-content>
+        <md-input-container class="md-block" layout-padding>
+            <label>Feedback description</label>
+            <textarea ng-model="feedback.feedbackDescription" md-maxlength="150" rows="3" md-select-on-focus></textarea>
+        </md-input-container>
+        <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+            <md-button class="md-raised md-primary" data-ng-click="sendFeedback()">Submit</md-button>
+        </section>
+
+
+
+    </div>
+</md-content>

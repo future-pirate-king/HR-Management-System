@@ -1,5 +1,5 @@
 <div style="min-width:300px; max-height: 450px; overflow-y: auto">
-    <form ng-init="form={}" layout="column" layout-padding name="timesheetForm" ng-submit="answer($event,form)">
+    <form ng-init="form={}" layout="column" layout-padding name="timesheetForm" ng-submit="answer($event,form, timesheetForm)">
         <h3 style="text-align:center">Task Details</h3>
         <md-input-container style="margin-bottom:unset; padding:unset;">
             <label>Task Date</label>
@@ -13,6 +13,34 @@
                 <div ng-message="required">Task name is required!</div>
             </div>
         </md-input-container>
+
+        <md-subheader class="md-primary">Swipe In Time</md-subheader>
+        <div layout="row" layout-align="space-between center">
+            <md-input-container>
+                <label>Hours</label>
+                <md-select name="swipeIn" ng-model="form.swipeIn">
+                    <md-option ng-repeat="hour in hours" ng-value="hour">
+                        {{hour}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container>
+                <label>Minutes</label>
+                <md-select name="swipeIn" ng-model="form.swipeIn">
+                    <md-option ng-repeat="minute in minutes" ng-value="minute">
+                        {{minute}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container>
+                <label>Period</label>
+                <md-select name="swipeIn" ng-model="form.swipeIn">
+                    <md-option ng-repeat="period in ['AM', 'PM']" ng-value="period">
+                        {{period}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+        </div>
 
         <md-input-container>
             <label>Swipe in time</label>

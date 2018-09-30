@@ -16,6 +16,8 @@ function employeeController(employeeService) {
         employeeService.getAllEmployees()
             .then((res) => {
                 $ctrl.employeeList = res.data;
+                $ctrl.showDetails(res.data[0]);
+                //$ctrl.employee = $ctrl.employeeList[0]
             })
     }
 

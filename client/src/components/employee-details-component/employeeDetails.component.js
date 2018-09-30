@@ -1,16 +1,36 @@
 app.component('employeeDetailsComponent', {
   bindings: {
-    employee: '<'
+    employee: '<',
+    view: '<'
   },
   templateUrl:
     './src/components/employee-details-component/employeeDetails.component.html',
   controller: employeeDetailsController
 });
 
-function employeeDetailsController(employeeService, $mdToast) {
+function employeeDetailsController(employeeService, $mdToast, timesheetService, $stateParams) {
   $ctrl = this;
+  $ctrl.timesheetList = [];
 
-  $ctrl.deleteEmployee = function() {
+  this.$onInit = function () {
+    timesheetService.getEmployeeTimesheetDetails($stateParams.empId)
+      .then(res => {
+        $ctrl.timesheetList = res.data
+        console.log(res.data);
+      });
+  }
+
+  $ctrl.rejectTimesheet = function (timesheet) {
+    timesheetService.rejectTimesheet(timesheet)
+      .then(res => console.log(res));
+  }
+
+  $ctrl.acceptTimesheet = function (timesheet) {
+    timesheetService.acceptTimesheet(timesheet)
+      .then(res => console.log(res));
+  }
+
+  $ctrl.deleteEmployee = function () {
     employeeService
       .deleteEmployee($ctrl.employee.empId)
       .then(res => {

@@ -1,8 +1,6 @@
 package com.project.hrmanagement.Dao;
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +23,6 @@ private SessionFactory sessionFactory;
 	}
 	
 	@Override
-	@Transactional
 	public Feedback addFeedback(Feedback feedback) {
 		Session session = sessionFactory.getCurrentSession();
 		session.save(feedback);
@@ -37,7 +34,6 @@ private SessionFactory sessionFactory;
 	}
 
 	@Override
-	@Transactional
 	public List<Feedback> listAllFeedback() {
 		Session session=sessionFactory.getCurrentSession();
 		@SuppressWarnings("unchecked")
@@ -47,8 +43,7 @@ private SessionFactory sessionFactory;
 	}
 	
 	@Override
-	@Transactional
-	public Feedback searchFeedback(Long feedbackId) {
+	public Feedback searchFeedback(Integer feedbackId) {
 		Session session= sessionFactory.getCurrentSession();
 		Feedback searchFeedback=(Feedback)session.get(Feedback.class, feedbackId);
 		session.close();
@@ -58,8 +53,7 @@ private SessionFactory sessionFactory;
 	}
 
 	@Override
-	@Transactional
-	public Feedback removeFeedback(Long feedbackId) {
+	public Feedback removeFeedback(Integer feedbackId) {
 		Session session= sessionFactory.getCurrentSession();
 		Feedback f1 = (Feedback) session.load(Feedback.class, feedbackId);
 		Feedback f2 = (Feedback) session.get(Feedback.class, feedbackId);

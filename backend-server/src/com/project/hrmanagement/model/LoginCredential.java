@@ -28,9 +28,6 @@ public class LoginCredential {
 	@Column(name="password")
 	private String password;
 	
-	@Column(name="last_login")
-	private Date lastLogin;
-	
 	@JsonIgnore
 	@OneToOne
 	@PrimaryKeyJoinColumn
@@ -56,21 +53,6 @@ public class LoginCredential {
 	}
 
 
-	public LoginCredential(String password, Date lastLogin) {
-		super();
-		this.password = password;
-		this.lastLogin = lastLogin;
-	}
-
-
-
-
-
-
-	@Override
-	public String toString() {
-		return "LoginCredential [empId=" + empId + ", password=" + password + ", lastLogin=" + lastLogin + "]";
-	}
 
 
 	public Integer getEmpId() {
@@ -89,13 +71,6 @@ public class LoginCredential {
 		this.password = password;
 	}
 
-	public Date getLastLogin() {
-		return lastLogin;
-	}
-
-	public void setLastLogin(Date lastLogin) {
-		this.lastLogin = lastLogin;
-	}
 
 
 	public Employee getEmployee() {
@@ -106,4 +81,11 @@ public class LoginCredential {
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
 	}
+
+
+	@Override
+	public String toString() {
+		return "LoginCredential [empId=" + empId + ", password=" + password + ", employee=" + employee + "]";
+	}
+	
 }

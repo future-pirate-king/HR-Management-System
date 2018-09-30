@@ -9,9 +9,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.PastOrPresent;
 
 @Entity
-@Table(name = "HR_TIMESHEET", uniqueConstraints = @UniqueConstraint(columnNames = { "task_date" }))
+@Table(name = "HR_TIMESHEET")
 public class TimeSheet implements Serializable {
 
 	/**
@@ -28,6 +29,7 @@ public class TimeSheet implements Serializable {
 	private Integer empId;
 
 	@Column(name = "task_date")
+	@PastOrPresent
 	private Date taskDate;
 
 	@Column(name = "task_name")

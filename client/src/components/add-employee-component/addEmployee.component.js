@@ -9,6 +9,14 @@ function addEmployeeController(employeeService, $mdToast) {
     $ctrl.employee = {
         firstName: 'sam',
         middleName: 'gnana',
+        "employeeAddress": {
+            "street": 'kurla',
+            "city": 'mumbai',
+            "state": 'Maharashtra',
+            "zipcode": '400024',
+            "country": 'India'
+
+        },
         lastName: 'david',
         bloodGroup: 'B+',
         gender: 'Male',

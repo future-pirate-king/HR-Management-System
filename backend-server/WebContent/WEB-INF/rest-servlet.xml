@@ -10,19 +10,20 @@
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
 	<context:component-scan base-package="com.project.hrmanagement"></context:component-scan>
+	
 	<!-- To convert JSON to Object and vice versa -->
-	<!-- <beans:bean id="jsonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"> -->
-	<!-- </beans:bean> -->
+	<beans:bean id="jsonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+	</beans:bean>
 
 	<!-- for processing requests with annotated controller methods and set Message 
 		Convertors from the list of convertors -->
-	<!-- <beans:bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"> -->
-	<!-- <beans:property name="messageConverters"> -->
-	<!-- <beans:list> -->
-	<!-- <beans:ref bean="jsonMessageConverter"/> -->
-	<!-- </beans:list> -->
-	<!-- </beans:property> -->
-	<!-- </beans:bean> -->
+	<beans:bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+	<beans:property name="messageConverters">
+	<beans:list>
+	<beans:ref bean="jsonMessageConverter"/>
+	</beans:list>
+	</beans:property>
+	</beans:bean>
 
 	<beans:bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -43,11 +44,15 @@
 				</beans:value>
 				<beans:value>com.project.hrmanagement.model.Employee</beans:value>
 				<beans:value>com.project.hrmanagement.model.TimeSheet</beans:value>
-				<beans:value>com.project.hrmanagement.model.Announcement</beans:value>
+				<beans:value>com.project.hrmanagement.model.Announcement
+				</beans:value>
 				<beans:value>com.project.hrmanagement.model.Feedback</beans:value>
 				<beans:value>com.project.hrmanagement.model.Leave</beans:value>
-<!-- 				<beans:value>com.project.hrmanagement.model.Complaints</beans:value>
- -->			</beans:list>
+				<beans:value>com.project.hrmanagement.model.Complaints</beans:value>
+				<beans:value>com.project.hrmanagement.model.EmployeeAddress
+				</beans:value>
+				<!-- <beans:value>com.project.hrmanagement.model.Complaints</beans:value> -->
+			</beans:list>
 		</beans:property>
 		<beans:property name="hibernateProperties">
 			<beans:props>

@@ -36,13 +36,13 @@ public class FeedbackService implements IFeedbackService {
 
 	@Override
 	@Transactional
-	public Feedback searchFeedback(Long feedbackId) {
+	public Feedback searchFeedback(Integer feedbackId) {
 		return feedbackDao.searchFeedback(feedbackId);
 	}
 
 	@Override
 	@Transactional
-	public Feedback removeFeedback(Long feedbackId) {
+	public Feedback removeFeedback(Integer feedbackId) {
 		feedbackDao.removeFeedback(feedbackId);
 		return null;
 	}

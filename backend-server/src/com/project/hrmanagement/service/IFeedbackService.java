@@ -12,11 +12,11 @@ public interface IFeedbackService {
 			public List<Feedback> listAllFeedback();
 			
 			//search
-			public Feedback searchFeedback(Long feedbackId);
+			public Feedback searchFeedback(Integer feedbackId);
 			
 			
 			//remove
-			public Feedback removeFeedback(Long feedbackId);
+			public Feedback removeFeedback(Integer feedbackId);
 			
 			
 }

@@ -1,0 +1,14 @@
+<md-list layout-padding flex style="width: 100%; max-width:500px; max-height: 300px; overflow-y: auto" md-whiteframe="3">
+    <md-list-item style="display:flex; align-items: center" class="md-3-line md-long-text" ng-repeat="item in $ctrl.announcementList">
+
+        <div style="margin:unset;" class="md-list-item-text" layout="column">
+            <div layout="row" layout-align="space-between center">
+                <h3>{{ item.announcementTitle }}</h3>
+                <span style="color:grey; font-size:13px">{{item.announcementDate | date: 'dd-MM-yy'}}</span>
+            </div>
+            <p>{{ item.announcementBody }}</p>
+        </div>
+        <md-button ng-if="$ctrl.delete" class="md-warn" style="position:absolute; bottom:0; right:0" ng-click="$ctrl.deleteAnnouncement(item.announcementId)">Delete</md-button>
+        <md-divider ng-if="!$last"></md-divider>
+    </md-list-item>
+</md-list>

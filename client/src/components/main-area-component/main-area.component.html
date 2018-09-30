@@ -1,18 +1,73 @@
 <div style="background-color:#ffffff; width: auto; height: calc(100% - 60px); margin:15px">
-    <div layout="row" layout-align="space-around" style="width: 900px; margin: 0 auto;">
-        <div id="home-timesheet" style="width: 350px; height: 300px" md-whiteframe="6">
-
-        </div>
-        <div id="home-announcement" style="width: 350px; height: 300px" md-whiteframe="6">
-
-        </div>
+    <div layout="row" layout-align="space-between">
+        <md-card style="width: 45%; min-height: 300px; max-height: 300px">
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline">Timesheet</span>
+                </md-card-title-text>
+            </md-card-title>
+            <md-card-content>
+                <p>your Timesheet is pending from....
+                    <md-card-actions layout="row" layout-align="end center">
+                        <md-button>
+                            <a id="timesheet" class="button personalization__button" href="https://www.google.com/" role="button" aria-label="go to">Pendind Date</a>
+                        </md-button>
+                    </md-card-actions>
+                </p>
+            </md-card-content>
+        </md-card>
+        <announcement-list-component style="width: 45%; min-height: 300px;" delete="false" layout="row" layout-align="center center"
+            layout-padding announcement-list="$ctrl.announcementList"></announcement-list-component>
     </div>
-    <div layout="row" layout-align="space-around">
-        <div id="home-leaves" style="width: 350px; height: 200px" md-whiteframe="6">
-
-        </div>
-        <div id="home-complaints" style="width: 350px; height: 200px" md-whiteframe="6">
-
-        </div>
+    <div layout="row" layout-align="space-between" style="margin-top: 20px;">
+        <md-card tyle="width: 30%; height: 150px">
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline">Leave</span>
+                </md-card-title-text>
+            </md-card-title>
+            <md-card-content>
+                <p>you have -- Earned leaves
+                    <md-card-actions layout="row" layout-align="end center">
+                        <md-button>
+                            <a id="timesheet" class="button personalization__button" href="https://www.google.com/" role="button" aria-label="go to">Earned Leaves</a>
+                        </md-button>
+                    </md-card-actions>
+                </p>
+            </md-card-content>
+        </md-card>
+        <md-card style="width: 30%; height: 150px">
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline">Payroll</span>
+                </md-card-title-text>
+            </md-card-title>
+            <md-card-content>
+                <p>
+                    <md-card-actions layout="row" layout-align="end center">
+                        <md-button>
+                            <a id="timesheet" class="button personalization__button" href="https://www.google.com/" role="button" aria-label="go to">Payslip</a>
+                        </md-button>
+                    </md-card-actions>
+                </p>
+            </md-card-content>
+        </md-card>
+        <md-card style="width: 25%; height: 150px">
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline">Complaint</span>
+                </md-card-title-text>
+            </md-card-title>
+            <md-card-content>
+                <p>
+                    <md-card-actions layout="row" layout-align="end center">
+                        <md-button>
+                            <a id="timesheet" class="button personalization__button" href="http://127.0.0.1:5500/complaint.html"
+                                role="button" aria-label="go to">Raise Complaint</a>
+                        </md-button>
+                    </md-card-actions>
+                </p>
+            </md-card-content>
+        </md-card>
     </div>
 </div>
