@@ -1,17 +1,17 @@
 <div ng-if="$ctrl.employee.empId">
     <div layout="row" style="width: 100%; height: 100px; position:relative; background:#eee; margin-top:3px;">
-        <img style="width: 100%; height: 100%;" src="../../../assets/profile.jpg" alt="prof">
+        <img style="width: 100%; height: 100%;filter: blur(20px);" src="../../../assets/profile.jpg" alt="cover">
         <div md-whiteframe="2" style="width: 100px; height: 100px; position: absolute; top: 50px; left: 30px; border-radius: 50%; background: #fff;">
-            <img style="width: 100%; height: 100%; border-radius: 50%" src="../../../assets/profile.jpg" alt="prof">
+            <img style="width: 100%; height: 100%; border-radius: 50%" src="../../../assets/profile.jpg" alt="profile">
         </div>
-        <div style="position: absolute;left: 30%;top: 27px;">
+        <div style="position: absolute;left: 30%;top: 27px; color: white">
             <h4 style="margin:unset">{{$ctrl.employee.firstName + ' ' + $ctrl.employee.lastName}}</h4>
             <h5 style="margin: 10px 0">{{$ctrl.employee.email}}</h5>
         </div>
         <md-menu ng-if="$ctrl.view">
             <md-button class="md-icon-button mar-lr" aria-label="action" style="position: absolute;right: 0;" ng-click="$mdMenu.open()">
                 <md-tooltip md-direction="left">Action</md-tooltip>
-                <i class="fas fa-ellipsis-v"></i>
+                <i style="color: white" class="fas fa-ellipsis-v"></i>
             </md-button>
 
             <md-menu-content width="2">
