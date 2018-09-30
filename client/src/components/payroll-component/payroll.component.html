@@ -1,1 +1,20 @@
-<p>Pay roll under construction!</p>
+<div layout="row" layout-align="space-between center" style="width:50%">
+    <div layout="column" md-whiteframe="10" style="width:120px; border-radius:5px; margin: 10px" ng-repeat="d in $ctrl.dates">
+        <p md-colors="{'background': 'blue'}" style="padding:10px; border-top-left-radius: 5px; border-top-right-radius:5px; text-align: center; color: white; margin: unset">{{d.name}}</p>
+        <div layout="row" layout-align="space-around center" layout-padding>
+            <span style="padding:unset">{{d.date | date:'EEE'}}</span>
+            <span style="padding:unset">{{d.date | date:'MMM'}}</span>
+        </div>
+        <div layout="column" layout-align="space-around center" layout-padding>
+            <span style="padding:unset; font-size: 40px;">{{d.date | date:'dd'}}</span>
+            <span style="padding:unset">{{d.date | date:'yyyy'}}</span>
+        </div>
+    </div>
+</div>
+
+<div style="display:flex; justify-content:flex-end;" layout-padding>
+    <div layout-padding md-whiteframe="10" style="width: 50%; height: 200px; border-radius: 5px">
+        <p style="font-size: 30px; text-align: center">Your payroll is :</p>
+        <p style="font-size: 20px; text-align: center">Rupees 22000.00</p>
+    </div>
+</div>

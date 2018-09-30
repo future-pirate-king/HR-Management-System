@@ -18,6 +18,7 @@ function mainAreaController(
 
   $ctrl.timesheetLink = 'home.timesheet({empId:' + $stateParams.empId + '})';
   $ctrl.complaintLink = 'home.complaint({empId:' + $stateParams.empId + '})';
+  $ctrl.payrollLink = 'home.payroll({empId:' + $stateParams.empId + '})';
 
   this.$onInit = function() {
     employeeService

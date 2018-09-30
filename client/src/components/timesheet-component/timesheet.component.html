@@ -34,7 +34,7 @@
             <tbody>
                 <tr ng-repeat="task in $ctrl.taskList">
                     <td>
-                        <span style="padding: 8px; background: cyan; border-radius: 5px; color: white;">{{task.taskDate
+                       <span md-colors="{'color': 'purple'}">{{task.taskDate
                             | date: 'EEE'}}</span>
                     </td>
                     <td>{{task.taskDate | date: 'mediumDate'}}</td>
