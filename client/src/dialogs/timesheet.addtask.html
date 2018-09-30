@@ -1,5 +1,5 @@
 <div style="min-width:300px; max-height: 450px; overflow-y: auto">
-    <form ng-init="form={}" layout="column" layout-padding name="timesheetForm" ng-submit="answer($event,form, timesheetForm)">
+    <form layout="column" layout-padding name="timesheetForm" ng-submit="answer($event)">
         <h3 style="text-align:center">Task Details</h3>
         <md-input-container style="margin-bottom:unset; padding:unset;">
             <label>Task Date</label>
@@ -8,57 +8,28 @@
 
         <md-input-container>
             <label>Task Name</label>
-            <input name="taskName" ng-model="form.taskName" type="text" style="font-weight:600;" required md-no-asterisk>
+            <input name="taskName" ng-model="timesheet.taskName" type="text" style="font-weight:600;" required
+                md-no-asterisk>
             <div ng-messages="timesheetForm.taskName.$error">
                 <div ng-message="required">Task name is required!</div>
             </div>
         </md-input-container>
 
-        <md-subheader class="md-primary">Swipe In Time</md-subheader>
-        <div layout="row" layout-align="space-between center">
-            <md-input-container>
-                <label>Hours</label>
-                <md-select name="swipeIn" ng-model="form.swipeIn">
-                    <md-option ng-repeat="hour in hours" ng-value="hour">
-                        {{hour}}
-                    </md-option>
-                </md-select>
-            </md-input-container>
-            <md-input-container>
-                <label>Minutes</label>
-                <md-select name="swipeIn" ng-model="form.swipeIn">
-                    <md-option ng-repeat="minute in minutes" ng-value="minute">
-                        {{minute}}
-                    </md-option>
-                </md-select>
-            </md-input-container>
-            <md-input-container>
-                <label>Period</label>
-                <md-select name="swipeIn" ng-model="form.swipeIn">
-                    <md-option ng-repeat="period in ['AM', 'PM']" ng-value="period">
-                        {{period}}
-                    </md-option>
-                </md-select>
-            </md-input-container>
-        </div>
-
         <md-input-container>
-            <label>Swipe in time</label>
-            <input ng-pattern="/^(1[012]|[1-9]):[0-5][0-9]$/" name="swipeIn" ng-model="form.swipeIn" type="text" style="font-weight:600;"
-                required md-no-asterisk>
+            <label>Swipe in time (24-hours)</label>
+            <input type="time" name="swipeIn" ng-model="timesheet.swipeIn" placeholder="HH:mm" min="00:00" max="23:59"
+                required md-no-asterisk />
             <div ng-messages="timesheetForm.swipeIn.$error">
                 <div ng-message="required">Swipe in time is required!</div>
-                <div ng-message="pattern">Time should be of format HH:MM (eg: 8:30 PM)</div>
             </div>
         </md-input-container>
 
         <md-input-container>
-            <label>Swipe out time</label>
-            <input ng-pattern="/^(1[012]|[1-9]):[0-5][0-9]$/" name="swipeOut" ng-model="form.swipeOut" type="text" style="font-weight:600;"
-                required md-no-asterisk>
+            <label>Swipe Out time (24-hours)</label>
+            <input type="time" name="swipeOut" ng-model="timesheet.swipeOut" placeholder="HH:mm" min="00:00" max="23:59"
+                required md-no-asterisk />
             <div ng-messages="timesheetForm.swipeOut.$error">
-                <div ng-message="required">Swipe out time is required!</div>
-                <div ng-message="pattern">Time should be of format HH:MM (eg: 10:30)</div>
+                <div ng-message="required">Swipe Out time is required!</div>
             </div>
         </md-input-container>
 

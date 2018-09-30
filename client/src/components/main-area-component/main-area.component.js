@@ -4,14 +4,53 @@ app.component('mainAreaComponent', {
   controller: mainAreaController
 });
 
-function mainAreaController(announcementService) {
-
+function mainAreaController(
+  announcementService,
+  timesheetService,
+  $stateParams
+) {
   var $ctrl = this;
 
   $ctrl.announcementList = [];
+  $ctrl.timesheetPendingDates = [];
+  $ctrl.status = '';
 
-  this.$onInit = function () {
-    announcementService.getAllAnnouncements()
-      .then(res => $ctrl.announcementList = res.data);
-  }
+  this.$onInit = function() {
+    $ctrl.getTimesheetDetails();
+    announcementService
+      .getAllAnnouncements()
+      .then(res => ($ctrl.announcementList = res.data));
+  };
+
+  $ctrl.getTimesheetDetails = function() {
+    var date = new Date();
+    var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+    var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+
+    timesheetService
+      .getTimeSheetDetails(
+        firstDay.getTime(),
+        lastDay.getTime(),
+        $stateParams.empId
+      )
+      .then(res => {
+        var data = res.data;
+        data.map(fd => {
+          if (fd.isApproved === 0) {
+            $ctrl.status = 'PENDING';
+          } else if (fd.isApproved === 1) {
+            $ctrl.status = 'APPROVED';
+          } else {
+            $ctrl.status = 'REJECTED';
+          }
+
+          var details = {
+            taskName: fd.taskName,
+            taskDate: fd.taskDate,
+            status: $ctrl.status
+          };
+          $ctrl.timesheetPendingDates.push(details);
+        });
+      });
+  };
 }

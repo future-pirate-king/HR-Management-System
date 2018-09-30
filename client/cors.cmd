@@ -1,0 +1,6 @@
+echo Going to chrome.exe location...
+
+cd C:\Program Files (x86)\Google\Chrome\Application
+
+echo Starting Chrome...
+chrome.exe --disable-web-security --user-data-dir="C:\Users\samd9\Desktop\Sam\Web"

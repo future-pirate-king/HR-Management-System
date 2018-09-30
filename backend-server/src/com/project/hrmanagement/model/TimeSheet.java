@@ -36,15 +36,31 @@ public class TimeSheet implements Serializable {
 	private String taskName;
 
 	@Column(name = "swipe_in")
-	private String swipeIn;
+	private Date swipeIn;
 
 	@Column(name = "swipe_out")
-	private String swipeOut;
+	private Date swipeOut;
 
 	/*
 	 * @Column(name = "total_time") private Float totalTime = Float.valueOf(swipeIn)
 	 * - Float.valueOf(swipeOut);
 	 */
+
+	public Date getSwipeIn() {
+		return swipeIn;
+	}
+
+	public void setSwipeIn(Date swipeIn) {
+		this.swipeIn = swipeIn;
+	}
+
+	public Date getSwipeOut() {
+		return swipeOut;
+	}
+
+	public void setSwipeOut(Date swipeOut) {
+		this.swipeOut = swipeOut;
+	}
 
 	@Column(name = "is_filled")
 	private Integer isFilled = 0;
@@ -56,7 +72,7 @@ public class TimeSheet implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public TimeSheet(Integer empId, Date taskDate, String taskName, String swipeIn, String swipeOut) {
+	public TimeSheet(Integer empId, Date taskDate, String taskName, Date swipeIn, Date swipeOut) {
 		super();
 		this.empId = empId;
 		this.taskDate = taskDate;
@@ -112,28 +128,5 @@ public class TimeSheet implements Serializable {
 		this.taskName = taskName;
 	}
 
-	public String getSwipeIn() {
-		return swipeIn;
-	}
-
-	public void setSwipeIn(String swipeIn) {
-		this.swipeIn = swipeIn;
-	}
-
-	public String getSwipeOut() {
-		return swipeOut;
-	}
-
-	public void setSwipeOut(String swipeOut) {
-		this.swipeOut = swipeOut;
-	}
-
-	/*
-	 * public Float getTotalTime() { return totalTime; }
-	 * 
-	 * 
-	 * 
-	 * public void setTotalTime(Float totalTime) { this.totalTime = totalTime; }
-	 */
 
 }

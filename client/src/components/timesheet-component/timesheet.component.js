@@ -17,7 +17,7 @@ function timesheetController(
   $scope.startDate = null;
   $scope.endDate = null;
 
-  $ctrl.onInit = function () {
+  $ctrl.onInit = function() {
     // getTimesheetDetails goes here..
   };
 
@@ -25,14 +25,15 @@ function timesheetController(
 
   $ctrl.data = [10];
 
-  $ctrl.getTimesheetDetails = function () {
-    timesheetService.getTimeSheetDetails($scope.startDate, $scope.endDate, $stateParams.empId)
+  $ctrl.getTimesheetDetails = function() {
+    timesheetService
+      .getTimeSheetDetails($scope.startDate, $scope.endDate, $stateParams.empId)
       .then(res => {
         $ctrl.taskList = res.data;
       });
-  }
+  };
 
-  $ctrl.addTask = function (event) {
+  $ctrl.addTask = function(event) {
     $mdDialog
       .show({
         controller: DialogController,
@@ -49,35 +50,41 @@ function timesheetController(
   };
 }
 
-function DialogController($scope, $mdDialog, date, timesheetService, $stateParams, $mdToast) {
+function DialogController(
+  $scope,
+  $mdDialog,
+  date,
+  timesheetService,
+  $stateParams,
+  $mdToast
+) {
   $scope.date = date;
-  $scope.hours = [];
-  $scope.minutes = [];
-  $scope.hide = function () {
+
+  $scope.timesheet = {
+    swipeOut: null,
+    swipeIn: null,
+    taskDate: $scope.date,
+    taskName: ''
+  };
+
+  $scope.hide = function() {
     $mdDialog.hide();
   };
 
-  $scope.cancel = function () {
+  $scope.cancel = function() {
     $mdDialog.cancel();
   };
 
-  for (var hour = 1; hour <= 12; hour++) {
-    $scope.hours.push(hour);
-  }
-
-  for (var minute = 0; minute <= 60; minute++) {
-    $scope.minutes.push(minute);
-  }
-
-  $scope.answer = function (event, formData) {
+  $scope.answer = function(event, formData) {
     event.preventDefault();
+
     timesheetService
       .addTask(
-      $stateParams.empId,
-      formData.swipeIn,
-      formData.swipeOut,
-      $scope.date._d.getTime(),
-      formData.taskName
+        $stateParams.empId,
+        $scope.timesheet.swipeIn.getTime(),
+        $scope.timesheet.swipeOut.getTime(),
+        $scope.date._d.getTime(),
+        $scope.timesheet.taskName
       )
       .then(res => {
         $mdToast.show(

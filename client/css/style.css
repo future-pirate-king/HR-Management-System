@@ -5,7 +5,7 @@ a {
 
 body {
   min-width: 1124px;
-  background-color: #ffffff;
+  background-color: #fafafa;
 }
 
 h2 {
@@ -58,6 +58,17 @@ ui-view {
   width: 100% !important;
 }
 
+.md-whiteframe-10dp,
+.md-whiteframe-z4 {
+  box-shadow: 0 6px 6px -3px rgba(0, 0, 0, 0), 0 10px 14px 1px rgba(0, 0, 0, 0),
+    0 4px 18px 3px rgba(0, 0, 0, 0.1);
+}
+
+.md-whiteframe-5dp {
+  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0), 0 5px 8px 0 rgba(0, 0, 0, 0),
+    0 1px 14px 0 rgba(0, 0, 0, 0.12);
+}
+
 .hoverable {
   -webkit-transition: -webkit-box-shadow 0.25s;
   transition: -webkit-box-shadow 0.25s;
@@ -87,6 +98,10 @@ md-tabs-content-wrapper {
 
 #profile-btn {
   border-radius: 20px;
+}
+
+#profile-btn:hover {
+  background-color: none;
 }
 
 /* ###################Login styles will go here################ */
@@ -143,13 +158,33 @@ md-tabs-content-wrapper {
   height: 100%;
   width: 5px;
   border-radius: 5px;
-  background-color: #fafafa;
+  background-color: #9c27b0;
   position: absolute;
-  left: 0;
+  right: 0;
 }
 /* End of Side Nav styles */
 
 /* #######################Styles for calender starts here###################### */
+.approved {
+  padding: 8px;
+  background: #00695c;
+  border-radius: 8px;
+  color: #fafafa;
+}
+
+.rejected {
+  padding: 8px;
+  background: #d50000;
+  border-radius: 8px;
+  color: #fafafa;
+}
+
+.pending {
+  padding: 8px;
+  background: #ffab00;
+  border-radius: 8px;
+  color: #fafafa;
+}
 
 #cal {
   display: table;
@@ -297,7 +332,6 @@ calendar > div.week {
   background-color: #ededed;
 }
 
-
 /* feedback details css */
 .rating {
   color: #a9a9a9;
@@ -314,27 +348,27 @@ ul.rating {
   text-align: center;
   font-weight: bold;
   cursor: pointer;
-  font-size:20px;
+  font-size: 20px;
 }
 .rating .filled {
   color: orangered;
 }
-.clear{
-margin-top:20px;
+.clear {
+  margin-top: 20px;
 }
 
-#feedback-radio input[type=radio] {
-  display:none; 
-  margin:10px;
+#feedback-radio input[type='radio'] {
+  display: none;
+  margin: 10px;
 }
 
 /*
 Change the look'n'feel of labels (which are adjacent to radiobuttons).
 Add some margin, padding to label
 */
-#feedback-radio input[type=radio] + label {
-  display:inline-block;
-  margin:-2px;
+#feedback-radio input[type='radio'] + label {
+  display: inline-block;
+  margin: -2px;
   padding: 15px 60px;
   background-color: #e7e7e7;
   border-color: rgb(31, 28, 28);
@@ -344,7 +378,7 @@ Add some margin, padding to label
 Change background color for label next to checked radio button
 to make it look like highlighted button
 */
-#feedback-radio input[type=radio]:checked + label { 
- background-image: none;
-  background-color:#9ea0b6;
+#feedback-radio input[type='radio']:checked + label {
+  background-image: none;
+  background-color: #9ea0b6;
 }

@@ -1,4 +1,5 @@
-<md-list layout-padding flex style="width: 100%; max-width:500px; max-height: 300px; overflow-y: auto" md-whiteframe="3">
+<md-list ng-if="$ctrl.announcementList.length > 0" layout-padding flex style="width: 100%; max-width:500px; max-height: 300px; overflow-y: auto"
+    md-whiteframe="10" style="background: #ffffff; border-radius: 5px">
     <md-list-item style="display:flex; align-items: center" class="md-3-line md-long-text" ng-repeat="item in $ctrl.announcementList">
 
         <div style="margin:unset;" class="md-list-item-text" layout="column">
@@ -12,3 +13,8 @@
         <md-divider ng-if="!$last"></md-divider>
     </md-list-item>
 </md-list>
+
+<div layout="row" layout-align="center center" ng-if="$ctrl.announcementList.length === 0" style="width: 100%; height: 300px; background-color: #ffffff; border-radius: 5px"
+    md-whiteframe="10">
+    <strong md-colors="{color: 'grey'}">No Anouncements available</strong>
+</div>

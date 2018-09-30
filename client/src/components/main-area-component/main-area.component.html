@@ -1,26 +1,35 @@
-<div style="background-color:#ffffff; width: auto; height: calc(100% - 60px); margin:15px">
+<div style="background-color:#fafafa; width: auto; height: calc(100% - 60px); margin:15px">
     <div layout="row" layout-align="space-between">
-        <md-card style="width: 45%; min-height: 300px; max-height: 300px">
-            <md-card-title>
+        <md-card md-whiteframe="10" style=" border-radius: 5px;width: 45%; min-height: 300px; max-height: 300px; position: relative;">
+            <md-card-title style="max-height: 30px;">
                 <md-card-title-text>
                     <span class="md-headline">Timesheet</span>
                 </md-card-title-text>
             </md-card-title>
-            <md-card-content>
-                <p>your Timesheet is pending from....
-                    <md-card-actions layout="row" layout-align="end center">
-                        <md-button>
-                            <a id="timesheet" class="button personalization__button" href="https://www.google.com/" role="button" aria-label="go to">Pendind Date</a>
-                        </md-button>
-                    </md-card-actions>
-                </p>
+            <md-card-content style="overflow-y: auto">
+                <div ng-repeat="task in $ctrl.timesheetPendingDates">
+                    <div style="margin: 5px 0" layout="row" layout-align="space-between center">
+                        <span md-colors="{'color': 'grey'}">{{task.taskDate | date: 'MMM, dd'}}</span>
+                        <span md-colors="{'color': 'grey'}">{{task.taskName}}</span>
+                        <span style="font-size: 12px" ng-class="{'approved':task.status==='APPROVED',
+                            'rejected':task.status==='REJECTED',
+                            'pending':task.status==='PENDING'}">{{task.status}}</span>
+                    </div>
+                    <md-divider ng-if="!$last"></md-divider>
+                </div>
             </md-card-content>
+            <md-card-actions layout="row" layout-align="end center" style="position:absolute;right:0; bottom:0">
+                <md-button>
+                    <a id="timesheet" md-colors="{color: 'purple'}" href="https://www.google.com/" role="button"
+                        aria-label="go to">Go To Timesheet</a>
+                </md-button>
+            </md-card-actions>
         </md-card>
         <announcement-list-component style="width: 45%; min-height: 300px;" delete="false" layout="row" layout-align="center center"
             layout-padding announcement-list="$ctrl.announcementList"></announcement-list-component>
     </div>
     <div layout="row" layout-align="space-between" style="margin-top: 20px;">
-        <md-card tyle="width: 30%; height: 150px">
+        <md-card md-whiteframe="10" style="border-radius: 5px;width: 30%; height: 150px">
             <md-card-title>
                 <md-card-title-text>
                     <span class="md-headline">Leave</span>
@@ -30,13 +39,14 @@
                 <p>you have -- Earned leaves
                     <md-card-actions layout="row" layout-align="end center">
                         <md-button>
-                            <a id="timesheet" class="button personalization__button" href="https://www.google.com/" role="button" aria-label="go to">Earned Leaves</a>
+                            <a id="timesheet" md-colors="{color: 'purple'}" href="https://www.google.com/" role="button"
+                                aria-label="go to">Earned Leaves</a>
                         </md-button>
                     </md-card-actions>
                 </p>
             </md-card-content>
         </md-card>
-        <md-card style="width: 30%; height: 150px">
+        <md-card md-whiteframe="10" style="border-radius: 5px;width: 30%; height: 150px">
             <md-card-title>
                 <md-card-title-text>
                     <span class="md-headline">Payroll</span>
@@ -46,13 +56,14 @@
                 <p>
                     <md-card-actions layout="row" layout-align="end center">
                         <md-button>
-                            <a id="timesheet" class="button personalization__button" href="https://www.google.com/" role="button" aria-label="go to">Payslip</a>
+                            <a id="timesheet" md-colors="{color: 'purple'}" href="https://www.google.com/" role="button"
+                                aria-label="go to">Payslip</a>
                         </md-button>
                     </md-card-actions>
                 </p>
             </md-card-content>
         </md-card>
-        <md-card style="width: 25%; height: 150px">
+        <md-card md-whiteframe="10" style="border-radius: 5px;width: 25%; height: 150px">
             <md-card-title>
                 <md-card-title-text>
                     <span class="md-headline">Complaint</span>
@@ -62,7 +73,7 @@
                 <p>
                     <md-card-actions layout="row" layout-align="end center">
                         <md-button>
-                            <a id="timesheet" class="button personalization__button" href="http://127.0.0.1:5500/complaint.html"
+                            <a id="timesheet" md-colors="{color: 'purple'}" href="http://127.0.0.1:5500/complaint.html"
                                 role="button" aria-label="go to">Raise Complaint</a>
                         </md-button>
                     </md-card-actions>
