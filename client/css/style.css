@@ -87,12 +87,71 @@ ui-view {
 }
 
 .md-subheader .md-subheader-inner {
+  background-color: #fafafa;
+}
+
+#timesheet-tab .md-subheader .md-subheader-inner {
   background-color: #ffffff;
 }
 
-md-tab-content,
+/* md-tab-content,
 md-tabs-content-wrapper {
   position: static;
+} */
+
+/* md-tabs:not(.md-no-tab-content):not(.md-dynamic-height) {
+  min-height: -webkit-fill-available;
+}  */
+table,
+th,
+td {
+  border: none;
+}
+
+table {
+  width: 100%;
+  display: table;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+table.striped tr {
+  border-bottom: none;
+}
+
+table.striped > tbody > tr:nth-child(odd) {
+  background-color: rgba(242, 242, 242, 0.5);
+}
+
+table.striped > tbody > tr > td {
+  border-radius: 0;
+}
+
+table.highlight > tbody > tr {
+  -webkit-transition: background-color 0.25s ease;
+  transition: background-color 0.25s ease;
+}
+
+table.highlight > tbody > tr:hover {
+  background-color: rgba(242, 242, 242, 0.5);
+}
+
+table.centered thead tr th,
+table.centered tbody tr td {
+  text-align: center;
+}
+
+tr {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+td,
+th {
+  padding: 15px 5px;
+  display: table-cell;
+  text-align: left;
+  vertical-align: middle;
+  border-radius: 2px;
 }
 /* End of Global styles */
 
@@ -348,10 +407,10 @@ ul.rating {
   text-align: center;
   font-weight: bold;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 40px;
 }
 .rating .filled {
-  color: orangered;
+  color: #ffab00;
 }
 .clear {
   margin-top: 20px;
@@ -370,9 +429,13 @@ Add some margin, padding to label
   display: inline-block;
   margin: -2px;
   padding: 15px 60px;
-  background-color: #e7e7e7;
-  border-color: rgb(31, 28, 28);
+  background-color: #ffffff;
+  border-radius: 4px;
   cursor: pointer;
+  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0), 0 5px 8px 0 rgba(0, 0, 0, 0),
+    0 1px 14px 0 rgba(0, 0, 0, 0.12);
+  box-sizing: border-box;
+  margin: 10px;
 }
 /*
 Change background color for label next to checked radio button
@@ -380,5 +443,6 @@ to make it look like highlighted button
 */
 #feedback-radio input[type='radio']:checked + label {
   background-image: none;
-  background-color: #9ea0b6;
+  border: 2px solid #9c27b0;
+  color: #9c27b0;
 }

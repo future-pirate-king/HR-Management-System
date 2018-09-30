@@ -14,41 +14,89 @@ function timesheetController(
   $ctrl.dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   $scope.day = moment();
   $ctrl.taskList = [];
+  $ctrl.totalTime = null;
   $scope.startDate = null;
   $scope.endDate = null;
+  $ctrl.series = ['Hours Worked'];
+  $ctrl.data = [];
 
-  $ctrl.onInit = function() {
-    // getTimesheetDetails goes here..
+  this.$onInit = function() {
+    $ctrl.initData();
+    var currentWeekStartEndDates = new Date().getWeek();
+    timesheetService
+      .getTimeSheetDetails(
+        currentWeekStartEndDates[0].getTime(),
+        currentWeekStartEndDates[1].getTime(),
+        $stateParams.empId
+      )
+      .then(res => {
+        $ctrl.taskList = res.data;
+
+        $ctrl.taskList.map(data => {
+          $ctrl.calculateTotalTime(
+            data.swipeIn,
+            data.swipeOut,
+            new Date(data.taskDate).getDay()
+          );
+        });
+      });
   };
 
-  $ctrl.series = ['Hours Worked'];
+  $ctrl.calculateTotalTime = function(swipeIn, swipeOut, dayIndex) {
+    var swipeInHours = swipeIn / (1000 * 60 * 60);
+    var swipeOutHours = swipeOut / (1000 * 60 * 60);
 
-  $ctrl.data = [10];
+    $ctrl.totalTime = swipeOutHours - swipeInHours;
+    $ctrl.data[dayIndex] = $ctrl.totalTime;
+  };
+
+  $ctrl.initData = function() {
+    $ctrl.data = [0, 0, 0, 0, 0, 0, 0];
+  };
 
   $ctrl.getTimesheetDetails = function() {
+    $ctrl.initData();
     timesheetService
       .getTimeSheetDetails($scope.startDate, $scope.endDate, $stateParams.empId)
       .then(res => {
         $ctrl.taskList = res.data;
+        $ctrl.taskList.map(data => {
+          $ctrl.calculateTotalTime(
+            data.swipeIn,
+            data.swipeOut,
+            new Date(data.taskDate).getDay()
+          );
+        });
       });
   };
 
   $ctrl.addTask = function(event) {
-    $mdDialog
-      .show({
-        controller: DialogController,
-        templateUrl: './src/dialogs/timesheet.addtask.html',
-        parent: angular.element(document.body),
-        targetEvent: event,
-        locals: {
-          date: $scope.day
-        },
-        clickOutsideToClose: true,
-        fullscreen: false // Only for -xs, -sm breakpoints.
-      })
-      .then(data => $ctrl.taskList.push(data));
+    $mdDialog.show({
+      controller: DialogController,
+      templateUrl: './src/dialogs/timesheet.addtask.html',
+      parent: angular.element(document.body),
+      targetEvent: event,
+      locals: {
+        date: $scope.day
+      },
+      clickOutsideToClose: false,
+      fullscreen: false // Only for -xs, -sm breakpoints.
+    });
   };
 }
+
+Date.prototype.getWeek = function(start) {
+  //Calcing the starting point
+  start = start || 0;
+  var today = new Date(this.setHours(0, 0, 0, 0));
+  var day = today.getDay() - start;
+  var date = today.getDate() - day;
+
+  // Grabbing Start/End Dates
+  var StartDate = new Date(today.setDate(date));
+  var EndDate = new Date(today.setDate(date + 6));
+  return [StartDate, EndDate];
+};
 
 function DialogController(
   $scope,

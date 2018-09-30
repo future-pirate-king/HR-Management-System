@@ -20,7 +20,7 @@
             </md-card-content>
             <md-card-actions layout="row" layout-align="end center" style="position:absolute;right:0; bottom:0">
                 <md-button>
-                    <a id="timesheet" md-colors="{color: 'purple'}" href="https://www.google.com/" role="button"
+                    <a id="timesheet" md-colors="{color: 'purple'}" ui-sref="{{$ctrl.timesheetLink}}" role="button"
                         aria-label="go to">Go To Timesheet</a>
                 </md-button>
             </md-card-actions>
@@ -39,8 +39,8 @@
                 <p>you have -- Earned leaves
                     <md-card-actions layout="row" layout-align="end center">
                         <md-button>
-                            <a id="timesheet" md-colors="{color: 'purple'}" href="https://www.google.com/" role="button"
-                                aria-label="go to">Earned Leaves</a>
+                            <a id="timesheet" md-colors="{color: 'purple'}" role="button" aria-label="go to">Earned
+                                Leaves</a>
                         </md-button>
                     </md-card-actions>
                 </p>
@@ -73,8 +73,8 @@
                 <p>
                     <md-card-actions layout="row" layout-align="end center">
                         <md-button>
-                            <a id="timesheet" md-colors="{color: 'purple'}" href="http://127.0.0.1:5500/complaint.html"
-                                role="button" aria-label="go to">Raise Complaint</a>
+                            <a id="timesheet" md-colors="{color: 'purple'}" ui-sref="{{$ctrl.complaintLink}}" role="button"
+                                aria-label="go to">Raise Complaint</a>
                         </md-button>
                     </md-card-actions>
                 </p>

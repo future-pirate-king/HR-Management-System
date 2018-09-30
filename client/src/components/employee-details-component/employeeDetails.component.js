@@ -8,29 +8,40 @@ app.component('employeeDetailsComponent', {
   controller: employeeDetailsController
 });
 
-function employeeDetailsController(employeeService, $mdToast, timesheetService, $stateParams) {
+function employeeDetailsController(
+  employeeService,
+  $mdToast,
+  timesheetService,
+  $stateParams
+) {
   $ctrl = this;
   $ctrl.timesheetList = [];
 
-  this.$onInit = function () {
-    timesheetService.getEmployeeTimesheetDetails($stateParams.empId)
+  this.$onInit = function() {
+    $ctrl.initTimesheet();
+  };
+
+  $ctrl.initTimesheet = function() {
+    timesheetService
+      .getEmployeeTimesheetDetails($stateParams.empId)
       .then(res => {
-        $ctrl.timesheetList = res.data
-        console.log(res.data);
+        $ctrl.timesheetList = res.data;
       });
-  }
+  };
 
-  $ctrl.rejectTimesheet = function (timesheet) {
-    timesheetService.rejectTimesheet(timesheet)
-      .then(res => console.log(res));
-  }
+  $ctrl.rejectTimesheet = function(timesheet) {
+    timesheetService
+      .rejectTimesheet(timesheet)
+      .then(res => $ctrl.initTimesheet());
+  };
 
-  $ctrl.acceptTimesheet = function (timesheet) {
-    timesheetService.acceptTimesheet(timesheet)
-      .then(res => console.log(res));
-  }
+  $ctrl.acceptTimesheet = function(timesheet) {
+    timesheetService
+      .acceptTimesheet(timesheet)
+      .then(res => $ctrl.initTimesheet());
+  };
 
-  $ctrl.deleteEmployee = function () {
+  $ctrl.deleteEmployee = function() {
     employeeService
       .deleteEmployee($ctrl.employee.empId)
       .then(res => {

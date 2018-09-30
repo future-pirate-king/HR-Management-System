@@ -33,8 +33,13 @@
             </div>
         </md-input-container>
 
-        <md-button type="submit" class="md-raised md-primary mar-t">
-            Add Task
-        </md-button>
+        <div layout="row" layout-align="space-between center">
+            <md-button type="submit" md-colors="{'color':'purple'}">
+                Add Task
+            </md-button>
+            <md-button ng-click="hide()">
+                Cancel
+            </md-button>
+        </div>
     </form>
 </div>

@@ -1,0 +1,19 @@
+<h3 style="text-align:center;">List of complaints</h3>
+<div md-whiteframe="5" style="border-radius:5px; background: #ffffff; padding:8px; margin:10px; min-height: 400px">
+    <table class="striped centered highlight">
+        <thead>
+            <th>Employee Id</th>
+            <th>Complaint Type</th>
+            <th>Complaint Description</th>
+            <th>Complaint Id</th>
+        </thead>
+        <tbody>
+            <tr ng-repeat="c in $ctrl.complaintList">
+                <td>{{c.empId}}</td>
+                <td>{{c.complaintType}}</td>
+                <td>{{c.complaintDescription}}</td>
+                <td>{{c.complaintId}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

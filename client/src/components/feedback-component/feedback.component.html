@@ -20,7 +20,8 @@
         </md-content>
 
         <md-content style="overflow: hidden;" id="feedback-radio" layout="row" layout-align="space-around center">
-            <input type="radio" ng-model="feedback.feedbackCategory" id="radio1" name="radios" value="Suggestions" checked>
+            <input type="radio" ng-model="feedback.feedbackCategory" id="radio1" name="radios" value="Suggestions"
+                checked>
             <label for="radio1">Suggestions</label>
             <input type="radio" ng-model="feedback.feedbackCategory" id="radio2" name="radios" value="Something is not quite right!">
             <label for="radio2">Something is not quite right!</label>
@@ -33,10 +34,10 @@
         </md-content>
         <md-input-container class="md-block" layout-padding>
             <label>Feedback description</label>
-            <textarea ng-model="feedback.feedbackDescription" md-maxlength="150" rows="3" md-select-on-focus></textarea>
+            <textarea ng-model="feedback.feedbackDescription" md-maxlength="100" rows="2" md-select-on-focus></textarea>
         </md-input-container>
         <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
-            <md-button class="md-raised md-primary" data-ng-click="sendFeedback()">Submit</md-button>
+            <md-button md-colors="{'color': 'purple'}" data-ng-click="sendFeedback()">Submit</md-button>
         </section>
 
 

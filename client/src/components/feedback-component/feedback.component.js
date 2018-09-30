@@ -4,36 +4,49 @@ app.component('feedbackComponent', {
   controller: feedbackController
 });
 
-function feedbackController($scope, feedbackService, $stateParams) {
+function feedbackController($scope, feedbackService, $stateParams, $mdToast) {
   $scope.rating = 0;
-  $scope.ratings = [{
-    current: 3,
-    max: 5
-  }];
+  $scope.ratings = [
+    {
+      current: 3,
+      max: 5
+    }
+  ];
 
   $scope.feedback = {
     feedbackRating: '',
     feedbackCategory: '',
-    feedbackDescription: '',
+    feedbackDescription: ''
   };
 
-  $scope.getSelectedRating = function (rating) {
+  $scope.getSelectedRating = function(rating) {
     return rating;
-  }
+  };
 
-
-
-  $scope.sendFeedback = function () {
-    $scope.feedback.feedbackRating = $scope.ratings[0].current + "/" + $scope.ratings[0].max;
-    feedbackService.sendFeedback($scope.feedback, $stateParams.empId)
-      .then(res => console.log(res))
-  }
+  $scope.sendFeedback = function() {
+    $scope.feedback.feedbackRating =
+      $scope.ratings[0].current + '/' + $scope.ratings[0].max;
+    feedbackService
+      .sendFeedback($scope.feedback, $stateParams.empId)
+      .then(res => {
+        if (res.data) {
+          $mdToast.show(
+            $mdToast
+              .simple()
+              .textContent('Feedback Added successfully.')
+              .position('bottom left')
+              .hideDelay(3000)
+          );
+        }
+      });
+  };
 }
 
-app.directive('starRating', function () {
+app.directive('starRating', function() {
   return {
     restrict: 'A',
-    template: '<ul class="rating">' +
+    template:
+      '<ul class="rating">' +
       '<li ng-repeat="star in stars" ng-class="star" ng-click="toggle($index)">' +
       '\u2605' +
       '</li>' +
@@ -43,9 +56,8 @@ app.directive('starRating', function () {
       max: '=',
       onRatingSelected: '&'
     },
-    link: function (scope, elem, attrs) {
-
-      var updateStars = function () {
+    link: function(scope, elem, attrs) {
+      var updateStars = function() {
         scope.stars = [];
         for (var i = 0; i < scope.max; i++) {
           scope.stars.push({
@@ -54,18 +66,18 @@ app.directive('starRating', function () {
         }
       };
 
-      scope.toggle = function (index) {
+      scope.toggle = function(index) {
         scope.ratingValue = index + 1;
         scope.onRatingSelected({
           rating: index + 1
         });
       };
 
-      scope.$watch('ratingValue', function (oldVal, newVal) {
+      scope.$watch('ratingValue', function(oldVal, newVal) {
         if (newVal) {
           updateStars();
         }
       });
     }
-  }
-})
+  };
+});

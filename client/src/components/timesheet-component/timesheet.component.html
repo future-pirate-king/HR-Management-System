@@ -10,17 +10,19 @@
             <span style="color:#FF80AB">
                 <i class="fas fa-square mar-r"></i>Not Filled</span>
         </div>
-        <calendar selected="day" add-task="$ctrl.addTask()" end-date="endDate" start-date="startDate" get-timesheet-details="$ctrl.getTimesheetDetails()"></calendar>
+        <calendar md-whiteframe="10" style="padding:unset; border-radius:5px; background-color: #ffffff" selected="day"
+            add-task="$ctrl.addTask()" end-date="endDate" start-date="startDate" get-timesheet-details="$ctrl.getTimesheetDetails()"></calendar>
 
-        <div style="margin: 15px; width:400px; max-height: 350px; border-radius: 5px;" md-whiteframe="5" layout-padding>
+        <div style="margin: 15px; width:400px; max-height: 350px; border-radius: 5px; background-color: #ffffff"
+            md-whiteframe="5" layout-padding>
             <canvas id="bar" class="chart chart-bar" chart-data="$ctrl.data" chart-labels="$ctrl.dayNames" chart-series="$ctrl.series">
             </canvas>
         </div>
 
     </div>
 
-    <div id="timesheet-details" style="width:60%; min-height: 300px; border-radius: 5px;" md-whiteframe="5">
-        <table style="width:100%">
+    <div style="width:100%">
+        <table style="width:100%" class="striped highlight centered">
             <thead>
                 <th>Day</th>
                 <th>Date</th>
@@ -32,13 +34,14 @@
             <tbody>
                 <tr ng-repeat="task in $ctrl.taskList">
                     <td>
-                        <span style="padding: 8px; background: cyan; border-radius: 5px; color: white;">{{$ctrl.dayNames[$index + 1]}}</span>
+                        <span style="padding: 8px; background: cyan; border-radius: 5px; color: white;">{{task.taskDate
+                            | date: 'EEE'}}</span>
                     </td>
                     <td>{{task.taskDate | date: 'mediumDate'}}</td>
                     <td>{{task.taskName}}</td>
-                    <td>{{task.swipeIn}}</td>
-                    <td>{{task.swipeOut}}</td>
-                    <td>09:45</td>
+                    <td>{{task.swipeIn | date: 'shortTime'}}</td>
+                    <td>{{task.swipeOut | date: 'shortTime'}}</td>
+                    <td>{{$ctrl.totalTime}} hours</td>
                 </tr>
             </tbody>
         </table>

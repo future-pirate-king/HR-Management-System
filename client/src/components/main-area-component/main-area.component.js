@@ -15,6 +15,9 @@ function mainAreaController(
   $ctrl.timesheetPendingDates = [];
   $ctrl.status = '';
 
+  $ctrl.timesheetLink = 'home.timesheet({empId:' + $stateParams.empId + '})';
+  $ctrl.complaintLink = 'home.complaint({empId:' + $stateParams.empId + '})';
+
   this.$onInit = function() {
     $ctrl.getTimesheetDetails();
     announcementService

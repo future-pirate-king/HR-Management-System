@@ -1,6 +1,6 @@
 app.config([
   '$stateProvider',
-  function ($stateProvider) {
+  function($stateProvider) {
     $stateProvider
       .state({
         name: 'login',
@@ -26,6 +26,16 @@ app.config([
         name: 'hr_home.announcement',
         url: '/announcement',
         component: 'addAnnouncementComponent'
+      })
+      .state({
+        name: 'hr_home.complaint',
+        url: '/complaints',
+        component: 'complaintListComponent'
+      })
+      .state({
+        name: 'hr_home.feedback',
+        url: '/feedbacks',
+        component: 'feedbackListComponent'
       })
       .state({
         name: 'home',

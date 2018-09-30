@@ -27,14 +27,14 @@
             </md-menu-content>
         </md-menu>
 
-        <md-button layout="row" layout-align="center center" ng-if="!$ctrl.view" class="md-icon-button mar-lr" aria-label="home"
-            style="position: absolute;left: 0;" ui-sref="home({empId:$ctrl.employee.empId})">
+        <md-button layout="row" layout-align="center center" ng-if="!$ctrl.view" class="md-icon-button mar-lr"
+            aria-label="home" style="position: absolute;left: 0;" ui-sref="home({empId:$ctrl.employee.empId})">
             <md-tooltip md-direction="right">back to home</md-tooltip>
             <i class="fas fa-arrow-left fa-lg"></i>
         </md-button>
     </div>
 
-    <md-tabs md-center-tabs class="mar-t">
+    <md-tabs md-dynamic-height md-center-tabs class="mar-t">
         <md-tab label="Details">
             <div layout="row" layout-align="space-around center">
                 <div layout="column" layout-align="space-around center">
@@ -81,73 +81,58 @@
 
         </md-tab>
         <md-tab label="Timesheet" ng-if="$ctrl.view">
-            <md-content>
-                <md-list layout-padding flex>
-                    <md-list-item style="display:flex; align-items: center" class="md-3-line md-long-text" ng-repeat="item in $ctrl.timesheetList">
-                        <div layout="row" layout-align="space-around center" class="mar-t" layout-padding>
-                            <div layout="column" layout-align="space-around center">
-                                <md-subheader>Task Name</md-subheader>
-                                <span>{{item.taskName}}</span>
-                            </div>
-                            <div layout="column" layout-align="space-around center">
-                                <md-subheader>Date</md-subheader>
-                                <span>{{item.taskDate | date:'dd-MM-yyyy'}}</span>
-                            </div>
-                            <div layout="column" layout-align="space-around center">
-                                <md-subheader>Swipe In</md-subheader>
-                                <span>{{item.swipeIn}}</span>
-                            </div>
-                            <div layout="column" layout-align="space-around center">
-                                <md-subheader>Swipe Out</md-subheader>
-                                <span>{{item.swipeOut}}</span>
-                            </div>
-                            <div layout="column" layout-align="space-around center">
-                                <md-button md-colors="{color: 'green'}" ng-click="$ctrl.acceptTimesheet(item)">Accept</md-button>
-                            </div>
-                            <div layout="column" layout-align="space-around center">
-                                <md-button class="md-warn" ng-click="$ctrl.rejectTimesheet(item)">Reject</md-button>
-                            </div>
-                        </div>
+            <div id="timesheet-tab" md-whiteframe="5" style="border-radius:5px; background:#ffffff" layout="row"
+                layout-align="space-around center" class="mar" layout-padding ng-repeat="item in $ctrl.timesheetList">
+                <div layout="column" layout-align="space-around center">
+                    <md-subheader>Task Name</md-subheader>
+                    <span>{{item.taskName}}</span>
+                </div>
+                <div layout="column" layout-align="space-around center">
+                    <md-subheader>Date</md-subheader>
+                    <span>{{item.taskDate | date:'dd-MM-yyyy'}}</span>
+                </div>
+                <div layout="column" layout-align="space-around center">
+                    <md-subheader>Swipe In</md-subheader>
+                    <span>{{item.swipeIn | date: 'shortTime'}}</span>
+                </div>
+                <div layout="column" layout-align="space-around center">
+                    <md-subheader>Swipe Out</md-subheader>
+                    <span>{{item.swipeOut | date: 'shortTime'}}</span>
+                </div>
+                <div layout="column" layout-align="space-around center">
+                    <md-subheader>Status</md-subheader>
+                    <span><i ng-if="item.isApproved===1" md-colors="{'color':'green'}" class="fas fa-check"></i>
+                        <i ng-if="item.isApproved===null" md-colors="{'color': 'red'}" class="fas fa-times"></i></span>
+                </div>
+                <div layout="column" layout-align="space-around center">
+                    <md-menu>
+                        <md-button class="md-icon-button mar-lr" aria-label="action" style="position: absolute;right: 0;"
+                            ng-click="$mdMenu.open()">
+                            <md-tooltip md-direction="left">Action</md-tooltip>
+                            <i class="fas fa-ellipsis-v"></i>
+                        </md-button>
 
-                        <md-divider ng-if="!$last"></md-divider>
-                    </md-list-item>
-                </md-list>
-            </md-content>
+                        <md-menu-content width="2">
+                            <md-menu-item>
+                                <md-button md-colors="{color: 'green'}" ng-click="$ctrl.acceptTimesheet(item)">
+                                    Accept
+                                </md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button class="md-warn" ng-click="$ctrl.rejectTimesheet(item)">
+                                    Reject
+                                </md-button>
+                            </md-menu-item>
+                        </md-menu-content>
+                    </md-menu>
+                </div>
+            </div>
         </md-tab>
         <md-tab label="Payroll" ng-if="$ctrl.view">
             <md-content class="md-padding">
 
             </md-content>
         </md-tab>
-        <!-- <md-tab label="More Info" ng-show="$ctrl.address">
-            <md-content class="md-padding">
-                <div layout="row" layout-align="space-around center" class="mar-t" layout-padding>
-                    <div layout="column" layout-align="space-around center">
-                        <md-subheader>Country</md-subheader>
-                        <span>{{$ctrl.address.country}}</span>
-                    </div>
-                    <div layout="column" layout-align="space-around center">
-                        <md-subheader>State</md-subheader>
-                        <span>{{$ctrl.address.state}}</span>
-                    </div>
-                    <div layout="column" layout-align="space-around center">
-                        <md-subheader>City</md-subheader>
-                        <span>{{$ctrl.address.city}}</span>
-                    </div>
-                </div>
-
-                <div layout="row" layout-align="space-around center" class="mar-t" layout-padding>
-                    <div layout="column" layout-align="space-around center">
-                        <md-subheader>Street</md-subheader>
-                        <span>{{$ctrl.address.street}}</span>
-                    </div>
-                    <div layout="column" layout-align="space-around center">
-                        <md-subheader>Zip Code</md-subheader>
-                        <span>{{$ctrl.address.zipcode}}</span>
-                    </div>
-                </div>
-            </md-content>
-        </md-tab> -->
     </md-tabs>
 </div>
 

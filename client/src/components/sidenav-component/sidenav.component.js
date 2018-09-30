@@ -9,9 +9,9 @@ app.component('sidenavComponent', {
 function sidenavController($stateParams) {
   var $ctrl = this;
 
-  this.$onInit = function () {
+  this.$onInit = function() {
     $ctrl.hrNav = $ctrl.mode === 'hr';
-  }
+  };
 
   $ctrl.menuItems = [
     {
@@ -53,7 +53,7 @@ function sidenavController($stateParams) {
       link: 'hr_home.announcement()'
     },
     {
-      icon: 'fas fa-bullhorn',
+      icon: 'fas fa-comment-dots',
       title: 'Manage Complaints',
       link: 'hr_home.complaint()'
     },

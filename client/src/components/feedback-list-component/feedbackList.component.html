@@ -1,0 +1,21 @@
+<h3 style="text-align:center;">List of Feedback</h3>
+<div md-whiteframe="5" style="border-radius:5px; background: #ffffff; padding:8px; margin:10px; min-height: 400px">
+    <table class="striped centered highlight">
+        <thead>
+            <th>Employee Id</th>
+            <th>Feedback Id</th>
+            <th>Feedback Category</th>
+            <th>Feedback Description</th>
+            <th>Feedback Rating</th>
+        </thead>
+        <tbody>
+            <tr ng-repeat="f in $ctrl.feedbackList">
+                <td>{{f.empId}}</td>
+                <td>{{f.feedbackId}}</td>
+                <td>{{f.feedbackCategory}}</td>
+                <td>{{f.feedbackDescription}}</td>
+                <td><strong md-colors="{'background': 'purple'}" style="padding:5px 10px; border-radius:4px; color: #ffffff">{{f.feedbackRating}}</strong></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

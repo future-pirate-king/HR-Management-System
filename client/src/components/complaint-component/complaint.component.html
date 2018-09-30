@@ -1,4 +1,4 @@
-<form name="complaintForm" ng-submit="$ctrl.addComplaint()" layout-padding>
+<form name="complaintForm" ng-submit="$ctrl.addComplaint()" layout-padding md-whiteframe="10" style="margin: 15px; border-radius:5px; background-color: #ffffff;">
 
     <div class="complaintForm-container">
         <md-input-container>
@@ -9,29 +9,24 @@
                 </md-option>
             </md-select>
         </md-input-container>
-
-
-        <div ng-messages="complaintForm.empId.$error">
-            <div ng-message="required">Complaint Type is required!</div>
-        </div>
-        </md-input-container>
     </div>
 
     <div class="complaintForm-container">
         <md-input-container class="md-block">
             <label>Complaint Description</label>
-            <textarea ng-model="$ctrl.complaint.complaintDescription" md-maxlength="100" rows="3" md-select-on-focus></textarea>
+            <textarea ng-model="$ctrl.complaint.complaintDescription" md-maxlength="100" rows="3" required></textarea>
             <div ng-messages="complaintForm.complaintDescription.$error">
                 <div ng-message="required">Complaint Description is required!</div>
             </div>
         </md-input-container>
     </div>
 
-    <md-button style="padding:6px;" ng-click="addComplaints()" ng-disabled="$ctrl.isloading" type="submit" layout="row" layout-align="center center"
-        id="submitComplaint-btn" class="md-raised md-primary mar-t">
-        <md-progress-circular class="mar-r" ng-if="$ctrl.isloading" class="md-accent" md-diameter="20"></md-progress-circular>
-        <strong>Submit Complaint</strong>
-    </md-button>
+    <div style="display: flex; justify-content: flex-end">
+        <md-button ng-click="addComplaints()" ng-disabled="$ctrl.isloading" type="submit" md-colors="{'color':'purple'}">
+            <md-progress-circular class="mar-r" ng-if="$ctrl.isloading" class="md-accent" md-diameter="20"></md-progress-circular>Submit
+            Complaint
+        </md-button>
+    </div>
 
 </form>
 

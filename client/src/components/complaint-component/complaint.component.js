@@ -4,19 +4,27 @@ app.component('complaintComponent', {
   controller: complaintController
 });
 
-function complaintController(complaintService, $stateParams) {
+function complaintController(complaintService, $stateParams, $mdToast) {
   var $ctrl = this;
 
   $ctrl.complaint = {
-    complaintsType: '',
+    complaintsType: 'Service',
     complaintDescription: ''
   };
 
-  this.$onInit = async () => console.log(await complaintService.getAllComplaints())
-
   $ctrl.addComplaint = () => {
-    console.log($ctrl.complaint);
-    complaintService.addComplaint($ctrl.complaint, $stateParams.empId)
-      .then(res => console.log(res))
+    complaintService
+      .addComplaint($ctrl.complaint, $stateParams.empId)
+      .then(res => {
+        $mdToast.show(
+          $mdToast
+            .simple()
+            .textContent('Complaint Added successfully.')
+            .position('bottom left')
+            .hideDelay(3000)
+        );
+        $ctrl.complaint.complaintsType = 'Service';
+        $ctrl.complaint.complaintDescription = '';
+      });
   };
 }
