@@ -2,15 +2,30 @@
     <div layout="row">
         <md-input-container>
             <label>First Name</label>
-            <input ng-model="$ctrl.employee.firstName">
+            <input name="firstName" required pattern="^[a-zA-Z]+$" ng-model="$ctrl.employee.firstName">
+            <div ng-messages="employeeForm.firstName.$error" role="alert" multiple>
+                <div ng-message="required">First name is required.</div>
+                <div ng-message="pattern">First name can have only letters.
+                </div>
+            </div>
         </md-input-container>
         <md-input-container>
             <label>Middle Name</label>
-            <input ng-model="$ctrl.employee.middleName">
+            <input name="middleName" pattern="^[a-zA-Z]+$" ng-model="$ctrl.employee.middleName">
+            <div ng-messages="employeeForm.middleName.$error" role="alert" multiple>
+
+                <div ng-message="pattern">Middle name can have only letters.
+                </div>
+            </div>
         </md-input-container>
         <md-input-container>
             <label>Last Name</label>
-            <input ng-model="$ctrl.employee.lastName">
+            <input name="lastName" required pattern="^[a-zA-Z]+$" ng-model="$ctrl.employee.lastName">
+            <div ng-messages="employeeForm.lastName.$error" role="alert" multiple>
+                <div ng-message="required">Last name is required.</div>
+                <div ng-message="pattern">Last name can have only letters.
+                </div>
+            </div>
         </md-input-container>
     </div>
 
@@ -25,7 +40,7 @@
 
     <md-input-container>
         <label>Gender</label>
-        <md-select ng-model="$ctrl.employee.gender">
+        <md-select required ng-model="$ctrl.employee.gender">
             <md-option value="Male">Male</md-option>
             <md-option value="Female">Female</md-option>
         </md-select>
@@ -34,30 +49,42 @@
     <div layout-gt-sm="row">
         <md-input-container class="md-block" flex-gt-sm>
             <label>Street</label>
-            <input ng-model="$ctrl.employee.employeeAddress.street">
+            <input name="street" required ng-model="$ctrl.employee.employeeAddress.street">
+            <div ng-messages="employeeForm.street.$error" role="alert" multiple>
+                <div ng-message="required">Street name is required.</div>
+            </div>
         </md-input-container>
 
         <md-input-container class="md-block" flex-gt-sm>
             <label>Country</label>
-            <input ng-model="$ctrl.employee.employeeAddress.country">
+            <input required name="country" ng-model="$ctrl.employee.employeeAddress.country">
+            <div ng-messages="employeeForm.country.$error" role="alert" multiple>
+                <div ng-message="required">Country name is required.</div>
+            </div>
         </md-input-container>
     </div>
 
     <div layout-gt-sm="row">
         <md-input-container class="md-block" flex-gt-sm>
             <label>City</label>
-            <input ng-model="$ctrl.employee.employeeAddress.city">
+            <input required name="city" ng-model="$ctrl.employee.employeeAddress.city">
+            <div ng-messages="employeeForm.city.$error" role="alert" multiple>
+                <div ng-message="required">City name is required.</div>
+            </div>
         </md-input-container>
 
         <md-input-container class="md-block" flex-gt-sm>
             <label>State</label>
-            <input ng-model="$ctrl.employee.employeeAddress.state">
+            <input required name="state" ng-model="$ctrl.employee.employeeAddress.state">
+            <div ng-messages="employeeForm.state.$error" role="alert" multiple>
+                <div ng-message="required">State name is required.</div>
+            </div>
         </md-input-container>
 
         <md-input-container class="md-block" flex-gt-sm>
             <label>Postal Code</label>
-            <input name="postalCode" ng-model="$ctrl.employee.employeeAddress.zipcode" placeholder="123456" required ng-pattern="/^[0-9]{5}[0-9]?$/"
-                md-maxlength="6">
+            <input name="postalCode" ng-model="$ctrl.employee.employeeAddress.zipcode" placeholder="123456" required
+                ng-pattern="/^[0-9]{5}[0-9]?$/" md-maxlength="6">
 
             <div ng-messages="employeeForm.postalCode.$error" role="alert" multiple>
                 <div ng-message="required">You must supply a postal code.</div>
@@ -73,8 +100,8 @@
     <div layout="row">
         <md-input-container class="md-block" flex-gt-sm>
             <label>Email</label>
-            <input required type="email" name="email" ng-model="$ctrl.employee.email" minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/"
-            />
+            <input required type="email" name="email" ng-model="$ctrl.employee.email" minlength="10" maxlength="100"
+                ng-pattern="/^.+@.+\..+$/" />
 
             <div ng-messages="$ctrl.employee.email.$error" role="alert">
                 <div ng-message="required">Email is required.</div>
@@ -87,12 +114,20 @@
 
         <md-input-container class="md-block" flex-gt-sm>
             <label>Mobile No</label>
-            <input ng-model="$ctrl.employee.mobileNo">
+            <input name="mobileNo" pattern="[7-9]{1}[0-9]{9}" required ng-model="$ctrl.employee.mobileNo">
+            <div ng-messages="employeeForm.mobileNo.$error" role="alert" multiple>
+                <div ng-message="required">Mobile number is required.</div>
+                <div ng-message="pattern">Enter a valid number starting with 7,8 or 9.
+                </div>
+            </div>
         </md-input-container>
 
         <md-input-container class="md-block" flex-gt-sm>
             <label>Cadre</label>
-            <input ng-model="$ctrl.employee.cadre">
+            <input required name="cadre" ng-model="$ctrl.employee.cadre">
+            <div ng-messages="employeeForm.cadre.$error" role="alert" multiple>
+                <div ng-message="required">Cadre is required.</div>
+            </div>
         </md-input-container>
     </div>
 
@@ -106,17 +141,24 @@
     <div layout="row">
         <md-input-container class="md-block" flex-gt-sm>
             <label>Department Name</label>
-            <input ng-model="$ctrl.employee.deptName">
+            <input required name="deptName" ng-model="$ctrl.employee.deptName">
+            <div ng-messages="employeeForm.deptName.$error" role="alert" multiple>
+                <div ng-message="required">Department name is required.</div>
+            </div>
         </md-input-container>
 
         <md-input-container class="md-block" flex-gt-sm>
             <label>Reporting To</label>
-            <input ng-model="$ctrl.employee.reportingTo">
+            <input required name="manager" ng-model="$ctrl.employee.reportingTo">
+            <div ng-messages="employeeForm.manager.$error" role="alert" multiple>
+                <div ng-message="required">Manager name is required.</div>
+            </div>
         </md-input-container>
 
     </div>
 
     <md-button ng-disabled="$ctrl.isloading" type="submit" layout="row" layout-align="center center" class="md-raised md-primary mar-t">
-        <md-progress-circular class="mar-r" ng-if="$ctrl.isloading" class="md-accent" md-diameter="20"></md-progress-circular>Add Employee
+        <md-progress-circular class="mar-r" ng-if="$ctrl.isloading" class="md-accent" md-diameter="20"></md-progress-circular>Add
+        Employee
     </md-button>
 </form>

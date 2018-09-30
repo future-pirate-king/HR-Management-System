@@ -36,17 +36,26 @@ function timesheetController(
           $ctrl.calculateTotalTime(
             data.swipeIn,
             data.swipeOut,
-            new Date(data.taskDate).getDay()
+            new Date(data.taskDate).getDay(),
+            data
           );
         });
       });
   };
 
-  $ctrl.calculateTotalTime = function(swipeIn, swipeOut, dayIndex) {
+  $ctrl.calculateTotalTime = function(swipeIn, swipeOut, dayIndex, data) {
     var swipeInHours = swipeIn / (1000 * 60 * 60);
     var swipeOutHours = swipeOut / (1000 * 60 * 60);
 
+    var taskIndex = $ctrl.taskList.indexOf(data);
+
     $ctrl.totalTime = swipeOutHours - swipeInHours;
+    $ctrl.taskList[taskIndex] = {
+      ...$ctrl.taskList[taskIndex],
+      totalTime: $ctrl.totalTime
+    };
+
+    console.log($ctrl.taskList);
     $ctrl.data[dayIndex] = $ctrl.totalTime;
   };
 
@@ -64,7 +73,8 @@ function timesheetController(
           $ctrl.calculateTotalTime(
             data.swipeIn,
             data.swipeOut,
-            new Date(data.taskDate).getDay()
+            new Date(data.taskDate).getDay(),
+            data
           );
         });
       });

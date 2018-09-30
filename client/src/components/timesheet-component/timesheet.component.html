@@ -41,7 +41,7 @@
                     <td>{{task.taskName}}</td>
                     <td>{{task.swipeIn | date: 'shortTime'}}</td>
                     <td>{{task.swipeOut | date: 'shortTime'}}</td>
-                    <td>{{$ctrl.totalTime}} hours</td>
+                    <td>{{task.totalTime | number: 2}} hours</td>
                 </tr>
             </tbody>
         </table>

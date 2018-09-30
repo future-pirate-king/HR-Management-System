@@ -3,14 +3,22 @@
         <h3>Add Announcement Form</h3>
         <md-input-container>
             <label>Title</label>
-            <input ng-model="$ctrl.announcement.title" md-maxlength="16" required>
+            <input name="title" ng-model="$ctrl.announcement.title" md-maxlength="16" required>
+            <div ng-messages="announcementForm.title.$error" role="alert" multiple>
+                <div ng-message="required">Title is required.</div>
+
+            </div>
         </md-input-container>
         <md-input-container>
             <label>body</label>
-            <input ng-model="$ctrl.announcement.body" md-maxlength="150" rows="5" required>
+            <input name="body" ng-model="$ctrl.announcement.body" md-maxlength="150" rows="5" required>
+            <div ng-messages="announcementForm.body.$error" role="alert" multiple>
+                <div ng-message="required">Description is required.</div>
+
+            </div>
         </md-input-container>
         <md-button type="submit" class="md-primary">Add Announcement</md-button>
     </form>
-    <announcement-list-component delete="true" layout="row" layout-align="center center" layout-padding announcement-list="$ctrl.announcementList"
-        style="width:40%"></announcement-list-component>
+    <announcement-list-component delete="true" layout="row" layout-align="center center" layout-padding
+        announcement-list="$ctrl.announcementList" style="width:40%"></announcement-list-component>
 </div>
